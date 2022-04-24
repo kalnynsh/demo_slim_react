@@ -1,1 +1,1 @@
-#Demo Slim + postresql, ReactJS project
+# Demo project, backend - Slim framework, frontend - ReactJS
