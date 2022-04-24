@@ -1,0 +1,112 @@
+version: '3.7'
+services:
+    gateway:
+        build:
+            context: gateway/docker
+            dockerfile: development/nginx/Dockerfile
+        ports:
+            - '8083:8083'
+            - '8082:8082'
+            - '8084:8084'
+        depends_on:
+            - frontend
+            - api
+            - mailer
+
+    frontend:
+        build:
+            context: frontend/docker/development/nginx
+        depends_on:
+            - frontend-node
+
+    frontend-node:
+        build:
+            context: frontend/docker/development/node
+        volumes:
+            - ./frontend:/app
+        command: sh -c "until [ -f .ready ] ; do sleep 1 ; done && npm start"
+        tty: true
+
+    frontend-node-cli:
+        build:
+            context: frontend/docker/development/node
+        volumes:
+            - ./frontend:/app
+
+    api:
+        build:
+            context: api/docker
+            dockerfile: development/nginx/Dockerfile
+        volumes:
+            - ./api:/app
+        depends_on:
+            - api-php-fpm
+            - api-php-cli
+
+    api-php-fpm:
+        build:
+            context: api/docker
+            dockerfile: development/php-fpm/Dockerfile
+        environment:
+            APP_ENV: dev
+            APP_DEBUG: 1
+            PHP_IDE_CONFIG: serverName=API
+            DB_HOST: api-postgres
+            DB_USER: app
+            DB_PASSWORD: secret
+            DB_NAME: an_app
+            MAILER_HOST: mailer
+            MAILER_PORT: 1025
+            MAILER_USER: app
+            MAILER_PASSWORD: secret
+            MAILER_ENCRYPTION: tcp
+            MAILER_FROM_EMAIL: app-admin@info.org
+            FRONTEND_URL: http://localhost:8083
+            SENTRY_DSN: ''
+        volumes:
+            - ./api:/app
+
+    api-php-cli:
+        build:
+            context: api/docker
+            dockerfile: development/php-cli/Dockerfile
+        environment:
+            APP_ENV: dev
+            APP_DEBUG: 1
+            DB_HOST: api-postgres
+            DB_USER: app
+            DB_PASSWORD: secret
+            DB_NAME: an_app
+            MAILER_HOST: mailer
+            MAILER_PORT: 1025
+            MAILER_USER: app
+            MAILER_PASSWORD: secret
+            MAILER_ENCRYPTION: tcp
+            MAILER_FROM_EMAIL: app-admin@info.org
+            FRONTEND_URL: http://localhost:8083
+            SENTRY_DSN: ''
+        volumes:
+            - ./api:/app
+
+    api-postgres:
+        image: postgres:14.1-alpine
+        environment:
+            POSTGRES_USER: app
+            POSTGRES_PASSWORD: secret
+            POSTGRES_DB: an_app
+        ports:
+          - '54323:5432'
+        volumes:
+          - api-postgres:/var/lib/postgresql/data
+
+    mailer:
+        image: mailhog/mailhog
+
+    cucumber-node-cli:
+        build:
+            context: cucumber/docker/development/node
+        volumes:
+            - ./cucumber:/app
+
+volumes:
+    api-postgres:

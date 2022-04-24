@@ -1,0 +1,11 @@
+workspace_auction.code-workspace
+/node_modules
+/coverage
+/build
+/yarn-debug.log*
+/yarn-error.log*
+/npm-debug.log*
+/.DS_Store
+
+/.ready
+

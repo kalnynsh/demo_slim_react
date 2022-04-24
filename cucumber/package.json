@@ -1,0 +1,24 @@
+{
+    "license": "MIT",
+    "dependencies": {
+        "@cucumber/cucumber": "^7.3.0",
+        "chai": "^4.3.6",
+        "puppeteer": "^13.1.2"
+    },
+    "devDependencies": {
+        "cucumber-html-reporter": "^5.5.0",
+        "eslint": "^7.32.0",
+        "eslint-config-standard": "^16.0.3",
+        "eslint-plugin-import": "^2.25.4",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-promise": "^5.2.0"
+    },
+    "scripts": {
+        "smoke": "cucumber-js --tags @smoke --fail-fast --parallel 2",
+        "e2e": "cucumber-js --format json:var/report.json",
+        "e2e-plane": "cucumber-js --parallel 4",
+        "report": "node reporter.js",
+        "lint": "eslint --ext .js features",
+        "lint-fix": "eslint --fix --ext .js features"
+    }
+}

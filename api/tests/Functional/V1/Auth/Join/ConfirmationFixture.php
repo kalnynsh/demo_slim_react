@@ -1,0 +1,45 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Test\Functional\V1\Auth\Join;
+
+use App\Auth\Entity\User\Id;
+use App\Auth\Entity\User\User;
+use App\Auth\Entity\User\Email;
+use App\Auth\Entity\User\Token;
+use Doctrine\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+
+class ConfirmationFixture extends AbstractFixture
+{
+    public const VALID = '00000000-0000-0000-0000-000000000001';
+    public const EXPIRED = '00000000-0000-0000-0000-000000000002';
+
+    public function load(ObjectManager $manager): void
+    {
+        // Valid
+        $user = User::requestJoinByEmail(
+            Id::generate(),
+            $date = new \DateTimeImmutable(),
+            new Email('valid-name@test.org'),
+            'password-hash',
+            new Token($value = self::VALID, $date->modify('+1 hour'))
+        );
+
+        $manager->persist($user);
+
+        // Expired
+        $user = User::requestJoinByEmail(
+            Id::generate(),
+            $date = new \DateTimeImmutable(),
+            new Email('expired-name@test.org'),
+            'password-hash',
+            new Token($value = self::EXPIRED, $date->modify('-2 hour'))
+        );
+
+        $manager->persist($user);
+
+        $manager->flush();
+    }
+}

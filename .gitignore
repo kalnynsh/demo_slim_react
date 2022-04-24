@@ -1,0 +1,27 @@
+vendor
+
+vendor/*/**
+
+projectInfo
+
+.phpunit.result.cache
+
+# phpunit.xml
+
+.directory
+
+.php-files.json
+
+.ready
+
+phinx.php
+
+migrations-db.php
+
+node_modules
+
+*.code-workspace
+
+.editconfig
+
+.vscode

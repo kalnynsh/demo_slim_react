@@ -1,0 +1,11 @@
+workspace_auction.code-workspace
+
+/vendor
+
+/.vscode
+
+/var/cache/*
+
+/var/log/*
+
+/var/test/*
