@@ -231,7 +231,7 @@ testing-smoke:
 testing-e2e:
 	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml run --rm cucumber-node-cli npm run e2e
 
-try-testing: try-build try-testing-build try-testing-init try-testing-smoke try-test-e2e try-testing-down-clear
+try-testing: try-build try-testing-build try-testing-init try-testing-smoke try-testing-e2e try-testing-down-clear
 
 deploy:
 	ssh ${HOST} -p ${PORT} 'rm -rf site_${BUILD_NUMBER}'
