@@ -12,6 +12,8 @@ services:
 
     api:
         image: ${REGISTRY}/auction-api:${IMAGE_TAG}
+        depends_on:
+            - api-php-fpm
 
     api-php-fpm:
         image: ${REGISTRY}/auction-api-php-fpm:${IMAGE_TAG}
