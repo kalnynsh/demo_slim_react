@@ -204,6 +204,17 @@ try-testing-down-clear:
 
 testing-build: testing-build-gateway testing-build-testing-api-php-cli testing-build-cucumber
 
+push-testing: push-testing-gateway push-testing-api-php-cli push-testing-cucumber
+
+push-testing-gateway:
+	docker push ${REGISTRY}/auction-testing-gateway:${IMAGE_TAG}
+
+push-testing-api-php-cli:
+	docker push ${REGISTRY}/auction-testing-api-php-cli:${IMAGE_TAG}
+
+push-testing-cucumber:
+	docker push ${REGISTRY}/auction-cucumber-node-cli:${IMAGE_TAG}
+
 testing-build-gateway:
 	docker --log-level=debug build --pull --file=gateway/docker/testing/nginx/Dockerfile --tag=${REGISTRY}/auction-testing-gateway:${IMAGE_TAG} gateway/docker
 
