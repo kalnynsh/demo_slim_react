@@ -35,8 +35,8 @@ return [
         }
 
         if (! $settings['dev_mode']) {
-            $queryCache = new PhpFilesAdapter('doctrine_queries');
-            $metadataCache = new PhpFilesAdapter('doctrine_metadata');
+            $queryCache = new PhpFilesAdapter('doctrine_queries', 0, $settings['cache_dir']);
+            $metadataCache = new PhpFilesAdapter('doctrine_metadata', 0, $settings['cache_dir']);
         }
 
         $config = new Configuration();
@@ -82,6 +82,7 @@ return [
                 __DIR__ . '/../../src/Auth/Entity',
             ],
             'proxy_dir' =>  __DIR__ . '/../../var/cache/doctrine/proxy',
+            'cache_dir' =>  __DIR__ . '/../../var/cache/doctrine/cache',
             'proxy_namespace' => 'App\Proxies',
             'types' => [
                 Auth\Entity\User\IdType::NAME => Auth\Entity\User\IdType::class,
