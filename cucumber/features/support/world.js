@@ -1,11 +1,11 @@
-const { setWorldConstructor, setDefaultTimeout } = require('@cucumber/cucumber');
+const { setWorldConstructor, setDefaultTimeout } = require('@cucumber/cucumber')
 
 function CustomWorld ({ attach }) {
-    this.attach = attach;
-    this.browser = null;
-    this.page = null;
+  this.attach = attach
+  this.browser = null
+  this.page = null
 };
 
-setWorldConstructor(CustomWorld);
+setWorldConstructor(CustomWorld)
 
-setDefaultTimeout(10 * 1000);
+setDefaultTimeout(10 * 1000)
