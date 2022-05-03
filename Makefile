@@ -234,7 +234,7 @@ testing-down-clear:
 	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml down -v --remove-orphans
 
 validate-jenkins:
-	curl --user ${USER} -X POST -F "jenkinsfile=<Jenkinsfile" ${HOST}/pipline-model-converter/validate
+	curl --user ${J_USER} -X POST -F "jenkinsfile=<Jenkinsfile" ${J_HOST}/pipeline-model-converter/validate
 
 testing-smoke:
 	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml run --rm cucumber-node-cli npm run smoke
