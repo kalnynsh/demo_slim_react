@@ -7,11 +7,6 @@ namespace App\Http\Test\Unit;
 use App\Http\JsonResponse;
 use PHPUnit\Framework\TestCase;
 
-ini_set('xdebug.mode', 'coverage');
-
-/**
- * @covers \App\Http\JsonResponse
- */
 class JsonResponseTest extends TestCase
 {
     public function testWithCode(): void
@@ -21,14 +16,6 @@ class JsonResponseTest extends TestCase
         self::assertEquals('application/json', $response->getHeaderLine('Content-Type'));
         self::assertEquals('0', $response->getBody()->getContents());
         self::assertEquals(201, $response->getStatusCode());
-    }
-
-    public function testNull(): void
-    {
-        $response = new JsonResponse(null);
-
-        self::assertEquals('null', $response->getBody()->getContents());
-        self::assertEquals(200, $response->getStatusCode());
     }
 
     /**
@@ -56,7 +43,6 @@ class JsonResponseTest extends TestCase
         $object->str = 'value';
         $object->int = 13;
         $object->none = null;
-
 
         $array = [
             'str' => 'value',
