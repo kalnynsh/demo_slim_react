@@ -9,42 +9,45 @@ pipeline {
     stages {
         stage("Init") {
             steps {
-                sh "make init"
+                sh -c "make init"
             }
         }
         stage("Validation") {
             steps {
-                sh "make api-validate-schema"
+                sh -c "make api-validate-schema"
             }
         }
         stage("Lint") {
             parallel {
                 stage("API") {
                     steps {
-                        sh "make api-lint"
+                        sh -c "make api-lint"
                     }
                 }
                 stage("Frontend") {
                     steps {
-                        sh "make frontend-lint"
+                        sh -c "make frontend-lint"
                     }
                 }
                 stage("Cucumber") {
                     steps {
-                        sh "make cucumber-lint"
+                        sh -c "make cucumber-lint"
                     }
                 }
             }
         }
+        stage("Analyze") {
+            sh -c "make api-analyze"
+        }
         stage("Down") {
             steps {
-                sh "make docker-down-clear"
+                sh -c "make docker-down-clear"
             }
         }
     }
     post {
         always {
-            sh "make docker-down-clear || true"
+            sh -c "make docker-down-clear || true"
         }
     }
 }
