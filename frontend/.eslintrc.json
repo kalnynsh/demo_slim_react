@@ -28,7 +28,6 @@
     }
   },
   "rules": {
-    "semi": ["error", "always"],
     "prettier/prettier": "error"
   }
 }
