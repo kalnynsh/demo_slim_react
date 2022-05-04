@@ -37,7 +37,9 @@ pipeline {
             }
         }
         stage("Analyze") {
-            sh "make api-analyze"
+            steps {
+                sh "make api-analyze"
+            }
         }
         stage("Down") {
             steps {
