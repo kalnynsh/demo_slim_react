@@ -34,13 +34,13 @@ if (\getenv('SENTRY_DSN')) {
  */
 $commands = $container->get('config')['console']['commands'];
 
+/** @var EntityManagerInterface $entityManager */
 $entityManager = $container->get(EntityManagerInterface::class);
-$connection = $entityManager->getConnection();
 
-$configuration = new Configuration($connection);
+$configuration = new Configuration();
 $configuration->addMigrationsDirectory('App\Data\Migration', __DIR__ . '/../src/Data/Migration');
 $configuration->setAllOrNothing(true);
-$configuration->setCheckDatabasePlatform(true);
+$configuration->setCheckDatabasePlatform(false);
 
 $storageConfiguration = new TableMetadataStorageConfiguration();
 $storageConfiguration->setTableName('migrations');
@@ -52,12 +52,8 @@ $dependencyFactory = DependencyFactory::fromEntityManager(
 );
 
 $cli->setCatchExceptions(true);
+/** @psalm-suppress DeprecatedClass */
 $cli->getHelperSet()->set(new EntityManagerHelper($entityManager), 'em');
-
-\Doctrine\Migrations\Tools\Console\ConsoleRunner::addCommands(
-    $cli,
-    $dependencyFactory
-);
 
 foreach ($commands as $name) {
     /** @var Command $command */

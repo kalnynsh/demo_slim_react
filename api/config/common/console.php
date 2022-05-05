@@ -9,6 +9,17 @@ return [
         'console' => [
             'commands' => [
                 ValidateSchemaCommand::class,
+                CurrentCommand::class,
+                ExecuteCommand::class,
+                GenerateCommand::class,
+                LatestCommand::class,
+                MigrateCommand::class,
+                RollupCommand::class,
+                StatusCommand::class,
+                VersionCommand::class,
+                UpToDateCommand::class,
+                SyncMetadataCommand::class,
+                ListCommand::class,
             ],
         ],
     ],
