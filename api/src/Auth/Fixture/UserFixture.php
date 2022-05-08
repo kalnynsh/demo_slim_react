@@ -13,9 +13,13 @@ use App\Auth\Service\PasswordHasher;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 
+/**
+ * @psalm-suppress PropertyNotSetInConstructor
+ */
 class UserFixture extends AbstractFixture
 {
     private PasswordHasher $hasher;
+
 
     public function __construct()
     {

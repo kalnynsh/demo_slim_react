@@ -54,9 +54,14 @@ class UserRepository
         return $user;
     }
 
+    /**
+     * @psalm-suppress MoreSpecificReturnType
+     * @psalm-suppress LessSpecificReturnStatement
+     * @param string $tokenValue
+     * @return User|null
+     */
     public function findByJoinConfirmToken(string $tokenValue): ?User
     {
-        /** @psalm-return User|null */
         return $this
             ->repository
             ->findOneBy(
@@ -66,9 +71,14 @@ class UserRepository
             );
     }
 
+    /**
+     * @psalm-suppress MoreSpecificReturnType
+     * @psalm-suppress LessSpecificReturnStatement
+     * @param string $tokenValue
+     * @return User|null
+     */
     public function findByNewEmailToken(string $tokenValue): ?User
     {
-        /** @psalm-return User|null */
         return $this
             ->repository
             ->findOneBy(
@@ -78,9 +88,14 @@ class UserRepository
             );
     }
 
+    /**
+     * @psalm-suppress MoreSpecificReturnType
+     * @psalm-suppress LessSpecificReturnStatement
+     * @param string $tokenValue
+     * @return User|null
+     */
     public function findByPasswordResetToken(string $tokenValue): ?User
     {
-        /** @psalm-return User|null */
         return $this
             ->repository
             ->findOneBy(

@@ -12,12 +12,14 @@ return [
     FixturesLoadCommand::class => static function (ContainerInterface $container) {
         /**
          * @psalm-suppress MixedArrayAccess
-         * @psalm-var array{fixture_paths:string[]} $config
+         * @psalm-var array{commands:array{int,string},fixture_paths:array{array-key,string}} $config
          */
         $config = $container->get('config')['console'];
 
+        /** @var Loader $loader */
         $loader = $container->get(Loader::class);
 
+        /** @var ORMExecutor $executor */
         $executor = $container->get(ORMExecutor::class);
 
         return new FixturesLoadCommand(

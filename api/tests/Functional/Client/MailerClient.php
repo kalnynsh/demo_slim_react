@@ -26,6 +26,7 @@ class MailerClient
     {
         $response = $this->client->get('/api/v2/search?kind=to&query=' . \urlencode($to));
 
+        /** @psalm-suppress MixedArrayAccess */
         $result = \json_decode((string) $response->getBody(), true, 512, JSON_THROW_ON_ERROR);
 
         return $result['total'] > 0;

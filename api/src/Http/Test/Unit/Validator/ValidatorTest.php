@@ -53,7 +53,6 @@ class ValidatorTest extends TestCase
         } catch (\Exception $exception) {
             self::assertInstanceOf(ValidationException::class, $exception);
             /** @var ConstraintViolationList $violations */
-            /** @var ValidationException $exception */
             self::assertEquals($violations, $exception->getViolations());
         }
     }

@@ -10,12 +10,12 @@ use App\Frontend\FrontendUrlTwigExtension;
 return [
     Environment::class => static function (ContainerInterface $container): Environment {
         /**
-         * @psalm-suppress MixedArrayAccess
+         * @psalm-suppress MixedAssignment
          * @psalm-var array{
          *   debug:bool,
-         *   template_dirs:array<string,string>
+         *   template_dirs:array<string,string>,
          *   cache_dir:string,
-         *   extensions:string[],
+         *   extensions:array<int,string>
          * } $config
          */
         $config = $container->get('config')['twig'];
@@ -26,6 +26,7 @@ return [
             $loader->addPath($dir, $alias);
         }
 
+        /** @psalm-suppress MixedArrayAccess */
         $environment = new Environment(
             $loader,
             [
@@ -36,10 +37,12 @@ return [
             ]
         );
 
+        /** @psalm-suppress MixedArrayAccess */
         if ($config['debug']) {
             $environment->addExtension(new DebugExtension());
         }
 
+        /** @psalm-suppress MixedArrayAccess */
         foreach ($config['extensions'] as $class) {
             /** @var ExtensionInterface $extension */
             $extension = $container->get($class);

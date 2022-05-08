@@ -77,6 +77,7 @@ class UserBuilder
             );
         }
 
+        /** @psalm-suppress PossiblyNullArgument */
         $user = User::requestJoinByEmail(
             $this->id,
             $this->date,

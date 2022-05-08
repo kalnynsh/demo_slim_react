@@ -50,6 +50,11 @@ class InputTrimmerMiddleware implements MiddlewareInterface
         return $result;
     }
 
+    /**
+     *
+     * @param array<string, array<string, UploadedFileInterface>|UploadedFileInterface> $items
+     * @return array
+     */
     private static function filterFiles($items): array
     {
         $result = [];

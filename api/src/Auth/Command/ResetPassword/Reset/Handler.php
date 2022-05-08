@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\Command\ResetPassword\Request;
+namespace App\Auth\Command\ResetPassword\Reset;
 
 use App\Flusher;
 use App\Auth\Entity\User\UserRepository;

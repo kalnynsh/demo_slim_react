@@ -13,6 +13,7 @@ return [
         /** @psalm-suppress DeprecatedMethod */
         AnnotationRegistry::registerLoader('class_exists');
 
+        /** @var TranslatorInterface $translator */
         $translator = $container->get(TranslatorInterface::class);
 
         return Validation::createValidatorBuilder()

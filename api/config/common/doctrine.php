@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 use App\Auth;
-use Doctrine\Common\EventManager;
-use Doctrine\Common\EventSubscriber;
+use Doctrine\ORM\ORMSetup;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
+use Doctrine\Common\EventManager;
+use Doctrine\Common\EventSubscriber;
 use Psr\Container\ContainerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
@@ -17,14 +18,16 @@ use Symfony\Component\Cache\Adapter\PhpFilesAdapter;
 return [
     EntityManagerInterface::class => function (ContainerInterface $container): EntityManagerInterface {
         /**
-         * @psalm-suppress MixedArrayAccess
+         * @psalm-suppress MixedAssignment
          * @psalm-var array{
          *   paths:array<string,string>,
          *   dev_mode:bool,
          *   proxy_dir:string,
          *   proxy_namespace:string,
          *   types:array<string,string>,
-         *   connection:array
+         *   connection:array<string,mixed>,
+         *   cache_dir:string,
+         *   subscribers:array<string>
          * } $settings
          */
         $settings = $container->get('config')['doctrine'];
@@ -39,11 +42,18 @@ return [
             $metadataCache = new PhpFilesAdapter('doctrine_metadata', 0, $settings['cache_dir']);
         }
 
+        $metadataCache =  $metadataCache ?? new ArrayAdapter();
+        $queryCache =  $queryCache ?? new ArrayAdapter();
+
         $config = new Configuration();
+
+        /** @phan-suppress MixedArgument */
         $config->setMetadataCache($metadataCache);
-        $driverImpl = $config->newDefaultAnnotationDriver($settings['paths'], false);
+        $driverImpl = ORMSetup::createDefaultAnnotationDriver($settings['paths'], $metadataCache);
 
         $config->setMetadataDriverImpl($driverImpl);
+
+        /** @phan-suppress MixedArgument */
         $config->setQueryCache($queryCache);
         $config->setProxyDir($settings['proxy_dir']);
 
@@ -52,6 +62,7 @@ return [
 
         foreach ($settings['types'] as $name => $class) {
             if (! Type::hasType($name)) {
+                /** @psalm-suppress ArgumentTypeCoercion */
                 Type::addType($name, $class);
             }
         }

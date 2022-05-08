@@ -22,6 +22,7 @@ return [
         /** @var EntityRepository $repository */
         $repository = $em->getRepository(User::class);
 
+        /** @psalm-suppress MixedArgumentTypeCoercion */
         return new UserRepository($em, $repository);
     },
 
@@ -33,7 +34,7 @@ return [
         $twig = $container->get(Environment::class);
 
         /**
-         * @psalm-suppress MixedArrayAccess
+         * @psalm-suppress MixedAssignment
          * @psalm-var array{from:string} $mailerConfig
          */
         $mailerConfig = $container->get('config')['mailer'];
@@ -53,7 +54,7 @@ return [
         $twig = $container->get(Environment::class);
 
         /**
-         * @psalm-suppress MixedArrayAccess
+         * @psalm-suppress MixedAssignment
          * @psalm-var array{from:string} $mailerConfig
          */
         $mailerConfig = $container->get('config')['mailer'];
@@ -73,7 +74,7 @@ return [
         $twig = $container->get(Environment::class);
 
         /**
-         * @psalm-suppress MixedArrayAccess
+         * @psalm-suppress MixedAssignment
          * @psalm-var array{from:string} $mailerConfig
          */
         $mailerConfig = $container->get('config')['mailer'];
@@ -87,7 +88,7 @@ return [
 
     Tokenizer::class => static function (ContainerInterface $container): Tokenizer {
         /**
-         * @psalm-suppress MixedArrayAccess
+         * @psalm-suppress MixedAssignment
          * @psalm-var array{token_ttl:string} $config
          */
         $config = $container->get('config')['auth'];

@@ -32,6 +32,6 @@ class Handler
 
         $user->attachNetwork($identity);
 
-        $this->flausher->flush();
+        $this->flusher->flush();
     }
 }

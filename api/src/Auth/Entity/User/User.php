@@ -275,7 +275,9 @@ class User
      */
     public function getNetworks(): array
     {
-        /** @var Network[] */
+        /**
+         * @psalm-suppress MixedArgumentTypeCoercion
+        */
         return $this
             ->networks
             ->map(static function (UserNetwork $network) {

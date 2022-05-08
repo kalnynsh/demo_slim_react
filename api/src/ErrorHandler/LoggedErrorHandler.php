@@ -10,7 +10,7 @@ use Slim\Handlers\ErrorHandler;
 use Slim\Interfaces\CallableResolverInterface;
 
 /**
- * @phan-suppress PropertyNotSetInConstructor
+ * @psalm-suppress PropertyNotSetInConstructor
  */
 class LoggedErrorHandler extends ErrorHandler
 {

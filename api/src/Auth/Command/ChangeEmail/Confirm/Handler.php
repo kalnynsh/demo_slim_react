@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\Command\ChangeEmail\Request;
+namespace App\Auth\Command\ChangeEmail\Confirm;
 
 use App\Flusher;
-use App\Auth\Entity\User\Id;
-use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\UserRepository;
 
 class Handler

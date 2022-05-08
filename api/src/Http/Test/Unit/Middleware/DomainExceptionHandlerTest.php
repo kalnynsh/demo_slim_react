@@ -50,8 +50,13 @@ class DomainExceptionHandlerTest extends TestCase
             ->expects($this->once())
             ->method('warning');
 
+        /** @psalm-suppress UndefinedInterfaceMethod */
         $translator = $this->createStub(TranslatorInterface::class);
 
+        /**
+         * @psalm-suppress MixedMethodCall
+         * @psalm-suppress UndefinedInterfaceMethod
+         */
         $translator
             ->expects($this->once())
             ->method('trans')

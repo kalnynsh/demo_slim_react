@@ -8,8 +8,9 @@ use Psr\Container\ContainerInterface;
 return [
     FrontendUrlGenerator::class => static function (ContainerInterface $container): FrontendUrlGenerator {
         /**
-         * $psalm-suppress MixedArrayAccess
-         * $psalm-var array{url:string} $config
+         * @psalm-suppress MixedAssignment
+         *
+         * @psalm-var array{url:string} $config
          */
         $config = $container->get('config')['frontend'];
 

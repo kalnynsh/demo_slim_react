@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\Command\ChangeEmail\Confirm;
+namespace App\Auth\Command\ChangeEmail\Request;
 
 class Command
 {
-    public string $token = '';
+    public string $id = '';
+    public string $email = '';
 }

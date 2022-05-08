@@ -19,9 +19,10 @@ return [
         $responseFactory = $container->get(ResponseFactoryInterface::class);
 
         /**
-         * @phan-suppress MixedArrayAccess
+         * @psalm-suppress MixedAssignment
          * @psalm-var array{
          *  display_error_details:bool,
+         *  use_sentry:bool
          * } $config
          */
         $config = $container->get('config')['errors'];

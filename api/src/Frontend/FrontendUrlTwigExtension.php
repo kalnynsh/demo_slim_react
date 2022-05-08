@@ -23,6 +23,7 @@ class FrontendUrlTwigExtension extends AbstractExtension
         ];
     }
 
+    /** @psalm-param array<array-key, mixed> $params */
     public function url(string $path, $params = []): string
     {
         return $this->url->generate($path, $params);

@@ -11,7 +11,6 @@ use App\Http\Validator\ValidationException;
 use Fig\Http\Message\StatusCodeInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 class ValidationExceptionHandler implements MiddlewareInterface
@@ -33,7 +32,6 @@ class ValidationExceptionHandler implements MiddlewareInterface
     {
         $errors = [];
 
-        /** @var ConstraintViolationInterface $violation */
         foreach ($violations as $violation) {
             $errors[$violation->getPropertyPath()] = $violation->getMessage();
         }

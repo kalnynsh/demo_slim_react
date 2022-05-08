@@ -10,17 +10,20 @@ use Symfony\Component\Mailer\MailerInterface;
 return [
     MailerInterface::class => static function (ContainerInterface $container) {
         /**
-         * @psalm-suppress MixedArrayAccess
+         * @psalm-suppress MixedAssignment
          * @psalm-var array{
          *  host:string,
          *  port:int,
          *  user:string,
          *  password:string,
-         *  encryption:string
+         *  encryption:string,
+         *  from: string,
+         *  verify_peer:int
          * } $config
          */
         $config = $container->get('config')['mailer'];
 
+        /** @psalm-suppress MixedOperand */
         $dsn = 'smtp://'
             . $config['user']
             . ':'

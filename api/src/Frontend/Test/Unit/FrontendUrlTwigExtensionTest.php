@@ -12,7 +12,7 @@ use Twig\Loader\ArrayLoader;
 
 class FrontendUrlTwigExtensionTest extends TestCase
 {
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $frontend = $this->createMock(FrontendUrlGenerator::class);
 
