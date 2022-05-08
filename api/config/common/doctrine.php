@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 use App\Auth;
 use Doctrine\ORM\ORMSetup;
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Types\Type;
-use Doctrine\ORM\Configuration;
+use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Common\EventManager;
 use Doctrine\Common\EventSubscriber;
 use Psr\Container\ContainerInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Cache\Psr6\DoctrineProvider;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Doctrine\ORM\Mapping\UnderscoreNamingStrategy;
-use Symfony\Component\Cache\Adapter\PhpFilesAdapter;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 return [
     EntityManagerInterface::class => function (ContainerInterface $container): EntityManagerInterface {
@@ -32,31 +34,22 @@ return [
          */
         $settings = $container->get('config')['doctrine'];
 
-        if ($settings['dev_mode']) {
-            $queryCache = new ArrayAdapter();
-            $metadataCache = new ArrayAdapter();
-        }
+        $config = Setup::createConfiguration(
+            $settings['dev_mode'],
+            $settings['proxy_dir'],
+            $settings['cache_dir'] ?
+                DoctrineProvider::wrap(new FilesystemAdapter('doctrine_queries', 0, $settings['cache_dir'])) :
+                DoctrineProvider::wrap(new ArrayAdapter())
+        );
 
-        if (! $settings['dev_mode']) {
-            $queryCache = new PhpFilesAdapter('doctrine_queries', 0, $settings['cache_dir']);
-            $metadataCache = new PhpFilesAdapter('doctrine_metadata', 0, $settings['cache_dir']);
-        }
-
-        $metadataCache =  $metadataCache ?? new ArrayAdapter();
-        $queryCache =  $queryCache ?? new ArrayAdapter();
-
-        $config = new Configuration();
+        $metadataCache = $settings['dev_mode'] ?
+            new ArrayAdapter() : new FilesystemAdapter('doctrine_metadata', 0, $settings['cache_dir']);
 
         /** @phan-suppress MixedArgument */
         $config->setMetadataCache($metadataCache);
         $driverImpl = ORMSetup::createDefaultAnnotationDriver($settings['paths'], $metadataCache);
 
         $config->setMetadataDriverImpl($driverImpl);
-
-        /** @phan-suppress MixedArgument */
-        $config->setQueryCache($queryCache);
-        $config->setProxyDir($settings['proxy_dir']);
-
         $config->setProxyNamespace($settings['proxy_namespace']);
         $config->setNamingStrategy(new UnderscoreNamingStrategy());
 
@@ -83,7 +76,15 @@ return [
             $eventManager->addEventSubscriber($subscriber);
         }
 
-        return EntityManager::create($settings['connection'], $config);
+        return EntityManager::create(
+            $settings['connection'],
+            $config,
+            $eventManager
+        );
+    },
+    Connection::class => static function (ContainerInterface $container): Connection {
+        $em = $container->get(EntityManagerInterface::class);
+        return $em->getConnection();
     },
 
     'config' => [
