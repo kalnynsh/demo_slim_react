@@ -34,22 +34,15 @@ return [
          */
         $settings = $container->get('config')['doctrine'];
 
-        $config = Setup::createConfiguration(
+        $config = ORMSetup::createAnnotationMetadataConfiguration(
+            $settings['paths'],
             $settings['dev_mode'],
             $settings['proxy_dir'],
             $settings['cache_dir'] ?
-                DoctrineProvider::wrap(new FilesystemAdapter('doctrine_queries', 0, $settings['cache_dir'])) :
-                DoctrineProvider::wrap(new ArrayAdapter())
+                new FilesystemAdapter('doctrine_queries', 0, $settings['cache_dir']) :
+                new ArrayAdapter()
         );
 
-        $metadataCache = $settings['dev_mode'] ?
-            new ArrayAdapter() : new FilesystemAdapter('doctrine_metadata', 0, $settings['cache_dir']);
-
-        /** @phan-suppress MixedArgument */
-        $config->setMetadataCache($metadataCache);
-        $driverImpl = ORMSetup::createDefaultAnnotationDriver($settings['paths'], $metadataCache);
-
-        $config->setMetadataDriverImpl($driverImpl);
         $config->setProxyNamespace($settings['proxy_namespace']);
         $config->setNamingStrategy(new UnderscoreNamingStrategy());
 
