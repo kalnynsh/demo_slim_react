@@ -32,7 +32,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test_with_watch": "react-scripts test",
+    "test": "react-scripts test --watchAll=false",
     "eslint": "eslint --ext .js,.jsx src",
     "eslint-fix": "eslint --fix --ext .js,.jsx src",
     "stylelint": "stylelint \"src/**/*.css\"",

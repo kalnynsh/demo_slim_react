@@ -115,10 +115,10 @@ frontend-start:
 	docker compose run --rm frontend-node-cli npm run start
 
 frontend-test:
-	docker compose run --rm frontend-node-cli npm run test --watchAll=false
+	docker compose run --rm frontend-node-cli npm run test
 
 frontend-test-watch:
-	docker compose run --rm frontend-node-cli npm run test
+	docker compose run --rm frontend-node-cli npm run test_with_watch
 
 frontend-eslint:
 	docker compose run --rm frontend-node-cli npm run eslint
