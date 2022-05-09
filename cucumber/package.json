@@ -14,9 +14,10 @@
         "eslint-plugin-promise": "^5.2.0"
     },
     "scripts": {
-        "smoke": "cucumber-js --tags @smoke --fail-fast --parallel 2",
-        "e2e": "cucumber-js --format json:var/report.json",
-        "e2e-plane": "cucumber-js --parallel 4",
+        "smoke": "cucumber-js --tags @smoke --fail-fast --parallel 4",
+        "smoke-ci": "cucumber-js --tags @smoke --fail-fast --parallel 2 --retry 2",
+        "e2e": "cucumber-js --parallel 4",
+        "e2e-ci": "cucumber-js --parallel 2 --retry 2",
         "report": "node reporter.js",
         "lint": "eslint --ext .js features",
         "lint-fix": "eslint --fix --ext .js features"

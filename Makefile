@@ -237,10 +237,10 @@ validate-jenkins:
 	curl --user ${J_USER} -X POST -F "jenkinsfile=<Jenkinsfile" ${J_HOST}/pipeline-model-converter/validate
 
 testing-smoke:
-	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml run --rm cucumber-node-cli npm run smoke
+	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml run --rm cucumber-node-cli npm run smoke-ci
 
 testing-e2e:
-	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml run --rm cucumber-node-cli npm run e2e
+	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml run --rm cucumber-node-cli npm run e2e-ci
 
 try-testing: try-build try-testing-build try-testing-init try-testing-smoke try-testing-e2e try-testing-down-clear
 
