@@ -81,7 +81,7 @@ pipeline {
                 }
                 stage("Smoke") {
                     steps {
-                        "make testing-smoke"
+                        sh "make testing-smoke"
                     }
                 }
                 stage("E2E") {
