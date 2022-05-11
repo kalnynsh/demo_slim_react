@@ -12,3 +12,9 @@ authorize:
 
 docker-login:
 	ansible-playbook -i hosts.yml docker-login.yml
+
+generate-deploy-key:
+	ssh-keygen -q -t ed25519 -N '' -f files/deploy_ed25519
+
+authorize-deploy:
+	ansible-playbook -i hosts.yml authorize-deploy.yml
