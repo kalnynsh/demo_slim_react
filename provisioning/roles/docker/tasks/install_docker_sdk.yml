@@ -1,0 +1,13 @@
+---
+-   name: Install docker's SDK dependencies
+    apt:
+        name:
+            - python-pip
+            - virtualenv
+            - python-setuptools
+        state: present
+        update_cache: yes
+
+-   name: Install docker's SDK for python
+    pip:
+        name: docker
