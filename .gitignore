@@ -25,3 +25,5 @@ node_modules
 .editconfig
 
 .vscode
+
+docker-compose-vm.yml
