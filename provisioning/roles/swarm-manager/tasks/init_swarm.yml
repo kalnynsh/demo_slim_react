@@ -2,6 +2,7 @@
 -   name: Init swarm
     docker_swarm:
         advertise_addr: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}:2377"
+        state: present
     register: swarm_init_result
 
 -   name: Store worker join token
