@@ -46,11 +46,8 @@
         state: present
         update_cache: yes
 
--   name: Install docker-compose-plugin
-    apt:
-        name: docker-compose-plugin
-        state: present
-        update_cache: yes
+-   name: Remove docker compose plugin
+    shell: "docker plugin rm -f docker-compose-plugin"
 
 -   name: Set periodic Docker prune
     cron:

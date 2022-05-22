@@ -10,7 +10,7 @@
         port: 80
         timeout: 1
     register: port_check
-    ignore_errors: yes
+    ignore_errors: true
 
 -   name: Up certbot standalone Apache
     shell: "docker run -d --name apache -v /var/www/html:/usr/local/apache2/htdocs/ -p 80:80 httpd:2.4"
