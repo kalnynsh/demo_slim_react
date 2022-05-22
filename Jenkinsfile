@@ -128,7 +128,7 @@ pipeline {
                 sh "make push"
             }
         }
-        stage("Poduction") {
+        stage("Stage on VM") {
             when {
                 branch "main"
             }
