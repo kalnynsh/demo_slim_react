@@ -146,7 +146,7 @@ pipeline {
                     string(credentialsId: 'SENTRY_DSN', variable: 'SENTRY_DSN')
                 ]) {
                     sshagent (credentials: ["PRODUCTION_AUTH"]) {
-                        sh "BUILD_NUMBER=${env.BUILD_NUMBER} make deploy"
+                        sh "BUILD_NUMBER=${env.BUILD_NUMBER} make deploy-vm"
                     }
                 }
             }
@@ -156,6 +156,7 @@ pipeline {
         always {
             sh "make docker-down-clear || true"
             sh "make testing-down-clear || true"
+            sh "make deploy-vm-clean || true"
         }
     }
     failure {
