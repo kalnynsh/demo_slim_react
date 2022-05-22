@@ -253,16 +253,12 @@ deploy:
 	rm -f docker-compose-production-env.yml
 
 	ssh -o StrictHostKeyChecking=no ${D_USER}@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy --compose-file docker-compose.yml auction --with-registry-auth --prune'
-	ssh -o StrictHostKeyChecking=no ${D_USER}@${HOST} -p ${PORT} 'rm -f site'
-	ssh -o StrictHostKeyChecking=no ${D_USER}@${HOST} -p ${PORT} 'ln -sr site_${BUILD_NUMBER} site'
 
 deploy-clean:
 	rm -f docker-compose-production-env.yml
 
 rollback:
 	ssh -o StrictHostKeyChecking=no ${D_USER}@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy --compose-file docker-compose.yml auction --with-registry-auth --prune'
-	ssh -o StrictHostKeyChecking=no ${D_USER}@${HOST} -p ${PORT} 'rm -f site'
-	ssh -o StrictHostKeyChecking=no ${D_USER}@${HOST} -p ${PORT} 'ln -sr site_${BUILD_NUMBER} site'
 
 deploy-vm:
 	ssh -o StrictHostKeyChecking=no ${D_USER}@${HOST} -p ${PORT} 'rm -rf site_${BUILD_NUMBER}'
@@ -273,13 +269,9 @@ deploy-vm:
 	rm -f docker-compose-vm-env.yml
 
 	ssh -o StrictHostKeyChecking=no ${D_USER}@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy --compose-file docker-compose.yml auction --with-registry-auth --prune'
-	ssh -o StrictHostKeyChecking=no ${D_USER}@${HOST} -p ${PORT} 'rm -f site'
-	ssh -o StrictHostKeyChecking=no ${D_USER}@${HOST} -p ${PORT} 'ln -sr site_${BUILD_NUMBER} site'
 
 deploy-vm-clean:
 	rm -f docker-compose-vm-env.yml
 
 rollback-vm:
 	ssh -o StrictHostKeyChecking=no ${D_USER}@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy --compose-file docker-compose.yml auction --with-registry-auth --prune'
-	ssh -o StrictHostKeyChecking=no ${D_USER}@${HOST} -p ${PORT} 'rm -f site'
-	ssh -o StrictHostKeyChecking=no ${D_USER}@${HOST} -p ${PORT} 'ln -sr site_${BUILD_NUMBER} site'
