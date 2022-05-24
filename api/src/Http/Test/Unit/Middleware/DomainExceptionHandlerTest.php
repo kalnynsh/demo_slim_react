@@ -14,7 +14,7 @@ use App\Http\Middleware\DomainExceptionHandler;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @covers DomainExceptionHandler
+ * @covers \App\Http\Middleware\DomainExceptionHandler
  */
 class DomainExceptionHandlerTest extends TestCase
 {

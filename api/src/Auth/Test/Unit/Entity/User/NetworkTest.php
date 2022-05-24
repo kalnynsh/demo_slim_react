@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 use App\Auth\Entity\User\Network;
 
 /**
- * @covers Network
+ * @covers \App\Auth\Entity\User\Network
  */
 class NetworkTest extends TestCase
 {

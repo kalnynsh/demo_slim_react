@@ -15,7 +15,7 @@ use Symfony\Component\Mime\Email as MimeEmail;
 use App\Auth\Service\PasswordResetTokenSender;
 
 /**
- * @covers PasswordResetTokenSender
+ * @covers \App\Auth\Service\PasswordResetTokenSender
  */
 class PasswordResetTokenSenderTest extends TestCase
 {

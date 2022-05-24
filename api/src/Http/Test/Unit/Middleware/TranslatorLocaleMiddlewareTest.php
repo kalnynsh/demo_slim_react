@@ -14,7 +14,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Symfony\Component\Translation\Translator;
 
 /**
- * @covers TranslatorLocaleMiddleware
+ * @covers \App\Http\Middleware\TranslatorLocaleMiddleware
  */
 class TranslatorLocaleMiddlewareTest extends TestCase
 {

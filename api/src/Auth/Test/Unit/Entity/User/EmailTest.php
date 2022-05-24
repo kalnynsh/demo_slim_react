@@ -7,7 +7,7 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers Email
+ * @covers \App\Auth\Entity\User\Email
  */
 class EmailTest extends TestCase
 {

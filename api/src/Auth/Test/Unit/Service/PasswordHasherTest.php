@@ -8,7 +8,7 @@ use App\Auth\Service\PasswordHasher;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers PasswordHasher
+ * @covers \App\Auth\Service\PasswordHasher
  */
 class PasswordHasherTest extends TestCase
 {

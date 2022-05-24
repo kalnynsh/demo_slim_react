@@ -13,7 +13,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
- * @covers ContentLanguage
+ * @covers \Middlewares\ContentLanguage
  */
 class ContentLanguageTest extends TestCase
 {

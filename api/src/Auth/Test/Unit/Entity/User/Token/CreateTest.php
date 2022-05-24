@@ -9,7 +9,7 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers Token
+ * @covers \App\Auth\Entity\User\Token
  */
 class CreateTest extends TestCase
 {

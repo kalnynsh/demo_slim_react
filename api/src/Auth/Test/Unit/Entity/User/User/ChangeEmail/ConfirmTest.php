@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 use App\Auth\Test\Builder\UserBuilder;
 
 /**
- * @covers User::confirmEmailChanging
+ * @covers \App\Auth\Entity\User\User::confirmEmailChanging
  */
 class ConfirmTest extends TestCase
 {

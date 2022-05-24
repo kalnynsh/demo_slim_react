@@ -15,7 +15,7 @@ use Symfony\Component\Mime\Email as MimeEmail;
 use App\Auth\Service\NewEmailConfirmTokenSender;
 
 /**
- * @covers NewEmailConfirmTokenSender
+ * @covers \App\Auth\Service\NewEmailConfirmTokenSender
  */
 class NewEmailConfirmTokenSenderTest extends TestCase
 {

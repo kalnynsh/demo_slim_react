@@ -11,7 +11,7 @@ use App\Auth\Entity\User\Token;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers User
+ * @covers \App\Auth\Entity\User\User
  */
 class RequestTest extends TestCase
 {

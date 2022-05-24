@@ -10,7 +10,7 @@ use Fig\Http\Message\StatusCodeInterface;
 use Test\Functional\V1\Auth\Join\RequestFixture;
 
 /**
- * @covers App\Http\Action\V1\Auth\Join\RequestAction
+ * @covers \App\Http\Action\V1\Auth\Join\RequestAction
  */
 class RequestTest extends WebTestCase
 {

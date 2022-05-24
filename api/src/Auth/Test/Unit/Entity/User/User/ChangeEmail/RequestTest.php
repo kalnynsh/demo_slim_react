@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 use App\Auth\Test\Builder\UserBuilder;
 
 /**
- * @covers User::requestEmailChanging
+ * @covers \App\Auth\Entity\User\User::requestEmailChanging
  */
 class RequestTest extends TestCase
 {

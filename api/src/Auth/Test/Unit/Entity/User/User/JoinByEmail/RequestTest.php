@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @covers User::requestJoinByEmail
+ * @covers \App\Auth\Entity\User\User::requestJoinByEmail
  */
 class RequestTest extends TestCase
 {

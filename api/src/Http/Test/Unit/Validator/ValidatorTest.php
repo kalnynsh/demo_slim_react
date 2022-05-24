@@ -13,7 +13,7 @@ use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * @covers Validator
+ * @covers \App\Http\Validator\Validator
  */
 class ValidatorTest extends TestCase
 {

@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 use App\Auth\Test\Builder\UserBuilder;
 
 /**
- * @covers User::changeRole
+ * @covers \App\Auth\Entity\User\User::changeRole
  */
 class ChangeRoleTest extends TestCase
 {

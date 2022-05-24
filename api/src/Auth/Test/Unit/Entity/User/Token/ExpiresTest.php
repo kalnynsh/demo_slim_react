@@ -7,7 +7,7 @@ use App\Auth\Entity\User\Token;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers Token::isExpiredTo
+ * @covers \App\Auth\Entity\User\Token::isExpiredTo
  */
 class ExpiresTest extends TestCase
 {

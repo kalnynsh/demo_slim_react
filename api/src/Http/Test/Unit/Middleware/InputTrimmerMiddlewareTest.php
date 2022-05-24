@@ -15,7 +15,7 @@ use Slim\Psr7\Factory\StreamFactory;
 use Slim\Psr7\Factory\UploadedFileFactory;
 
 /**
- * @covers InputTrimmerMiddleware
+ * @covers \App\Http\Middleware\InputTrimmerMiddleware
  */
 class InputTrimmerMiddleware extends TestCase
 {

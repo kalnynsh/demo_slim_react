@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 use App\Auth\Test\Builder\UserBuilder;
 
 /**
- * @covers User::requestPasswordReset
+ * @covers \App\Auth\Entity\User\User::requestPasswordReset
  */
 class RequestTest extends TestCase
 {
