@@ -31,7 +31,7 @@ class NewEmailConfirmTokenSenderTest extends TestCase
 
         /** \PHPUnit\Framework\MockObject\MockObject $twig */
         $twig
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('render')
             ->with(
                 $this->equalTo(NewEmailConfirmTokenSender::TEMPLATE_PATH),
@@ -47,7 +47,7 @@ class NewEmailConfirmTokenSenderTest extends TestCase
 
         /** \PHPUnit\Framework\MockObject\MockObject $mailer */
         $mailer
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('send')
             ->willReturnCallback(static function (MimeEmail $mimeEmail) use ($from, $to, $body): int {
                 self::assertEquals([new Address($from)], $mimeEmail->getFrom());

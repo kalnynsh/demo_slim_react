@@ -23,7 +23,7 @@ class ValidatorTest extends TestCase
         $origin = $this->createMock(ValidatorInterface::class);
 
         $origin
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('validate')
             ->with($this->equalTo($command))
             ->willReturn(new ConstraintViolationList());
@@ -38,7 +38,7 @@ class ValidatorTest extends TestCase
         $origin = $this->createMock(ValidatorInterface::class);
 
         $origin
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('validate')
             ->with($this->equalTo($command))
             ->willReturn($violations = new ConstraintViolationList([

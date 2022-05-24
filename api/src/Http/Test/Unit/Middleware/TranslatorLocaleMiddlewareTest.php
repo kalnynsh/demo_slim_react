@@ -44,7 +44,7 @@ class TranslatorLocaleMiddlewareTest extends TestCase
         $translator = $this->createMock(Translator::class);
 
         $translator
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('setLocale')
             ->with($this->equalTo('ru'));
 

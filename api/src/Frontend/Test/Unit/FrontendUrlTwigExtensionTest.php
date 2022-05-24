@@ -17,7 +17,7 @@ class FrontendUrlTwigExtensionTest extends TestCase
         $frontend = $this->createMock(FrontendUrlGenerator::class);
 
         $frontend
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('generate')
             ->with(
                 $this->equalTo('search'),

@@ -47,7 +47,7 @@ class DomainExceptionHandlerTest extends TestCase
         $logger = $this->createMock(LoggerInterface::class);
 
         $logger
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('warning');
 
         /** @psalm-suppress UndefinedInterfaceMethod */
@@ -58,7 +58,7 @@ class DomainExceptionHandlerTest extends TestCase
          * @psalm-suppress UndefinedInterfaceMethod
          */
         $translator
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('trans')
             ->with(
                 $this->equalTo('Error has occurred.'),

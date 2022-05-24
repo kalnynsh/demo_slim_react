@@ -39,7 +39,7 @@ class InputTrimmerMiddleware extends TestCase
         $handler = $this->createMock(RequestHandlerInterface::class);
 
         $handler
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('handle')
             ->willReturnCallback(static function (ServerRequestInterface $request): ResponseInterface {
                 self::assertEquals([
@@ -88,7 +88,7 @@ class InputTrimmerMiddleware extends TestCase
         $handler = $this->createMock(RequestHandlerInterface::class);
 
         $handler
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('handle')
             ->willReturnCallback(static function (ServerRequestInterface $request) use ($realFile): ResponseInterface {
                 self::assertEquals([
