@@ -25,7 +25,6 @@ test-smoke: api-fixtures cucumber-clear cucumber-smoke
 test-e2e: api-fixtures cucumber-clear cucumber-e2e-plane
 
 frontend-init: frontend-npm-install frontend-ready
-frontend-lint: frontend-eslint frontend-stylelint
 
 docker-up:
 	docker compose up -d
@@ -113,6 +112,12 @@ frontend-npm-install:
 frontend-ready:
 	docker run --rm -v ${PWD}/frontend:/app -w /app alpine touch .ready
 
+frontend-check: frontend-lint frontend-test
+
+frontend-lint:
+	docker compose run --rm frontend-node-cli npm run eslint
+	docker compose run --rm frontend-node-cli npm run stylelint
+
 frontend-start:
 	docker compose run --rm frontend-node-cli npm run start
 
@@ -121,12 +126,6 @@ frontend-test:
 
 frontend-test-watch:
 	docker compose run --rm frontend-node-cli npm run test_with_watch
-
-frontend-eslint:
-	docker compose run --rm frontend-node-cli npm run eslint
-
-frontend-stylelint:
-	docker compose run --rm frontend-node-cli npm run stylelint
 
 frontend-eslint-fix:
 	docker compose run --rm frontend-node-cli npm run eslint-fix
