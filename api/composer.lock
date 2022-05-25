@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "455602e29401c3d9e2c01e82d48df023",
+    "content-hash": "af37855b19d6787881bc6aa7dd671397",
     "packages": [
         {
             "name": "brick/math",
@@ -7704,26 +7704,26 @@
         },
         {
             "name": "overtrue/phplint",
-            "version": "4.1.0",
+            "version": "5.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overtrue/phplint.git",
-                "reference": "b395e5016f454a0bb6757ad71901d2838f90ccc1"
+                "reference": "a9730575eb1fd855cae4c3ea25b7b83877447042"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overtrue/phplint/zipball/b395e5016f454a0bb6757ad71901d2838f90ccc1",
-                "reference": "b395e5016f454a0bb6757ad71901d2838f90ccc1",
+                "url": "https://api.github.com/repos/overtrue/phplint/zipball/a9730575eb1fd855cae4c3ea25b7b83877447042",
+                "reference": "a9730575eb1fd855cae4c3ea25b7b83877447042",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "n98/junit-xml": "1.1.0",
-                "php": ">=8.0",
-                "symfony/console": "^5.3.11|^6.0",
-                "symfony/finder": "^5.3.7|^6.0",
-                "symfony/process": "^5.3.12|^6.0",
-                "symfony/yaml": "^5.3.11|^6.0"
+                "php": ">=8.1",
+                "symfony/console": "^6.0",
+                "symfony/finder": "^6.0",
+                "symfony/process": "^6.0",
+                "symfony/yaml": "^6.0"
             },
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.4",
@@ -7767,7 +7767,7 @@
             ],
             "support": {
                 "issues": "https://github.com/overtrue/phplint/issues",
-                "source": "https://github.com/overtrue/phplint/tree/4.1.0"
+                "source": "https://github.com/overtrue/phplint/tree/5.1.0"
             },
             "funding": [
                 {
@@ -7775,7 +7775,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-12-23T21:26:28+00:00"
+            "time": "2022-04-19T03:40:18+00:00"
         },
         {
             "name": "phar-io/manifest",
