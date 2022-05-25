@@ -22,7 +22,7 @@ test-e2e-full:
 	make cucumber-report
 
 test-smoke: api-fixtures cucumber-clear cucumber-smoke
-test-e2e: api-fixtures cucumber-clear cucumber-e2e-plane
+test-e2e: api-fixtures cucumber-clear cucumber-e2e
 
 frontend-init: frontend-npm-install frontend-ready
 
@@ -140,9 +140,6 @@ cucumber-npm-install:
 
 cucumber-e2e:
 	docker compose run --rm cucumber-node-cli npm run e2e
-
-cucumber-e2e-plane:
-	docker compose run --rm cucumber-node-cli npm run e2e-plane
 
 cucumber-lint:
 	docker compose run --rm cucumber-node-cli npm run lint
