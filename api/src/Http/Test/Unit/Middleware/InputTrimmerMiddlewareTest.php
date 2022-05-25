@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Http\Test\Unit\Middleware;
 
-use Monolog\Test\TestCase;
+use PHPUnit\Framework\TestCase;
+use Slim\Psr7\Factory\StreamFactory;
 use Slim\Psr7\Factory\ResponseFactory;
 use Psr\Http\Message\ResponseInterface;
+use Slim\Psr7\Factory\UploadedFileFactory;
 use Slim\Psr7\Factory\ServerRequestFactory;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use App\Http\Middleware\InputTrimmerMiddleware as MiddlewareInputTrimmerMiddleware;
-use Slim\Psr7\Factory\StreamFactory;
-use Slim\Psr7\Factory\UploadedFileFactory;
 
 /**
  * @covers \App\Http\Middleware\InputTrimmerMiddleware
