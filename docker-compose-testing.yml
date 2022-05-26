@@ -70,7 +70,7 @@ services:
             SENTRY_DSN: ''
 
     api-postgres:
-        image: postgres:14.1-alpine
+        image: postgres:14.3-alpine
         environment:
             POSTGRES_USER: app
             POSTGRES_PASSWORD: secret
