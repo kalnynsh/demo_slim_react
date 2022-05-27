@@ -19,10 +19,12 @@ return [
         /** @var EntityManagerInterface $em */
         $em = $container->get(EntityManagerInterface::class);
 
-        /** @var EntityRepository $repository */
+        /**
+         * @var EntityRepository $repository
+         * @psalm-var EntityRepository<User>
+        */
         $repository = $em->getRepository(User::class);
 
-        /** @psalm-suppress MixedArgumentTypeCoercion */
         return new UserRepository($em, $repository);
     },
 

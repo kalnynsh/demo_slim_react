@@ -6,13 +6,11 @@ use App\Auth;
 use Doctrine\ORM\ORMSetup;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Types\Type;
-use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Common\EventManager;
 use Doctrine\Common\EventSubscriber;
 use Psr\Container\ContainerInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Common\Cache\Psr6\DoctrineProvider;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Doctrine\ORM\Mapping\UnderscoreNamingStrategy;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
@@ -26,7 +24,7 @@ return [
          *   dev_mode:bool,
          *   proxy_dir:string,
          *   proxy_namespace:string,
-         *   types:array<string,string>,
+         *   types:array<string,class-string<Doctrine\DBAL\Types\Type>>,
          *   connection:array<string,mixed>,
          *   cache_dir:string,
          *   subscribers:array<string>

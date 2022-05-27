@@ -10,8 +10,16 @@ use Doctrine\ORM\EntityRepository;
 class UserRepository
 {
     private EntityManagerInterface $em;
+    /**
+     * @psalm-var EntityRepository<User>
+     */
     private EntityRepository $repository;
 
+    /**
+     * @param EntityManagerInterface $em
+     * @param EntityRepository $repository
+     * @psalm-param EntityRepository<User> $repository
+     */
     public function __construct(EntityManagerInterface $em, EntityRepository $repository)
     {
         $this->em = $em;
@@ -25,11 +33,13 @@ class UserRepository
      */
     public function get(Id $userId): User
     {
-        if (! $user = $this->repository->find($userId->getValue())) {
+        /** @var User|null */
+        $user = $this->repository->find($userId->getValue());
+
+        if ($user === null) {
             throw new \DomainException('User was not found.');
         }
 
-        /** @var User $user */
         return $user;
     }
 
@@ -40,17 +50,15 @@ class UserRepository
      */
     public function getByEmail(Email $email): User
     {
-        if (
-            ! $user = $this->repository->findOneBy(
-                [
-                    'email' => $email->getValue(),
-                ]
-            )
-        ) {
+        /** @var User|null */
+        $user = $this
+            ->repository
+            ->findOneBy(['email' => $email->getValue()]);
+
+        if ($user === null) {
             throw new \DomainException('User was not found.');
         }
 
-        /** @var User $user */
         return $user;
     }
 
@@ -59,6 +67,7 @@ class UserRepository
      * @psalm-suppress LessSpecificReturnStatement
      * @param string $tokenValue
      * @return User|null
+     * @psalm-return User|null
      */
     public function findByJoinConfirmToken(string $tokenValue): ?User
     {
@@ -76,6 +85,7 @@ class UserRepository
      * @psalm-suppress LessSpecificReturnStatement
      * @param string $tokenValue
      * @return User|null
+     * @psalm-return User|null
      */
     public function findByNewEmailToken(string $tokenValue): ?User
     {
@@ -93,6 +103,7 @@ class UserRepository
      * @psalm-suppress LessSpecificReturnStatement
      * @param string $tokenValue
      * @return User|null
+     * @psalm-return User|null
      */
     public function findByPasswordResetToken(string $tokenValue): ?User
     {
