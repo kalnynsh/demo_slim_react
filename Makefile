@@ -106,6 +106,9 @@ api-composer-update:
 api-composer-upgrade:
 	docker compose run --rm api-php-cli composer upgrade
 
+api-composer-outdated:
+	docker compose run --rm api-php-cli composer outdated --direct
+
 frontend-clear:
 	docker run --rm -v ${PWD}/frontend:/app -w /app alpine sh -c 'rm -rf .ready build'
 
