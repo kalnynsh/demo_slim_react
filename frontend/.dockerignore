@@ -8,4 +8,4 @@ workspace_auction.code-workspace
 /.DS_Store
 
 /.ready
-
+/.eslintcache
