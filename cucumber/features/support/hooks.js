@@ -15,12 +15,15 @@ Before({ timeout: 60 * 1000 }, async function () {
 
 After(async function (testCase) {
   if (testCase.result.status === Status.FAILED) {
-    const screenShot = await this.page.screenshot({
-      encoding: 'base64',
-      fullPage: true
-    })
+    const name = testCase
+      .pickle
+      .uri
+      .replace(/^features\//, '')
+      .replace(/\//g, '_') +
+      '-' +
+      testCase.pickle.name.toLowerCase().replace(/[^\w]/g, '_')
 
-    this.attach(screenShot, 'image/png')
+    await this.page.screenshot({ path: 'var/' + name + '.png', fullPage: true })
   }
 
   await this.page.close()
