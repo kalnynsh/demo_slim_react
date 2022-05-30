@@ -35,6 +35,7 @@
         "dms/phpunit-arraysubset-asserts": "^0.4.0",
         "doctrine/data-fixtures": "^1.5",
         "guzzlehttp/guzzle": "^7.4",
+        "lctrs/psalm-psr-container-plugin": "^1.7",
         "overtrue/phplint": "^5.1",
         "phpunit/phpunit": "^9.5",
         "psalm/plugin-phpunit": "^0.16.1",
