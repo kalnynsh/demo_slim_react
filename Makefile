@@ -26,6 +26,8 @@ test-e2e: api-fixtures cucumber-clear cucumber-e2e
 
 frontend-init: frontend-npm-install frontend-ready
 
+deps-update: api-composer-update cucumber-npm-update frontend-npm-update restart
+
 docker-up:
 	docker compose up -d
 
@@ -115,6 +117,9 @@ frontend-clear:
 frontend-npm-install:
 	docker compose run --rm frontend-node-cli npm install
 
+frontend-npm-update:
+	docker compose run --rm frontend-node-cli npm update
+
 frontend-ready:
 	docker run --rm -v ${PWD}/frontend:/app -w /app alpine touch .ready
 
@@ -143,6 +148,9 @@ cucumber-init: cucumber-npm-install
 
 cucumber-npm-install:
 	docker compose run --rm cucumber-node-cli npm install
+
+cucumber-npm-update:
+	docker compose run --rm cucumber-node-cli npm update
 
 cucumber-e2e:
 	docker compose run --rm cucumber-node-cli npm run e2e
