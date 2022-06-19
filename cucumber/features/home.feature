@@ -8,5 +8,5 @@ Feature: View home page
         Given I am a guest user
         When I open "/" page
         Then I see welcome block
-        And I see "We shall be here soon."
-        And I do not see "We are here."
+        And I see "We shall be here soon"
+        And I do not see "We are here"
