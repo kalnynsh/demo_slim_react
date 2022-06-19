@@ -20,6 +20,6 @@ test('renders new welcome', () => {
     <Welcome features={['WE_ARE_HERE']} />
   )
 
-  expect(getByText(/We shall be here soon/i)).toBeNull()
-  expect(queryByText(/We are here/i)).toBeInTheDocument()
+  expect(queryByText(/We shall be here soon/i)).toBeNull()
+  expect(getByText(/We are here/i)).toBeInTheDocument()
 })
