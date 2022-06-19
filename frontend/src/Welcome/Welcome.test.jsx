@@ -1,15 +1,14 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import Welcome from './Welcome'
-
-test('renders welcome', () => {
-  const { getByText } = render(<Welcome features={[]} />)
-  const h1Element = getByText(/Auction/i)
-  expect(h1Element).toBeInTheDocument()
-})
+import { FeaturesContext } from '../FeatureToggle'
 
 test('renders old welcome', () => {
-  const { getByText, queryByText } = render(<Welcome features={[]} />)
+  const { getByText, queryByText } = render(
+    <FeaturesContext.Provider value={[]}>
+      <Welcome />
+    </FeaturesContext.Provider>
+  )
 
   expect(getByText(/We shall be here soon/i)).toBeInTheDocument()
   expect(queryByText(/We are here/i)).toBeNull()
@@ -17,7 +16,9 @@ test('renders old welcome', () => {
 
 test('renders new welcome', () => {
   const { getByText, queryByText } = render(
-    <Welcome features={['WE_ARE_HERE']} />
+    <FeaturesContext.Provider value={['WE_ARE_HERE']}>
+      <Welcome />
+    </FeaturesContext.Provider>
   )
 
   expect(queryByText(/We shall be here soon/i)).toBeNull()
