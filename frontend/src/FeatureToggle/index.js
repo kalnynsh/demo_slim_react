@@ -1,1 +1,1 @@
-export { default as FeaturesContext } from './FeatureContext'
+export { default as FeaturesContext } from './FeaturesContext'
