@@ -12,6 +12,7 @@
             <directory>src/Auth/Test/Unit</directory>
             <directory>src/Http/Test/Unit</directory>
             <directory>src/Frontend/Test/Unit</directory>
+            <directory>src/FeatureToggle/Test/Unit</directory>
         </testsuite>
         <testsuite name="functional">
             <directory>tests/Functional</directory>
@@ -31,8 +32,9 @@
             <directory>src/Auth/Test</directory>
             <directory>src/Http/Test</directory>
             <directory>src/Frontend/Test</directory>
-            <file>Functional/WebTestCase.php</file>
             <directory>vendor</directory>
+            <directory>src/FeatureToggle/Test</directory>
+            <file>Functional/WebTestCase.php</file>
         </exclude>
     </coverage>
 

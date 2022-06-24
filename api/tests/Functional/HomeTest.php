@@ -25,4 +25,17 @@ class HomeTest extends WebTestCase
         self::assertEquals('application/json', $response->getHeaderLine('Content-Type'));
         self::assertEquals('{"title":"Hello!"}', $response->getBody()->getContents());
     }
+
+    public function testNewHome(): void
+    {
+        self::markTestIncomplete('Wait for feature flags');
+
+        $response = $this->app()->handle(
+            self::json('GET', '/')->withHeader('X-Features', 'NEW_HOME')
+        );
+
+        self::assertEquals(200, $response->getStatusCode());
+        self::assertEquals('application/json', $response->getHeaderLine('Content-Type'));
+        self::assertEquals('{"name":"API"}', (string)$response->getBody());
+    }
 }
