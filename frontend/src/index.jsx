@@ -5,13 +5,9 @@ import * as serviceWorker from './serviceWorker'
 import { createRoot } from 'react-dom/client'
 import cookie from 'cookie'
 import { mergeFeatures } from './FeatureToggle'
+import defaultFeatures from './features'
 
 const root = createRoot(document.getElementById('root'))
-
-const defaultFeatures = {
-  WE_ARE_HERE: false,
-}
-
 const cookies = cookie.parse(document.cookie)
 
 const cookieFeatures = (cookies.features || '')
