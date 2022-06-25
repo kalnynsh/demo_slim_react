@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\FeatureToggle;
 
-class Features implements FeatureFlag
+class Features implements FeatureFlag, FeatureSwitch
 {
     /**
      * @var bool[] $features
@@ -28,5 +28,10 @@ class Features implements FeatureFlag
         }
 
         return $this->features[$name];
+    }
+
+    public function enable(string $name): void
+    {
+        $this->features[$name] = true;
     }
 }

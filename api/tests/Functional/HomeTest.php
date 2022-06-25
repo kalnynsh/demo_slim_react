@@ -28,8 +28,6 @@ class HomeTest extends WebTestCase
 
     public function testNewHome(): void
     {
-        self::markTestIncomplete('Wait for feature flags');
-
         $response = $this->app()->handle(
             self::json('GET', '/')->withHeader('X-Features', 'NEW_HOME')
         );
