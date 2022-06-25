@@ -6,6 +6,7 @@ use Twig\Extension\DebugExtension;
 use Psr\Container\ContainerInterface;
 use Twig\Extension\ExtensionInterface;
 use App\Frontend\FrontendUrlTwigExtension;
+use App\FeatureToggle\FeatureFlagTwigExtension;
 
 return [
     Environment::class => static function (ContainerInterface $container): Environment {
@@ -61,6 +62,7 @@ return [
             'cache_dir' => __DIR__ . '/../../var/cache/twig',
             'extensions' => [
                 FrontendUrlTwigExtension::class,
+                FeatureFlagTwigExtension::class,
             ],
         ],
     ],
