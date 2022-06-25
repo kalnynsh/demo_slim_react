@@ -44,7 +44,7 @@ class FeaturesMiddlewareTest extends TestCase
             ->withConsecutive(['ONE'], ['TWO']);
 
         $middleware = new FeaturesMiddleware($switch, 'X-Features');
-        $request = self::createRequest()->withHeader('X-Features', 'ONE, TWO');
+        $request = self::createRequest()->withHeader('X-Features', 'ONE, TWO, !THREE');
 
         $handler = $this->createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willReturn($source = self::createResponse());
