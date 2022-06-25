@@ -22,6 +22,7 @@ class FeaturesMiddlewareTest extends TestCase
     {
         $switch = $this->createMock(FeatureSwitch::class);
         $switch->expects(self::never())->method('enable');
+        $switch->expects(self::never())->method('disable');
 
         $middleware = new FeaturesMiddleware($switch, 'X-Features');
         $request = self::createRequest();
@@ -42,6 +43,11 @@ class FeaturesMiddlewareTest extends TestCase
             ->expects(self::exactly(2))
             ->method('enable')
             ->withConsecutive(['ONE'], ['TWO']);
+
+        $switch
+            ->expects(self::once())
+            ->method('disable')
+            ->withConsecutive(['THREE']);
 
         $middleware = new FeaturesMiddleware($switch, 'X-Features');
         $request = self::createRequest()->withHeader('X-Features', 'ONE, TWO, !THREE');
