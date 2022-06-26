@@ -6,6 +6,8 @@ use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 use Monolog\Handler\StreamHandler;
 use Psr\Container\ContainerInterface;
+use Monolog\Processor\ProcessorInterface;
+use App\FeatureToggle\FeaturesMonologProcessor;
 
 return [
     LoggerInterface::class => static function (ContainerInterface $container): Logger {
@@ -15,6 +17,7 @@ return [
          *   debug:bool,
          *   file:string,
          *   stderr:bool,
+         *   processors:string[]
          * } $config
          */
         $config = $container->get('config')['logger'];
@@ -31,6 +34,12 @@ return [
             $mLogger->pushHandler(new StreamHandler($config['file'], $level));
         }
 
+        foreach ($config['processors'] as $class) {
+            /** @var ProcessorInterface $processor */
+            $processor = $container->get($class);
+            $mLogger->pushProcessor($processor);
+        }
+
         return $mLogger;
     },
 
@@ -39,6 +48,9 @@ return [
             'debug' => (bool) getenv('APP_DEBUG'),
             'file' => null,
             'stderr' => true,
+            'processors' => [
+                FeaturesMonologProcessor::class,
+            ],
         ],
     ],
 ];
