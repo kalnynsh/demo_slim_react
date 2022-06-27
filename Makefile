@@ -1,4 +1,6 @@
-init: docker-down-clear \
+init: init-ci frontend-ready
+
+init-ci: docker-down-clear \
 	api-clear frontend-clear cucumber-clear \
 	docker-pull docker-build docker-up \
 	api-init frontend-init cucumber-init
@@ -24,7 +26,7 @@ test-e2e-full:
 test-smoke: api-fixtures cucumber-clear cucumber-smoke
 test-e2e: api-fixtures cucumber-clear cucumber-e2e
 
-frontend-init: frontend-npm-install frontend-ready
+frontend-init: frontend-npm-install
 
 deps-update: api-composer-update cucumber-npm-update frontend-npm-update restart
 
