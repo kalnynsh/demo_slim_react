@@ -12,7 +12,7 @@ test('renders content if feature is active', () => {
     </FeaturesProvider>
   )
 
-  expect(container.textContent).toContain('Content')
+  expect(container).toHaveTextContent(/Content/)
 })
 
 test('does not render content if feature is not active', () => {
@@ -24,7 +24,7 @@ test('does not render content if feature is not active', () => {
     </FeaturesProvider>
   )
 
-  expect(container.textContent).not.toContain('Content')
+  expect(container).not.toHaveTextContent(/Content/)
 })
 
 test('does not render content in not mode. Is active', () => {
@@ -36,7 +36,7 @@ test('does not render content in not mode. Is active', () => {
     </FeaturesProvider>
   )
 
-  expect(container.textContent).not.toContain('Content')
+  expect(container).not.toHaveTextContent(/Content/)
 })
 
 test('renders content in not mode. Is not active', () => {
@@ -48,5 +48,5 @@ test('renders content in not mode. Is not active', () => {
     </FeaturesProvider>
   )
 
-  expect(container.textContent).toContain('Content')
+  expect(container).toHaveTextContent(/Content/)
 })
