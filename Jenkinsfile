@@ -34,7 +34,9 @@ pipeline {
     stages {
         stage("Init") {
             steps {
+                sh "touch .docker-images-before"
                 sh "make init-ci"
+                sh "docker compose images > .docker-images-after"
             }
         }
         stage("Validation") {
@@ -197,6 +199,9 @@ pipeline {
         }
     }
     post {
+        success {
+            sh "mv -f .docker-images-after .docker-images-before"
+        }
         always {
             sh "make docker-down-clear || true"
             sh "make testing-down-clear || true"

@@ -27,3 +27,6 @@ node_modules
 .vscode
 
 docker-compose-vm.yml
+
+/.docker-images-before
+/.docker-images-after
