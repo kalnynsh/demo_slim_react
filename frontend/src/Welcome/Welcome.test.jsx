@@ -1,26 +1,32 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import Welcome from './Welcome'
 import { FeaturesProvider } from '../FeatureToggle'
 
 test('renders welcome', () => {
-  const { getByText, queryByText } = render(
+  render(
     <FeaturesProvider features={[]}>
       <Welcome />
     </FeaturesProvider>
   )
 
-  expect(getByText(/We shall be here soon/i)).toBeInTheDocument()
-  expect(queryByText(/We are here/i)).not.toBeInTheDocument()
+  const resultGetByText = screen.getByText(/We shall be here soon/i)
+  const resultQueryByText = screen.queryByText(/We are here/i)
+
+  expect(resultGetByText).toBeInTheDocument()
+  expect(resultQueryByText).not.toBeInTheDocument()
 })
 
 test('renders new welcome', () => {
-  const { getByText, queryByText } = render(
+  render(
     <FeaturesProvider features={['WE_ARE_HERE']}>
       <Welcome />
     </FeaturesProvider>
   )
 
-  expect(queryByText(/We shall be here soon/i)).not.toBeInTheDocument()
-  expect(getByText(/We are here/i)).toBeInTheDocument()
+  const resultGetByText = screen.getByText(/We are here/i)
+  const resultQueryByText = screen.queryByText(/We shall be here soon/i)
+
+  expect(resultGetByText).toBeInTheDocument()
+  expect(resultQueryByText).not.toBeInTheDocument()
 })
