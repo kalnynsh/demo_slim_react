@@ -5,8 +5,10 @@ When('I open {string} page', { wrapperOptions: { retry: 2 }, timeout: 30000 }, a
   return await this.page.goto('http://gateway:8080' + uri)
 })
 
-Then('I see {string} element', async function (id) {
-  await this.page.waitForSelector('[data-testid=' + id + ']')
+Then('I see {string} header', async function (value) {
+  await this.page.waitForSelector('h1')
+  const text = await this.page.$eval('h1', el => el.innerText)
+  expect(text).to.equals(value)
 })
 
 Then('I see {string}', async function (value) {
