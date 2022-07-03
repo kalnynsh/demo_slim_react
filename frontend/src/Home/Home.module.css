@@ -1,11 +1,11 @@
-.welcome {
+.home {
   display: block;
   padding: 30px;
   background-color: #fff;
   box-shadow: 1px 1px 10px rgba(0 0 0 / 5%);
 }
 
-.welcome h1 {
+.home h1 {
   text-align: center;
   color: #444;
   font-weight: normal;
@@ -14,7 +14,7 @@
   margin: 0 0 20px;
 }
 
-.welcome p {
+.home p {
   text-align: center;
   color: #444;
   font-size: 0.9rem;

@@ -1,12 +1,12 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import Welcome from './Welcome'
+import Home from './Home'
 import { FeaturesProvider } from '../FeatureToggle'
 
-test('renders welcome', () => {
+test('renders home', () => {
   render(
     <FeaturesProvider features={[]}>
-      <Welcome />
+      <Home />
     </FeaturesProvider>
   )
 
@@ -17,10 +17,10 @@ test('renders welcome', () => {
   expect(resultQueryByText).not.toBeInTheDocument()
 })
 
-test('renders new welcome', () => {
+test('renders new home', () => {
   render(
     <FeaturesProvider features={['WE_ARE_HERE']}>
-      <Welcome />
+      <Home />
     </FeaturesProvider>
   )
 
