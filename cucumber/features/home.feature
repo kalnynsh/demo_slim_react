@@ -19,3 +19,10 @@ Feature: View home page
         Then I see "Auction" header
         And I do not see "We shall be here soon"
         And I see "We are here"
+
+    Scenario: Click to join
+        Given I am a guest user
+        And I have "JOIN_TO_US" feature
+        And I am on "/" page
+        When I click "join-link" element
+        Then I see "Join to us" header

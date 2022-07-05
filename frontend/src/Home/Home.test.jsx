@@ -1,12 +1,15 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
 import Home from './Home'
 import { FeaturesProvider } from '../FeatureToggle'
 
 test('renders home', () => {
   render(
     <FeaturesProvider features={[]}>
-      <Home />
+      <MemoryRouter>
+        <Home />
+      </MemoryRouter>
     </FeaturesProvider>
   )
 
@@ -20,7 +23,9 @@ test('renders home', () => {
 test('renders new home', () => {
   render(
     <FeaturesProvider features={['JOIN_TO_US']}>
-      <Home />
+      <MemoryRouter>
+        <Home />
+      </MemoryRouter>
     </FeaturesProvider>
   )
 
