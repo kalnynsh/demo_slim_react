@@ -12,6 +12,7 @@ function FeatureFlag({ name, not = false, children }) {
 FeatureFlag.propTypes = {
   name: PropTypes.string.isRequired,
   not: PropTypes.bool,
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 }
 
 export default FeatureFlag

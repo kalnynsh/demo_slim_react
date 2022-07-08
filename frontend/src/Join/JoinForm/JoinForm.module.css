@@ -1,0 +1,7 @@
+@media (min-width: 320px) {
+  /* stylelint-disable */
+  .joinForm {
+    width: 280px;
+  }
+  /* stylelint-enable */
+}
