@@ -1,0 +1,22 @@
+const { When, Then } = require('@cucumber/cucumber')
+const { expect } = require('chai')
+
+When('I fill {string} field with {string}', async function (name, value) {
+  await this.page.waitForSelector('[name=' + name + ']')
+  await this.page.type('[name=' + name + ']', value)
+})
+
+When('I check {string} checkbox', async function (name) {
+  await this.page.waitForSelector('[name=' + name + ']')
+  await this.page.click('[name=' + name + ']')
+})
+
+When('I click sumbit button', async function () {
+  await this.page.click('button[type=submit]')
+})
+
+Then('I see validation error {string}', async function (message) {
+  await this.page.waitForSelector('.input-error')
+  const errors = await this.page.$$eval('.inpit-error', els => els.map(el => el.textContent))
+  expect(errors.toString()).to.include(message)
+})
