@@ -1,7 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './JoinForm.module.css'
 
 function JoinForm() {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    agree: false,
+  })
+
+  const handleChange = (event) => {
+    const input = event.target
+
+    setFormData({
+      ...formData,
+      [input.name]: input.type === 'checkbox' ? input.checked : input.value,
+    })
+  }
+
   return (
     <div data-testid="join-form" className={styles.joinForm}>
       <form className="form" method="post">
@@ -13,11 +28,12 @@ function JoinForm() {
             id="email"
             name="email"
             type="email"
-            defaultValue="mail@app.test"
+            value={formData.email}
+            onChange={handleChange}
             required
           />
         </div>
-        <div className="input-row has-error">
+        <div className="input-row">
           <label htmlFor="password" className="input-label">
             Password
           </label>
@@ -25,14 +41,21 @@ function JoinForm() {
             id="password"
             name="password"
             type="password"
-            defaultValue="pas"
+            value={formData.password}
+            onChange={handleChange}
             required
           />
           <div className="input-error">The value is too short.</div>
         </div>
         <div className="input-row">
           <label>
-            <input name="agree" type="checkbox" required />
+            <input
+              name="agree"
+              type="checkbox"
+              checked={formData.agree}
+              onChange={handleChange}
+              required
+            />
             <small>I agree with privacy policy</small>
           </label>
         </div>
