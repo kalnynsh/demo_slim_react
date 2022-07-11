@@ -107,7 +107,7 @@ function JoinForm() {
               required
             />
             {errors.email ? (
-              <div className="input-error" data-testid="violation-email">
+              <div className="input-error" data-testid="violation">
                 {errors.email}
               </div>
             ) : null}
@@ -125,7 +125,7 @@ function JoinForm() {
               required
             />
             {errors.password ? (
-              <div className="input-error" data-testid="violation-password">
+              <div className="input-error" data-testid="violation">
                 {errors.password}
               </div>
             ) : null}
@@ -142,7 +142,7 @@ function JoinForm() {
               <small>I agree with privacy policy</small>
             </label>
             {errors.agree ? (
-              <div className="input-error" data-testid="violation-agree">
+              <div className="input-error" data-testid="violation">
                 {errors.agree}
               </div>
             ) : null}

@@ -33,7 +33,6 @@ Feature: View join page
         And I click sumbit button
         Then I see error "User already exists."
 
-    @wip
     Scenario: Not valid join
         Given I am a guest user
         And I have "JOIN_TO_US" feature
@@ -42,4 +41,4 @@ Feature: View join page
         And I fill "password" field with "new"
         And I check "agree" checkbox
         And I click sumbit button
-        Then I see validation error "This value is too short."
+        Then I see validation error "This value is too short. It should have 6 characters or more."

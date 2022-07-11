@@ -76,7 +76,6 @@ test('shows validation errors', async () => {
         errors: {
           email: 'Incorrect email',
           password: 'Incorrect password',
-          agree: 'Private policy terms do not agreed',
         },
       }),
   })
@@ -95,17 +94,10 @@ test('shows validation errors', async () => {
 
   fireEvent.click(screen.getByTestId('join-button'))
 
-  const emailViolation = await screen.findByTestId('violation-email')
-  expect(emailViolation).toHaveTextContent('Incorrect email')
+  await screen.findAllByTestId('violation')
 
-  const passwordViolation = await screen.findByTestId('violation-password')
-  expect(passwordViolation).toHaveTextContent('Incorrect password')
-
-  const agreedViolation = await screen.findByTestId('violation-agree')
-
-  expect(agreedViolation).toHaveTextContent(
-    'Private policy terms do not agreed'
-  )
+  screen.getByText('Incorrect email')
+  screen.getByText('Incorrect password')
 })
 
 test('shows server errors', async () => {
