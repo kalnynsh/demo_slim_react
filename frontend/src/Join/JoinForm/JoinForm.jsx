@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styles from './JoinForm.module.css'
-import api, { parseErrors } from '../../Api'
+import api, { parseErrors, parseError } from '../../Api'
 
 function JoinForm() {
   const [formData, setFormData] = useState({
@@ -45,32 +45,7 @@ function JoinForm() {
       })
       .catch(async (error) => {
         setErrors(await parseErrors(error))
-
-        if (error.status === 422) {
-          return
-        }
-
-        if (error.status) {
-          const type = error.headers.get('content-type')
-
-          if (type && type.includes('application/json')) {
-            const data = await error.json()
-
-            if (data.message) {
-              setError(data.message)
-
-              return
-            }
-          }
-        }
-
-        if (error.status) {
-          setError(error.statusText)
-
-          return
-        }
-
-        setError(error.message)
+        setError(await parseError(error))
       })
   }
 
