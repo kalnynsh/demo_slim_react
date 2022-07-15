@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styles from './JoinForm.module.css'
-import api from '../../Api'
+import api, { parseErrors } from '../../Api'
 
 function JoinForm() {
   const [formData, setFormData] = useState({
@@ -44,10 +44,9 @@ function JoinForm() {
         setSuccess('Confirm join by link in email.')
       })
       .catch(async (error) => {
-        if (error.status === 422) {
-          const data = await error.json()
-          setErrors(data.errors)
+        setErrors(await parseErrors(error))
 
+        if (error.status === 422) {
           return
         }
 
