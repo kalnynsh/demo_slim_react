@@ -1,19 +1,19 @@
+import isJsonResponse from './isJsonResponse'
+
 async function parseError(error) {
   if (error.status === 422) {
     return null
   }
 
-  if (error.status) {
-    const type = error.headers.get('content-type')
+  if (error.status && isJsonResponse(error)) {
+    const data = await error.json()
 
-    if (type && type.includes('application/json')) {
-      const data = await error.json()
-
-      if (data.message) {
-        return data.message
-      }
+    if (data.message) {
+      return data.message
     }
+  }
 
+  if (error.status) {
     return error.statusText
   }
 
