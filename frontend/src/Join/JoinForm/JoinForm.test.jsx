@@ -1,17 +1,15 @@
 import React from 'react'
 import { render, fireEvent, screen } from '@testing-library/react'
 import JoinForm from './JoinForm'
+import api from '../../Api'
 
 test('allows the user successfully join', async () => {
-  const fetch = jest.spyOn(global, 'fetch').mockResolvedValue({
-    ok: true,
-    status: 201,
-  })
+  jest.spyOn(api, 'post').mockResolvedValue('')
 
   render(<JoinForm />)
 
   fireEvent.change(screen.getByLabelText('Email'), {
-    target: { value: 'mail.@app.test' },
+    target: { value: 'mail@app.test' },
   })
 
   fireEvent.change(screen.getByLabelText('Password'), {
@@ -26,21 +24,14 @@ test('allows the user successfully join', async () => {
 
   expect(alert).toHaveTextContent('Confirm join by link in email.')
 
-  expect(fetch).toHaveBeenCalledWith('/api/v1/auth/join', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/join',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      email: 'mail.@app.test',
-      password: 'secret-Password-831',
-    }),
+  expect(api.post).toHaveBeenCalledWith('/v1/auth/join', {
+    email: 'mail@app.test',
+    password: 'secret-Password-831',
   })
 })
 
 test('shows conflict error', async () => {
-  jest.spyOn(global, 'fetch').mockResolvedValue({
+  jest.spyOn(api, 'post').mockRejectedValue({
     ok: false,
     status: 409,
     headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -50,7 +41,7 @@ test('shows conflict error', async () => {
   render(<JoinForm />)
 
   fireEvent.change(screen.getByLabelText('Email'), {
-    target: { value: 'exisating-mail@app.test' },
+    target: { value: 'exisiting-mail@app.test' },
   })
 
   fireEvent.change(screen.getByLabelText('Password'), {
@@ -67,7 +58,7 @@ test('shows conflict error', async () => {
 })
 
 test('shows validation errors', async () => {
-  jest.spyOn(global, 'fetch').mockResolvedValue({
+  jest.spyOn(api, 'post').mockRejectedValue({
     ok: false,
     status: 422,
     headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -101,7 +92,7 @@ test('shows validation errors', async () => {
 })
 
 test('shows server errors', async () => {
-  jest.spyOn(global, 'fetch').mockResolvedValue({
+  jest.spyOn(api, 'post').mockRejectedValue({
     ok: false,
     status: 502,
     statusText: 'Bad Gateway',
