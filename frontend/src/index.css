@@ -197,9 +197,17 @@ a {
   font-style: 0.9rem;
 }
 
+.form .button-row button::disabled {
+  cursor: wait;
+}
+
 .form .button-row button[type='submit'] {
   background: linear-gradient(to bottom, #ad0090, #af0061);
   color: #fff;
+}
+
+.form .button-row button[type='submit']::disabled {
+  background: linear-gradient(to bottom, #59024b, #815c70);
 }
 
 .form .input-error {

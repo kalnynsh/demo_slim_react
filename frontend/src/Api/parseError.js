@@ -5,15 +5,15 @@ async function parseError(error) {
     return null
   }
 
-  if (error.status && isJsonResponse(error)) {
-    const data = await error.json()
-
-    if (data.message) {
-      return data.message
-    }
-  }
-
   if (error.status) {
+    if (isJsonResponse(error)) {
+      const data = await error.json()
+
+      if (data.message) {
+        return data.message
+      }
+    }
+
     return error.statusText
   }
 
