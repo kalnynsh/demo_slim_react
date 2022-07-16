@@ -119,22 +119,6 @@ a {
   color: #005ba0;
 }
 
-.alert {
-  padding: 10px;
-  margin-bottom: 1rem;
-  border-radius: 4px;
-  color: #fff;
-  text-align: center;
-}
-
-.alert.error {
-  background-color: #e42c2c;
-}
-
-.alert.success {
-  background-color: #099929;
-}
-
 .form {
   margin-bottom: 20px;
 }
@@ -197,7 +181,7 @@ a {
   font-style: 0.9rem;
 }
 
-.form .button-row button::disabled {
+.form .button-row button:disabled {
   cursor: wait;
 }
 
@@ -206,7 +190,7 @@ a {
   color: #fff;
 }
 
-.form .button-row button[type='submit']::disabled {
+.form .button-row button[type='submit']:disabled {
   background: linear-gradient(to bottom, #59024b, #815c70);
 }
 
