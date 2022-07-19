@@ -5,6 +5,7 @@ import { FeaturesProvider } from '../FeatureToggle'
 import Home from '../Home'
 import Join from '../Join'
 import { NotFound } from '../Error'
+import Confirm from '../Join/Confirm'
 import './App.css'
 
 function App({ features }) {
@@ -15,7 +16,10 @@ function App({ features }) {
           <Routes>
             <Route path="/" element={<Home />} />
             {features.includes('JOIN_TO_US') ? (
-              <Route path="join" element={<Join />} />
+              <Route path="/join" element={<Join />} />
+            ) : null}
+            {features.includes('JOIN_TO_US') ? (
+              <Route path="/join/confirm" element={<Confirm />} />
             ) : null}
             <Route path="*" element={<NotFound />} />
           </Routes>

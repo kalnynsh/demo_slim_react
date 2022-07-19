@@ -13,6 +13,7 @@ Feature: View join page
         Then I see "Join to us" header
         And I see "join-form" element
 
+    @wip
     Scenario: Success join
         Given I am a guest user
         And I have "JOIN_TO_US" feature
