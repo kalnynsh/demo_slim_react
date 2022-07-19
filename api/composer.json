@@ -1,5 +1,6 @@
 {
     "name": "mdv/demo-auction",
+    "description": "Demo auction - web application",
     "type": "project",
     "license": "BSD-3-Clause",
     "config": {
