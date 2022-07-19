@@ -7,6 +7,7 @@ import Join from '../Join'
 import { NotFound } from '../Error'
 import Confirm from '../Join/Confirm'
 import './App.css'
+import Success from '../Join/Success'
 
 function App({ features }) {
   return (
@@ -20,6 +21,9 @@ function App({ features }) {
             ) : null}
             {features.includes('JOIN_TO_US') ? (
               <Route path="/join/confirm" element={<Confirm />} />
+            ) : null}
+            {features.includes('JOIN_TO_US') ? (
+              <Route path="/join/success" element={<Success />} />
             ) : null}
             <Route path="*" element={<NotFound />} />
           </Routes>

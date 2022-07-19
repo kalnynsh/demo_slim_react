@@ -6,9 +6,10 @@ import {
   Routes,
   Route,
 } from 'react-router-dom'
-import { render, screen } from '@testing-library/react'
+import { render, waitFor, screen } from '@testing-library/react'
 import Confirm from './Confirm'
 import api from '../../Api'
+import Success from '../Success'
 
 test('confirms without token', async () => {
   jest.spyOn(api, 'post')
@@ -38,17 +39,24 @@ test('confirms successfully', async () => {
     text: () => Promise.resolve(''),
   })
 
+  const history = createMemoryHistory({
+    initialEntries: ['/join/confirm?token=01'],
+  })
+
   render(
-    <MemoryRouter initialEntries={['/join/confirm?token=01']}>
+    <HistoryRouter history={history}>
       <Routes>
         <Route path="/join/confirm" element={<Confirm />} />
+        <Route path="/join/success" element={<Success />} />
       </Routes>
-    </MemoryRouter>
+    </HistoryRouter>
   )
 
-  const alert = await screen.findByTestId('alert-success')
+  await waitFor(() => {
+    expect(api.post).toHaveBeenCalled()
+  })
 
-  expect(alert).toHaveTextContent('Success!')
+  expect(history.location.pathname).toBe('/join/success')
 
   expect(api.post).toHaveBeenCalledWith('/v1/auth/join/confirm', {
     token: '01',
