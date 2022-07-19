@@ -12,10 +12,13 @@ class EmptyResponse extends Response
 {
     public function __construct(int $status = StatusCodeInterface::STATUS_NO_CONTENT)
     {
+        $content = "{}";
+
         parent::__construct(
             $status,
             null,
-            (new StreamFactory())->createStreamFromResource(\fopen('php://temp', 'rb'))
+            (new StreamFactory())->createStream($content)
         );
+
     }
 }
