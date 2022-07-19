@@ -39,7 +39,7 @@ class ConfirmationTest extends WebTestCase
         ]));
 
         self::assertEquals(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
-        self::assertEquals('', (string) $response->getBody());
+        self::assertEquals('{}', (string) $response->getBody());
     }
 
     public function testExpired(): void
