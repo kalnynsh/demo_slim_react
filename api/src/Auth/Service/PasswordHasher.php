@@ -27,10 +27,6 @@ class PasswordHasher
         );
 
         if (null === $hash) {
-            throw new \RuntimeException('Invalid hashing algorithm.');
-        }
-
-        if (false === $hash) {
             throw new \RuntimeException('Unable to generate hash.');
         }
 
