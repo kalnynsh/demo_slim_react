@@ -19,6 +19,5 @@ class EmptyResponse extends Response
             null,
             (new StreamFactory())->createStream($content)
         );
-
     }
 }
