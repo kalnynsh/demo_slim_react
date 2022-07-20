@@ -12,6 +12,9 @@ use App\Auth\Service\PasswordHasher;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 
+/**
+ * @psalm-suppress PropertyNotSetInConstructor
+ */
 class UserJoinFixture extends AbstractFixture
 {
     private PasswordHasher $hasher;
