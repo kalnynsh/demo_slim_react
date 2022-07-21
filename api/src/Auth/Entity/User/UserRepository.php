@@ -11,14 +11,13 @@ class UserRepository
 {
     private EntityManagerInterface $em;
     /**
-     * @psalm-var EntityRepository<User>
+     * @var EntityRepository<User>
      */
     private EntityRepository $repository;
 
     /**
      * @param EntityManagerInterface $em
-     * @param EntityRepository $repository
-     * @psalm-param EntityRepository<User> $repository
+     * @param EntityRepository<User> $repository
      */
     public function __construct(EntityManagerInterface $em, EntityRepository $repository)
     {

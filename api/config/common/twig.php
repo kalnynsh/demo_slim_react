@@ -12,7 +12,7 @@ return [
     Environment::class => static function (ContainerInterface $container): Environment {
         /**
          * @psalm-suppress MixedAssignment
-         * @psalm-var array{
+         * @var array{
          *   debug:bool,
          *   template_dirs:array<string,string>,
          *   cache_dir:string,

@@ -11,7 +11,7 @@ return [
     MailerInterface::class => static function (ContainerInterface $container) {
         /**
          * @psalm-suppress MixedAssignment
-         * @psalm-var array{
+         * @var array{
          *  host:string,
          *  port:int,
          *  user:string,

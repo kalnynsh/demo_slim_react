@@ -20,8 +20,7 @@ return [
         $em = $container->get(EntityManagerInterface::class);
 
         /**
-         * @var EntityRepository $repository
-         * @psalm-var EntityRepository<User>
+         * @var EntityRepository<User> $repository
         */
         $repository = $em->getRepository(User::class);
 
@@ -91,7 +90,7 @@ return [
     Tokenizer::class => static function (ContainerInterface $container): Tokenizer {
         /**
          * @psalm-suppress MixedAssignment
-         * @psalm-var array{token_ttl:string} $config
+         * @var array{token_ttl:string} $config
          */
         $config = $container->get('config')['auth'];
 

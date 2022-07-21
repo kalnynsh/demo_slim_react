@@ -19,7 +19,7 @@ return [
     EntityManagerInterface::class => function (ContainerInterface $container): EntityManagerInterface {
         /**
          * @psalm-suppress MixedAssignment
-         * @psalm-var array{
+         * @var array{
          *   paths:array<string,string>,
          *   dev_mode:bool,
          *   proxy_dir:string,

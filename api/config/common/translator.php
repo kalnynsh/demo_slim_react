@@ -14,7 +14,7 @@ return [
     Translator::class => static function (ContainerInterface $container): Translator {
         /**
          * @psalm-suppress MixedArrayAccess
-         * @psalm-var array{lang:string, resources:array<string[]>} $config
+         * @var array{lang:string, resources:array<string[]>} $config
          */
         $config = $container->get('config')['translator'];
 
@@ -39,7 +39,7 @@ return [
     ContentLanguage::class => static function (ContainerInterface $container): ContentLanguage {
         /**
          * @psalm-suppress MixedArrayAccess
-         * @psalm-var array{allowed:string[]} $config
+         * @var array{allowed:string[]} $config
          */
         $config = $container->get('config')['locales'];
 

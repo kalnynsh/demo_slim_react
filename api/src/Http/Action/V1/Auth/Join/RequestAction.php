@@ -26,7 +26,7 @@ class RequestAction implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        /** @psalm-var array{email:?string, password:?string} */
+        /** @var array{email:?string, password:?string} */
         $body = $request->getParsedBody();
 
         $command = new Command();

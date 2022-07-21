@@ -20,7 +20,7 @@ return [
 
         /**
          * @psalm-suppress MixedAssignment
-         * @psalm-var array{
+         * @var array{
          *  display_error_details:bool,
          *  use_sentry:bool
          * } $config

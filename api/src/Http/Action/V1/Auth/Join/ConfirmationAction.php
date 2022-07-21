@@ -27,7 +27,7 @@ class ConfirmationAction implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         /**
-         * @psalm-var array{token:?string} $parsedBody
+         * @var array{token:?string} $parsedBody
          */
         $parsedBody = $request->getParsedBody();
 
