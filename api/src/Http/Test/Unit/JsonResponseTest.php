@@ -24,8 +24,9 @@ class JsonResponseTest extends TestCase
      * @param mixed $source
      * @param mixed $expect
      * @return void
+     * @throws \JsonException
      */
-    public function testResponse($source, $expect): void
+    public function testResponse(mixed $source, mixed $expect): void
     {
         $response = new JsonResponse($source);
 
@@ -35,9 +36,10 @@ class JsonResponseTest extends TestCase
     }
 
     /**
-     * @return array<mixed>
+     * @return iterable
+     * @psalm-return iterable<array-key, array<array-key, mixed>>
      */
-    public function getCases(): array
+    public function getCases(): iterable
     {
         $object = new \stdClass();
         $object->str = 'value';

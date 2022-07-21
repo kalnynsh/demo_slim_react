@@ -11,13 +11,8 @@ use Slim\Psr7\Headers;
 
 class JsonResponse extends Response
 {
-    /**
-     *
-     * @param mixed $data
-     * @param int $status
-     */
     public function __construct(
-        $data,
+        mixed $data,
         int $status = StatusCodeInterface::STATUS_OK
     ) {
         parent::__construct(

@@ -26,7 +26,11 @@ class PasswordHasher
             ['memory_cost' => $this->memoryCost]
         );
 
-        if (null === $hash) {
+        if ($hash === null) {
+            throw new \RuntimeException('Invalid hash algorithm.');
+        }
+
+        if ($hash === false) {
             throw new \RuntimeException('Unable to generate hash.');
         }
 
