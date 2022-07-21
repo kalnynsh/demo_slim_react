@@ -16,7 +16,6 @@ class UserRepository
     private EntityRepository $repository;
 
     /**
-     * @param EntityManagerInterface $em
      * @param EntityRepository<User> $repository
      */
     public function __construct(EntityManagerInterface $em, EntityRepository $repository)
@@ -64,9 +63,6 @@ class UserRepository
     /**
      * @psalm-suppress MoreSpecificReturnType
      * @psalm-suppress LessSpecificReturnStatement
-     * @param string $tokenValue
-     * @return User|null
-     * @psalm-return User|null
      */
     public function findByJoinConfirmToken(string $tokenValue): ?User
     {
@@ -82,9 +78,6 @@ class UserRepository
     /**
      * @psalm-suppress MoreSpecificReturnType
      * @psalm-suppress LessSpecificReturnStatement
-     * @param string $tokenValue
-     * @return User|null
-     * @psalm-return User|null
      */
     public function findByNewEmailToken(string $tokenValue): ?User
     {
@@ -100,9 +93,6 @@ class UserRepository
     /**
      * @psalm-suppress MoreSpecificReturnType
      * @psalm-suppress LessSpecificReturnStatement
-     * @param string $tokenValue
-     * @return User|null
-     * @psalm-return User|null
      */
     public function findByPasswordResetToken(string $tokenValue): ?User
     {

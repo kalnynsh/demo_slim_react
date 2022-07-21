@@ -25,8 +25,6 @@ class FixturesLoadCommand extends Command
     private array $paths;
 
     /**
-     * @param Loader $loader
-     * @param ORMExecutor $executor
      * @param string[] $paths
      */
     public function __construct(
