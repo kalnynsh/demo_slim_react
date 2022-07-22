@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Auth\Test\Unit\Entity\User;
 
-use PHPUnit\Framework\TestCase;
 use App\Auth\Entity\User\Status;
+use PHPUnit\Framework\TestCase;
 
 class StatusTest extends TestCase
 {

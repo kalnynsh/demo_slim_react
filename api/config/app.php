@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use Psr\Container\ContainerInterface;
-use Slim\Factory\AppFactory;
 use Slim\App;
+use Slim\Factory\AppFactory;
 
 return static function (ContainerInterface $container): App {
     $app = AppFactory::createFromContainer($container);

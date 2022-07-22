@@ -3,16 +3,16 @@
 declare(strict_types=1);
 
 use App\Auth;
-use Doctrine\ORM\ORMSetup;
+use Doctrine\Common\EventManager;
+use Doctrine\Common\EventSubscriber;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityManager;
-use Doctrine\Common\EventManager;
-use Doctrine\Common\EventSubscriber;
-use Psr\Container\ContainerInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Doctrine\ORM\Mapping\UnderscoreNamingStrategy;
+use Doctrine\ORM\ORMSetup;
+use Psr\Container\ContainerInterface;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 return [

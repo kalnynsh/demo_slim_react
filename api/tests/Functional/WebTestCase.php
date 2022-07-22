@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Test\Functional;
 
-use Slim\App;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
+use Doctrine\Common\DataFixtures\Loader;
+use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
-use Doctrine\Common\DataFixtures\Loader;
-use Doctrine\ORM\EntityManagerInterface;
-use Slim\Psr7\Factory\ServerRequestFactory;
 use Psr\Http\Message\ServerRequestInterface;
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
+use Slim\App;
+use Slim\Psr7\Factory\ServerRequestFactory;
 use Test\Functional\Client\MailerClient;
 
 /**

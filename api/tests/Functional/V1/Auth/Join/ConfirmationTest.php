@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Test\Functional\V1\Auth\Join;
 
-use Test\Functional\WebTestCase;
 use Fig\Http\Message\StatusCodeInterface;
 use Ramsey\Uuid\Uuid;
 use Test\Functional\Helper\JsonHelper;
+use Test\Functional\WebTestCase;
 
 class ConfirmationTest extends WebTestCase
 {

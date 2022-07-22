@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Slim\CallableResolver;
 use Psr\Container\ContainerInterface;
+use Slim\CallableResolver;
 use Slim\Interfaces\CallableResolverInterface;
 
 return [

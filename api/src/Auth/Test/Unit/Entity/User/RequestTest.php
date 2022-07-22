@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Auth\Test\Unit\Entity\User;
 
 use App\Auth\Entity\User\Email;
-use Ramsey\Uuid\Uuid;
-use DateTimeImmutable;
 use App\Auth\Entity\User\Id;
-use App\Auth\Entity\User\User;
 use App\Auth\Entity\User\Token;
+use App\Auth\Entity\User\User;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @covers \App\Auth\Entity\User\User

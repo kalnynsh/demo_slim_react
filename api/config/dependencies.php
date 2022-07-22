@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Laminas\ConfigAggregator\PhpFileProvider;
 use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\PhpFileProvider;
 
 $aggrigator = new ConfigAggregator([
     new PhpFileProvider(__DIR__ . '/common/*.php'),

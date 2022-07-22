@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Auth\Test\Unit\Entity\User\User;
 
-use App\Auth\Entity\User\Id;
-use App\Auth\Entity\User\User;
 use App\Auth\Entity\User\Email;
-use PHPUnit\Framework\TestCase;
+use App\Auth\Entity\User\Id;
 use App\Auth\Entity\User\Network;
 use App\Auth\Entity\User\Role;
+use App\Auth\Entity\User\User;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @cavers User::joinByNetwork

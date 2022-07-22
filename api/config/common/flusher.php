@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use App\Flusher;
-use Psr\Container\ContainerInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Container\ContainerInterface;
 
 return [
     Flusher::class => function (ContainerInterface $container): Flusher {

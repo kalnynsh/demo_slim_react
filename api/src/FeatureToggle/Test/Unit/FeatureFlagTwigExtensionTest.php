@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\FeatureToggle\Test\Unit;
 
-use Twig\Environment;
-use Twig\Loader\ArrayLoader;
-use PHPUnit\Framework\TestCase;
 use App\FeatureToggle\FeatureFlag;
 use App\FeatureToggle\FeatureFlagTwigExtension;
+use PHPUnit\Framework\TestCase;
+use Twig\Environment;
+use Twig\Loader\ArrayLoader;
 
 /**
  * @covers \App\FeatureToggle\FeatureFlagTwigExtension

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use Twig\Environment;
-use Twig\Loader\FilesystemLoader;
-use Twig\Extension\DebugExtension;
-use Psr\Container\ContainerInterface;
-use Twig\Extension\ExtensionInterface;
-use App\Frontend\FrontendUrlTwigExtension;
 use App\FeatureToggle\FeatureFlagTwigExtension;
+use App\Frontend\FrontendUrlTwigExtension;
+use Psr\Container\ContainerInterface;
+use Twig\Environment;
+use Twig\Extension\DebugExtension;
+use Twig\Extension\ExtensionInterface;
+use Twig\Loader\FilesystemLoader;
 
 return [
     Environment::class => static function (ContainerInterface $container): Environment {

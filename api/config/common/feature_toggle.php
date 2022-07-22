@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\FeatureToggle\Features;
 use App\FeatureToggle\FeatureFlag;
+use App\FeatureToggle\Features;
 use App\FeatureToggle\FeaturesContext;
 use App\FeatureToggle\FeatureSwitch;
 use Psr\Container\ContainerInterface;

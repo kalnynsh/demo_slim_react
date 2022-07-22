@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
+use App\Http\Middleware\TranslatorLocaleMiddleware;
 use Middlewares\ContentLanguage;
 use Psr\Container\ContainerInterface;
-use Symfony\Component\Translation\Translator;
-use App\Http\Middleware\TranslatorLocaleMiddleware;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Translation\Loader\PhpFileLoader;
 use Symfony\Component\Translation\Loader\XliffFileLoader;
+use Symfony\Component\Translation\Translator;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 return [
     TranslatorInterface::class => DI\get(Translator::class),

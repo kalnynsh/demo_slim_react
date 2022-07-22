@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Auth\Command\JoinByEmail\Request;
 
-use App\Flusher;
 use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\Id;
 use App\Auth\Entity\User\User;
-use App\Auth\Service\Tokenizer;
-use App\Auth\Service\PasswordHasher;
 use App\Auth\Entity\User\UserRepository;
 use App\Auth\Service\JoinConfirmationSender;
+use App\Auth\Service\PasswordHasher;
+use App\Auth\Service\Tokenizer;
+use App\Flusher;
 
 class Handler
 {

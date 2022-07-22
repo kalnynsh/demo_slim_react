@@ -6,11 +6,11 @@ namespace App\Http\Test\Unit\Middleware;
 
 use App\Http\Middleware\TranslatorLocaleMiddleware;
 use PHPUnit\Framework\TestCase;
-use Slim\Psr7\Factory\ResponseFactory;
 use Psr\Http\Message\ResponseInterface;
-use Slim\Psr7\Factory\ServerRequestFactory;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Slim\Psr7\Factory\ResponseFactory;
+use Slim\Psr7\Factory\ServerRequestFactory;
 use Symfony\Component\Translation\Translator;
 
 /**

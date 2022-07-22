@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Test\Unit\Validator;
 
-use stdClass;
-use PHPUnit\Framework\TestCase;
-use App\Http\Validator\Validator;
 use App\Http\Validator\ValidationException;
+use App\Http\Validator\Validator;
+use PHPUnit\Framework\TestCase;
+use stdClass;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;

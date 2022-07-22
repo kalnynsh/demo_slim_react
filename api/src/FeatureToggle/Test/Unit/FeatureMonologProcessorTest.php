@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\FeatureToggle\Test\Unit;
 
-use PHPUnit\Framework\TestCase;
 use App\FeatureToggle\FeaturesContext;
 use App\FeatureToggle\FeaturesMonologProcessor;
+use PHPUnit\Framework\TestCase;
 
 class FeatureMonologProcessorTest extends TestCase
 {

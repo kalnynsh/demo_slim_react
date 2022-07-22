@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Http\Action\V1\Auth\Join;
 
-use App\Http\EmptyResponse;
-use App\Http\Validator\Validator;
-use Psr\Http\Message\ResponseInterface;
-use Fig\Http\Message\StatusCodeInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 use App\Auth\Command\JoinByEmail\Confirm\Command;
 use App\Auth\Command\JoinByEmail\Confirm\Handler;
+use App\Http\EmptyResponse;
+use App\Http\Validator\Validator;
+use Fig\Http\Message\StatusCodeInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
 class ConfirmationAction implements RequestHandlerInterface
 {

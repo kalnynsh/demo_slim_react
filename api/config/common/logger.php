@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use Monolog\Logger;
-use Psr\Log\LoggerInterface;
-use Monolog\Handler\StreamHandler;
-use Psr\Container\ContainerInterface;
-use Monolog\Processor\ProcessorInterface;
 use App\FeatureToggle\FeaturesMonologProcessor;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
+use Monolog\Processor\ProcessorInterface;
+use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
 
 return [
     LoggerInterface::class => static function (ContainerInterface $container): Logger {

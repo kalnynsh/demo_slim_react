@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace App\Console;
 
+use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Loader;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 
 class FixturesLoadCommand extends Command
 {

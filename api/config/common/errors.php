@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use Psr\Log\LoggerInterface;
-use Slim\Middleware\ErrorMiddleware;
-use Psr\Container\ContainerInterface;
 use App\ErrorHandler\LoggedErrorHandler;
-use Psr\Http\Message\ResponseFactoryInterface;
-use Slim\Interfaces\CallableResolverInterface;
 use App\ErrorHandler\SentryErrorHandlerDecorator;
+use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Log\LoggerInterface;
+use Slim\Interfaces\CallableResolverInterface;
+use Slim\Middleware\ErrorMiddleware;
 
 return [
     ErrorMiddleware::class => static function (ContainerInterface $container): ErrorMiddleware {

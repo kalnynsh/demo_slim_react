@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Auth\Test\Unit\Entity\User\Token;
 
-use Ramsey\Uuid\Uuid;
 use App\Auth\Entity\User\Token;
 use PHPUnit\Framework\TestCase;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @covers \App\Auth\Entity\User\Token::isExpiredTo

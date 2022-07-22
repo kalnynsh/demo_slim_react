@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Auth\Command\ChangeEmail\Confirm;
 
-use App\Flusher;
 use App\Auth\Entity\User\UserRepository;
+use App\Flusher;
 
 class Handler
 {

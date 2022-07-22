@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Auth\Test\Builder;
 
-use Ramsey\Uuid\Uuid;
-use App\Auth\Entity\User\Id;
-use App\Auth\Entity\User\User;
 use App\Auth\Entity\User\Email;
-use App\Auth\Entity\User\Token;
+use App\Auth\Entity\User\Id;
 use App\Auth\Entity\User\Network;
+use App\Auth\Entity\User\Token;
+use App\Auth\Entity\User\User;
+use Ramsey\Uuid\Uuid;
 
 class UserBuilder
 {

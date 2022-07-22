@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use Psr\Container\ContainerInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Migrations\DependencyFactory;
-use Doctrine\Migrations\Tools\Console\Command;
-use Doctrine\Migrations\Configuration\Migration\ExistingConfiguration;
 use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
+use Doctrine\Migrations\Configuration\Migration\ExistingConfiguration;
+use Doctrine\Migrations\DependencyFactory;
 use Doctrine\Migrations\Metadata\Storage\TableMetadataStorageConfiguration;
+use Doctrine\Migrations\Tools\Console\Command;
+use Doctrine\ORM\EntityManagerInterface;
+use Psr\Container\ContainerInterface;
 
 return [
     DependencyFactory::class => static function (ContainerInterface $container) {

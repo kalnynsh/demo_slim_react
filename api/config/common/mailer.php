@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\Mailer\Mailer;
 use Psr\Container\ContainerInterface;
-use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mailer\Transport;
 
 return [
     MailerInterface::class => static function (ContainerInterface $container) {

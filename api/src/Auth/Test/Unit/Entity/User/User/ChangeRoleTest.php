@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Auth\Test\Unit\Entity\User\User;
 
 use App\Auth\Entity\User\Role;
-use PHPUnit\Framework\TestCase;
 use App\Auth\Test\Builder\UserBuilder;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \App\Auth\Entity\User\User::changeRole

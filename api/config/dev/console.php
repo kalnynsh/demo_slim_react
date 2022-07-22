@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 use App\Console\FixturesLoadCommand;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
-use Psr\Container\ContainerInterface;
 use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\ORM\Tools\Console\Command\SchemaTool;
+use Psr\Container\ContainerInterface;
 
 return [
     FixturesLoadCommand::class => static function (ContainerInterface $container) {

@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Auth\Fixture;
 
-use Ramsey\Uuid\Uuid;
-use App\Auth\Entity\User\Id;
-use App\Auth\Entity\User\User;
 use App\Auth\Entity\User\Email;
+use App\Auth\Entity\User\Id;
 use App\Auth\Entity\User\Token;
+use App\Auth\Entity\User\User;
 use App\Auth\Service\PasswordHasher;
-use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Persistence\ObjectManager;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @psalm-suppress PropertyNotSetInConstructor

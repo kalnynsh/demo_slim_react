@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\FeatureToggle;
 
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 class FeaturesMiddleware implements MiddlewareInterface

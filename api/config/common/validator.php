@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 return [

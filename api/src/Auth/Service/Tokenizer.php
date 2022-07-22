@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Auth\Service;
 
-use Ramsey\Uuid\Uuid;
 use App\Auth\Entity\User\Token;
+use Ramsey\Uuid\Uuid;
 
 class Tokenizer
 {

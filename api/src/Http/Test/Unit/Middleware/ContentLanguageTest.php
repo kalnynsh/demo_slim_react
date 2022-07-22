@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Http\Test\Unit\Middleware;
 
-use PHPUnit\Framework\TestCase;
 use Middlewares\ContentLanguage;
-use Slim\Psr7\Factory\ResponseFactory;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
-use Slim\Psr7\Factory\ServerRequestFactory;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Slim\Psr7\Factory\ResponseFactory;
+use Slim\Psr7\Factory\ServerRequestFactory;
 
 /**
  * @covers \Middlewares\ContentLanguage

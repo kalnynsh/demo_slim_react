@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Auth\Command\AttachNetwork;
 
-use App\Flusher;
 use App\Auth\Entity\User\Id;
-use App\Auth\Entity\User\UserRepository;
 use App\Auth\Entity\User\Network;
+use App\Auth\Entity\User\UserRepository;
+use App\Flusher;
 
 class Handler
 {

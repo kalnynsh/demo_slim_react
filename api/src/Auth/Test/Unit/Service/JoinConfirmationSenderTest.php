@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Auth\Test\Unit\Service;
 
-use Ramsey\Uuid\Uuid;
 use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\Token;
 use App\Auth\Service\JoinConfirmationSender;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Mime\Email as MimeEmail;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email as MimeEmail;
 use Twig\Environment;
 
 /**

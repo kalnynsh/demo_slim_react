@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Auth\Command\JoinByNetwork;
 
-use App\Flusher;
 use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\Id;
-use App\Auth\Entity\User\UserRepository;
 use App\Auth\Entity\User\Network;
 use App\Auth\Entity\User\User;
+use App\Auth\Entity\User\UserRepository;
+use App\Flusher;
 
 class Handler
 {

@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Auth\Test\Unit\Service;
 
-use Ramsey\Uuid\Uuid;
-use Twig\Environment;
 use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\Token;
-use PHPUnit\Framework\TestCase;
-use Symfony\Component\Mime\Address;
-use Symfony\Component\Mailer\Mailer;
-use Symfony\Component\Mime\Email as MimeEmail;
 use App\Auth\Service\PasswordResetTokenSender;
+use PHPUnit\Framework\TestCase;
+use Ramsey\Uuid\Uuid;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email as MimeEmail;
+use Twig\Environment;
 
 /**
  * @covers \App\Auth\Service\PasswordResetTokenSender

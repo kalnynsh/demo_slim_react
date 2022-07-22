@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Test\Functional\V1\Auth\Join;
 
-use Test\Functional\WebTestCase;
-use Test\Functional\Helper\JsonHelper;
 use Fig\Http\Message\StatusCodeInterface;
-use Test\Functional\V1\Auth\Join\RequestFixture;
+use Test\Functional\Helper\JsonHelper;
+use Test\Functional\WebTestCase;
 
 /**
  * @covers \App\Http\Action\V1\Auth\Join\RequestAction

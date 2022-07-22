@@ -4,8 +4,8 @@
 declare(strict_types=1);
 
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Console\Application;
 use Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper;
+use Symfony\Component\Console\Application;
 
 require __DIR__ . '/../vendor/autoload.php';
 
