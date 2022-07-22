@@ -22,7 +22,8 @@ return
             '@PSR12' => true,
             '@PSR12:risky' => true,
             '@DoctrineAnnotation' => true,
+            '@PHP80Migration' => true,
+            '@PHP80Migration:risky' => true,
             '@PHP81Migration' => true,
-            '@PHP81Migration:risky' => true,
-            '@PHPUnit95Migration:risky' => true,
+            '@PHPUnit84Migration:risky' => true,
         ]);
