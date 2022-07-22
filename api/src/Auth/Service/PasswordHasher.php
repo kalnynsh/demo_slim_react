@@ -19,7 +19,7 @@ class PasswordHasher
     {
         Assert::notEmpty($password);
 
-        /** @var string|false|null $hash */
+        /** @var false|string|null $hash */
         $hash = \password_hash(
             $password,
             PASSWORD_ARGON2ID,

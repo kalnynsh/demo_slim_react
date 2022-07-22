@@ -31,7 +31,7 @@ class InputTrimmerMiddleware implements MiddlewareInterface
 
         /**
          * @var string $key
-         * @var null|string|object $value
+         * @var object|string|null $value
          */
         foreach ($items as $key => $value) {
             if (\is_string($value)) {
