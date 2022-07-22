@@ -33,7 +33,7 @@ class FeatureMonologProcessorTest extends TestCase
         self::assertEquals(\array_merge_recursive($record, [
             'extra' => [
                 'features' => $source,
-            ]
+            ],
         ]), $result);
     }
 }

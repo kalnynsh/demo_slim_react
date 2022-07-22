@@ -139,7 +139,7 @@ class RequestTest extends WebTestCase
             'errors' => [
                 'email' => 'This value is not a valid email address.',
                 'password' => 'This value is too short. It should have 6 characters or more.',
-            ]
+            ],
         ], $data);
     }
 

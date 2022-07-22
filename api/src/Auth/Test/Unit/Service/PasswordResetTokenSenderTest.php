@@ -37,7 +37,7 @@ class PasswordResetTokenSenderTest extends TestCase
                 $this->equalTo(PasswordResetTokenSender::TEMPLATE_PATH),
                 $this->equalTo([
                     'uri' => PasswordResetTokenSender::URI,
-                    'token' => $token
+                    'token' => $token,
                 ])
             )
             ->willReturn($body = '<a href="' . $confirmUrl . '">' . $confirmUrl . '</a>')

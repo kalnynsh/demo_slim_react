@@ -59,7 +59,7 @@ class FixturesLoadCommand extends Command
 
         $this
             ->executor
-            ->setLogger(static function (string $message) use ($output) {
+            ->setLogger(static function (string $message) use ($output): void {
                 $output->writeln($message);
             });
 

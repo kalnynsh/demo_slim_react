@@ -37,7 +37,7 @@ class NewEmailConfirmTokenSenderTest extends TestCase
                 $this->equalTo(NewEmailConfirmTokenSender::TEMPLATE_PATH),
                 $this->equalTo([
                     'uri' => NewEmailConfirmTokenSender::URI,
-                    'token' => $token
+                    'token' => $token,
                 ])
             )
             ->willReturn($body = '<a href="' . $confirmUrl . '">' . $confirmUrl . '</a>')

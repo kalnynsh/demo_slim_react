@@ -37,7 +37,7 @@ class JoinConfirmationSenderTest extends TestCase
                 $this->equalTo(JoinConfirmationSender::TEMPLATE_PATH),
                 $this->equalTo([
                     'uri' => JoinConfirmationSender::URI,
-                    'token' => $token
+                    'token' => $token,
                 ])
             )
             ->willReturn($body = '<a href="' . $confirmUrl . '">' . $confirmUrl . '</a>')

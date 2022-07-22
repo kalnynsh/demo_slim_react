@@ -7,7 +7,5 @@ use Psr\Container\ContainerInterface;
 use Slim\Interfaces\CallableResolverInterface;
 
 return [
-    CallableResolverInterface::class => static function (ContainerInterface $container): CallableResolver {
-        return new CallableResolver($container);
-    },
+    CallableResolverInterface::class => static fn (ContainerInterface $container): CallableResolver => new CallableResolver($container),
 ];

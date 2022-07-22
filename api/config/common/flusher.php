@@ -12,5 +12,5 @@ return [
         $em = $container->get(EntityManagerInterface::class);
 
         return new Flusher($em);
-    }
+    },
 ];

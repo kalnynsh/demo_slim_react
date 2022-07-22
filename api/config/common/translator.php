@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Middlewares\ContentLanguage;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Translation\Translator;

@@ -57,7 +57,7 @@ class ValidationExceptionHandlerTest extends TestCase
             'errors' => [
                 'email' => 'Incorrect Email',
                 'password' => 'Empty Password',
-            ]
+            ],
         ], $data);
     }
 

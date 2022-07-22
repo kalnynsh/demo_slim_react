@@ -24,7 +24,6 @@ class SentryErrorHandlerDecorator implements ErrorHandlerInterface
         bool $logErrors,
         bool $logErrorDetails
     ): ResponseInterface {
-
         \Sentry\captureException($exception);
 
         return ($this->next)(

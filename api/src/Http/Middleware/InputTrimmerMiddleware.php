@@ -18,7 +18,7 @@ class InputTrimmerMiddleware implements MiddlewareInterface
             ->withParsedBody(self::filterStrings($request->getParsedBody()))
             ->withUploadedFiles(self::filterFiles($request->getUploadedFiles()));
 
-            return $handler->handle($request);
+        return $handler->handle($request);
     }
 
     /**

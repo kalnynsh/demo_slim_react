@@ -281,9 +281,7 @@ class User
         */
         return $this
             ->networks
-            ->map(static function (UserNetwork $network) {
-                return $network->getNetwork();
-            })->toArray();
+            ->map(static fn (UserNetwork $network) => $network->getNetwork())->toArray();
     }
 
     public function getNewEmail(): ?Email
@@ -297,7 +295,7 @@ class User
     }
 
     /**
-     * @ORM\PostLoad()
+     * @ORM\PostLoad
      */
     public function checkEmbeds(): void
     {
