@@ -9,6 +9,8 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \App\Auth\Entity\User\Network
+ *
+ * @internal
  */
 class NetworkTest extends TestCase
 {

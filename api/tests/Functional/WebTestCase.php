@@ -18,6 +18,8 @@ use Test\Functional\Client\MailerClient;
 
 /**
  * @coversNothing
+ *
+ * @internal
  */
 class WebTestCase extends TestCase
 {

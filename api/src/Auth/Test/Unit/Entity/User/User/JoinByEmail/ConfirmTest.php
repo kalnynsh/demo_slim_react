@@ -10,7 +10,9 @@ use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @covers App\Auth\Entity\User\User::confirmJoin
+ * @covers \App\Auth\Entity\User\User::confirmJoin
+ *
+ * @internal
  */
 class ConfirmTest extends TestCase
 {

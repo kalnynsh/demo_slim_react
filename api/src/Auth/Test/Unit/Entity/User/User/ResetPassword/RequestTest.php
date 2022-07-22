@@ -11,6 +11,8 @@ use Ramsey\Uuid\Uuid;
 
 /**
  * @covers \App\Auth\Entity\User\User::requestPasswordReset
+ *
+ * @internal
  */
 class RequestTest extends TestCase
 {

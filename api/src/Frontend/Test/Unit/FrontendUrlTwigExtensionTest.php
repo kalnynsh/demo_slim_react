@@ -10,6 +10,9 @@ use PHPUnit\Framework\TestCase;
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;
 
+/**
+ * @internal
+ */
 class FrontendUrlTwigExtensionTest extends TestCase
 {
     public function testSuccess(): void
@@ -20,8 +23,8 @@ class FrontendUrlTwigExtensionTest extends TestCase
             ->expects(self::once())
             ->method('generate')
             ->with(
-                $this->equalTo('search'),
-                $this->equalTo(['a' => 1, 'b' => 2])
+                self::equalTo('search'),
+                self::equalTo(['a' => 1, 'b' => 2])
             )
             ->willReturn('http://test.org/search?a=1&b=2');
 

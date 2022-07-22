@@ -7,6 +7,9 @@ namespace App\Http\Test\Unit;
 use App\Http\JsonResponse;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ */
 class JsonResponseTest extends TestCase
 {
     public function testWithCode(): void

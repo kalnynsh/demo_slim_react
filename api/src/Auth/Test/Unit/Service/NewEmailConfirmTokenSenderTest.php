@@ -16,6 +16,8 @@ use Twig\Environment;
 
 /**
  * @covers \App\Auth\Service\NewEmailConfirmTokenSender
+ *
+ * @internal
  */
 class NewEmailConfirmTokenSenderTest extends TestCase
 {
@@ -34,8 +36,8 @@ class NewEmailConfirmTokenSenderTest extends TestCase
             ->expects(self::once())
             ->method('render')
             ->with(
-                $this->equalTo(NewEmailConfirmTokenSender::TEMPLATE_PATH),
-                $this->equalTo([
+                self::equalTo(NewEmailConfirmTokenSender::TEMPLATE_PATH),
+                self::equalTo([
                     'uri' => NewEmailConfirmTokenSender::URI,
                     'token' => $token,
                 ])

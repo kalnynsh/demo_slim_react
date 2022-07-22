@@ -15,6 +15,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @covers \App\Http\Middleware\DomainExceptionHandler
+ *
+ * @internal
  */
 class DomainExceptionHandlerTest extends TestCase
 {
@@ -23,7 +25,7 @@ class DomainExceptionHandlerTest extends TestCase
         $logger = $this->createMock(LoggerInterface::class);
 
         $logger
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('warning');
 
         $translator = $this->createStub(TranslatorInterface::class);
@@ -61,9 +63,9 @@ class DomainExceptionHandlerTest extends TestCase
             ->expects(self::once())
             ->method('trans')
             ->with(
-                $this->equalTo('Error has occurred.'),
-                $this->equalTo([]),
-                $this->equalTo('exceptions')
+                self::equalTo('Error has occurred.'),
+                self::equalTo([]),
+                self::equalTo('exceptions')
             )->willReturn('Ошибка.');
 
         $middleware = new DomainExceptionHandler($logger, $translator);

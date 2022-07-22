@@ -8,6 +8,9 @@ use App\Http\EmptyResponse;
 use Fig\Http\Message\StatusCodeInterface;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ */
 class EmptyResponseTest extends TestCase
 {
     public function testDefault(): void

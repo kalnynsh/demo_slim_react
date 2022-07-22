@@ -15,6 +15,8 @@ use Symfony\Component\Translation\Translator;
 
 /**
  * @covers \App\Http\Middleware\TranslatorLocaleMiddleware
+ *
+ * @internal
  */
 class TranslatorLocaleMiddlewareTest extends TestCase
 {
@@ -23,7 +25,7 @@ class TranslatorLocaleMiddlewareTest extends TestCase
         $translator = $this->createMock(Translator::class);
 
         $translator
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('setLocale');
 
         $middleware = new TranslatorLocaleMiddleware($translator);
@@ -46,7 +48,7 @@ class TranslatorLocaleMiddlewareTest extends TestCase
         $translator
             ->expects(self::once())
             ->method('setLocale')
-            ->with($this->equalTo('ru'));
+            ->with(self::equalTo('ru'));
 
         $middleware = new TranslatorLocaleMiddleware($translator);
 

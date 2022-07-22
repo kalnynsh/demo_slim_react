@@ -16,6 +16,8 @@ use Twig\Environment;
 
 /**
  * @covers \App\Auth\Service\PasswordResetTokenSender
+ *
+ * @internal
  */
 class PasswordResetTokenSenderTest extends TestCase
 {
@@ -34,8 +36,8 @@ class PasswordResetTokenSenderTest extends TestCase
             ->expects(self::once())
             ->method('render')
             ->with(
-                $this->equalTo(PasswordResetTokenSender::TEMPLATE_PATH),
-                $this->equalTo([
+                self::equalTo(PasswordResetTokenSender::TEMPLATE_PATH),
+                self::equalTo([
                     'uri' => PasswordResetTokenSender::URI,
                     'token' => $token,
                 ])

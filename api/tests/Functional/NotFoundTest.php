@@ -9,6 +9,8 @@ use Test\Functional\Helper\JsonHelper;
 
 /**
  * @coversNothing
+ *
+ * @internal
  */
 class NotFoundTest extends WebTestCase
 {

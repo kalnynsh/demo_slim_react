@@ -16,6 +16,8 @@ use Slim\Psr7\Factory\UploadedFileFactory;
 
 /**
  * @covers \App\Http\Middleware\InputTrimmerMiddleware
+ *
+ * @internal
  */
 class InputTrimmerMiddleware extends TestCase
 {

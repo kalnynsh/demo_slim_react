@@ -9,6 +9,8 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \App\Auth\Entity\User\User::remove
+ *
+ * @internal
  */
 class RemoveTest extends TestCase
 {

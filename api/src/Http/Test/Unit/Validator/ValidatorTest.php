@@ -14,6 +14,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @covers \App\Http\Validator\Validator
+ *
+ * @internal
  */
 class ValidatorTest extends TestCase
 {
@@ -25,7 +27,7 @@ class ValidatorTest extends TestCase
         $origin
             ->expects(self::once())
             ->method('validate')
-            ->with($this->equalTo($command))
+            ->with(self::equalTo($command))
             ->willReturn(new ConstraintViolationList());
 
         $customValidator = new Validator($origin);
@@ -40,7 +42,7 @@ class ValidatorTest extends TestCase
         $origin
             ->expects(self::once())
             ->method('validate')
-            ->with($this->equalTo($command))
+            ->with(self::equalTo($command))
             ->willReturn($violations = new ConstraintViolationList([
                 $this->createMock(ConstraintViolation::class),
             ]));

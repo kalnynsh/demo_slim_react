@@ -9,11 +9,14 @@ use Ramsey\Uuid\Uuid;
 use Test\Functional\Helper\JsonHelper;
 use Test\Functional\WebTestCase;
 
+/**
+ * @internal
+ */
 class ConfirmationTest extends WebTestCase
 {
     private const URI = '/v1/auth/join/confirm';
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 

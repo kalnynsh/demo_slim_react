@@ -12,6 +12,8 @@ use Ramsey\Uuid\Uuid;
 
 /**
  * @covers \App\Auth\Entity\User\User::confirmEmailChanging
+ *
+ * @internal
  */
 class ConfirmTest extends TestCase
 {

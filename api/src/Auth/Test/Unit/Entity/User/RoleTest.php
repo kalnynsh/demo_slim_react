@@ -7,6 +7,9 @@ namespace App\Auth\Test\Unit\Entity\User;
 use App\Auth\Entity\User\Role;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ */
 class RoleTest extends TestCase
 {
     public function testSuccess(): void

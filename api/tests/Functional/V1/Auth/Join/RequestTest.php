@@ -10,12 +10,14 @@ use Test\Functional\WebTestCase;
 
 /**
  * @covers \App\Http\Action\V1\Auth\Join\RequestAction
+ *
+ * @internal
  */
 class RequestTest extends WebTestCase
 {
     private const URI = '/v1/auth/join';
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 

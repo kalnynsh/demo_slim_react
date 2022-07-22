@@ -13,6 +13,8 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @cavers User::joinByNetwork
+ *
+ * @internal
  */
 class JoinByNetworkTest extends TestCase
 {

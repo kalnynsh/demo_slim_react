@@ -16,6 +16,8 @@ use Twig\Environment;
 
 /**
  * @covers \App\Auth\Service\JoinConfirmationSender
+ *
+ * @internal
  */
 class JoinConfirmationSenderTest extends TestCase
 {
@@ -34,8 +36,8 @@ class JoinConfirmationSenderTest extends TestCase
             ->expects(self::once())
             ->method('render')
             ->with(
-                $this->equalTo(JoinConfirmationSender::TEMPLATE_PATH),
-                $this->equalTo([
+                self::equalTo(JoinConfirmationSender::TEMPLATE_PATH),
+                self::equalTo([
                     'uri' => JoinConfirmationSender::URI,
                     'token' => $token,
                 ])

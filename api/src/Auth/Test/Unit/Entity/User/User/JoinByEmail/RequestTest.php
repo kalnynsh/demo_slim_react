@@ -14,6 +14,8 @@ use Ramsey\Uuid\Uuid;
 
 /**
  * @covers \App\Auth\Entity\User\User::requestJoinByEmail
+ *
+ * @internal
  */
 class RequestTest extends TestCase
 {

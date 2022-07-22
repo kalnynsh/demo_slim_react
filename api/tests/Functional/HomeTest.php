@@ -6,6 +6,8 @@ namespace Test\Functional;
 
 /**
  * @coversNothing
+ *
+ * @internal
  */
 class HomeTest extends WebTestCase
 {
