@@ -75,7 +75,6 @@ class WebTestCase extends TestCase
 
     /**
      * @param array<string|int,string> $fixtures
-     * @return void
      */
     protected function loadFixtures(array $fixtures): void
     {

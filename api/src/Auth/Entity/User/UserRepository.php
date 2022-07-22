@@ -25,8 +25,6 @@ class UserRepository
     }
 
     /**
-     * @param Id $userId
-     * @return User
      * @throws \DomainException
      */
     public function get(Id $userId): User
@@ -42,8 +40,6 @@ class UserRepository
     }
 
     /**
-     * @param Email $email
-     * @return User
      * @throws \DomainException
      */
     public function getByEmail(Email $email): User

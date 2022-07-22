@@ -17,7 +17,6 @@ class LoggedErrorHandler extends ErrorHandler
      * Ovewrite parent method.
      * Write to the error log with \Monolog\Logger
      *
-     * @return void
      */
     protected function writeToErrorLog(): void
     {

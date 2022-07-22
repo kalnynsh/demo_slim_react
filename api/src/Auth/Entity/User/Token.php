@@ -14,12 +14,10 @@ use Webmozart\Assert\Assert;
 class Token
 {
     /**
-     * @var string
      * @ORM\Column(type="string", nullable=true)
      */
     private string $value;
     /**
-     * @var DateTimeImmutable
      * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private DateTimeImmutable $expires;

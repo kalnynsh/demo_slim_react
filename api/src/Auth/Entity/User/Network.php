@@ -40,7 +40,6 @@ class Network
     /**
      * Get the value of name
      *
-     * @return  string
      */
     public function getName(): string
     {
@@ -50,7 +49,6 @@ class Network
     /**
      * Get the value of identity
      *
-     * @return  string
      */
     public function getIdentity(): string
     {
