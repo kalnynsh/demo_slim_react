@@ -42,7 +42,6 @@
         "phpunit/phpunit": "^9.5",
         "psalm/plugin-phpunit": "^0.17.0",
         "roave/security-advisories": "dev-master",
-        "squizlabs/php_codesniffer": "^3.6",
         "vimeo/psalm": "^4.15"
     },
     "replace": {
@@ -67,8 +66,7 @@
     },
     "scripts": {
         "lint": "phplint",
-        "phpcs": "phpcs --standard=phpcs.xml",
-        "phpcbf": "phpcbf",
+        "php-cs-fixer": "php-cs-fixer --config=.php_cs --allow-risky=yes",
         "psalm": "psalm --config=psalm.xml",
         "test": "phpunit --colors=always",
         "test-coverage": "XDEBUG_MODE=coverage phpunit --colors=always --coverage-html var/test/coverage",
