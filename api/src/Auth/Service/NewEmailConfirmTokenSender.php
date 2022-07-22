@@ -46,8 +46,7 @@ class NewEmailConfirmTokenSender
                         'token' => $token,
                     ]
                 )
-            )
-        ;
+            );
 
         $this->mailer->send($mimeEmail);
     }

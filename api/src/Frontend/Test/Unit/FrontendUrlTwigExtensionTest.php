@@ -23,8 +23,7 @@ class FrontendUrlTwigExtensionTest extends TestCase
                 $this->equalTo('search'),
                 $this->equalTo(['a' => 1, 'b' => 2])
             )
-            ->willReturn('http://test.org/search?a=1&b=2')
-        ;
+            ->willReturn('http://test.org/search?a=1&b=2');
 
         $twig = new Environment(
             new ArrayLoader([

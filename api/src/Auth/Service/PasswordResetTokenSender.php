@@ -46,8 +46,7 @@ class PasswordResetTokenSender
                         'token' => $token,
                     ]
                 )
-            )
-        ;
+            );
 
         $this->mailer->send($mimeEmail);
     }

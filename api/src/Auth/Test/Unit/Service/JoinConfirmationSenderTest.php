@@ -40,8 +40,7 @@ class JoinConfirmationSenderTest extends TestCase
                     'token' => $token,
                 ])
             )
-            ->willReturn($body = '<a href="' . $confirmUrl . '">' . $confirmUrl . '</a>')
-        ;
+            ->willReturn($body = '<a href="' . $confirmUrl . '">' . $confirmUrl . '</a>');
 
         $mailer = $this->createMock(Mailer::class);
 
@@ -56,8 +55,7 @@ class JoinConfirmationSenderTest extends TestCase
                 self::assertEquals($body, $mimeEmail->getHtmlBody());
 
                 return 1;
-            })
-        ;
+            });
 
         $sender = new JoinConfirmationSender(
             $mailer,

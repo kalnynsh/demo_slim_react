@@ -34,8 +34,7 @@ return [
             . $config['port']
             . '?'
             . 'verify_peer='
-            . $config['verify_peer']
-        ;
+            . $config['verify_peer'];
 
         $transport = Transport::fromDsn($dsn);
 

@@ -46,8 +46,7 @@ class JoinConfirmationSender
                         'token' => $token,
                     ]
                 )
-            )
-        ;
+            );
 
         $this->mailer->send($mimeEmail);
     }
