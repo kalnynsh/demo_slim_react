@@ -21,7 +21,7 @@ use Test\Functional\Client\MailerClient;
  *
  * @internal
  */
-class WebTestCase extends TestCase
+abstract class WebTestCase extends TestCase
 {
     private ?App $app = null;
     private ?MailerClient $mailer = null;
@@ -60,12 +60,6 @@ class WebTestCase extends TestCase
         return $this->app;
     }
 
-    private function container(): ContainerInterface
-    {
-        /** @var ContainerInterface */
-        return require __DIR__ . '/../../config/container.php';
-    }
-
     protected function mailer(): MailerClient
     {
         if ($this->mailer === null) {
@@ -94,5 +88,11 @@ class WebTestCase extends TestCase
         $em = $container->get(EntityManagerInterface::class);
         $executor = new ORMExecutor($em, new ORMPurger($em));
         $executor->execute($loader->getFixtures());
+    }
+
+    private function container(): ContainerInterface
+    {
+        /** @var ContainerInterface */
+        return require __DIR__ . '/../../config/container.php';
     }
 }

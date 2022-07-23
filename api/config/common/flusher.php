@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Psr\Container\ContainerInterface;
 
 return [
-    Flusher::class => function (ContainerInterface $container): Flusher {
+    Flusher::class => static function (ContainerInterface $container): Flusher {
         /** @var EntityManagerInterface $em */
         $em = $container->get(EntityManagerInterface::class);
 
