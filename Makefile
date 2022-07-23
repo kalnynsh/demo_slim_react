@@ -122,6 +122,9 @@ frontend-npm-install:
 frontend-npm-update:
 	docker compose run --rm frontend-node-cli npm update --save
 
+frontend-npm-outdated:
+	docker compose run --rm frontend-node-cli npm outdated
+
 frontend-ready:
 	docker run --rm -v ${PWD}/frontend:/app -w /app alpine touch .ready
 
@@ -153,6 +156,9 @@ cucumber-npm-install:
 
 cucumber-npm-update:
 	docker compose run --rm cucumber-node-cli npm update --save
+
+cucumber-npm-outdated:
+	docker compose run --rm cucumber-node-cli npm outdated
 
 cucumber-e2e:
 	docker compose run --rm cucumber-node-cli npm run e2e
