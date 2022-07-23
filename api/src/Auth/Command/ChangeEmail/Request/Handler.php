@@ -11,7 +11,7 @@ use App\Auth\Service\NewEmailConfirmTokenSender;
 use App\Auth\Service\Tokenizer;
 use App\Flusher;
 
-class Handler
+final class Handler
 {
     private UserRepository $users;
     private Tokenizer $tokenizer;

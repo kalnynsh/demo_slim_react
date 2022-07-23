@@ -10,7 +10,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email as MimeEmail;
 use Twig\Environment;
 
-class JoinConfirmationSender
+final class JoinConfirmationSender
 {
     public const URI = 'join/confirm';
     public const TEMPLATE_PATH = 'auth/join/confirm.html.twig';

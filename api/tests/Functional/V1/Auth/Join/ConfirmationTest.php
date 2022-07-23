@@ -12,7 +12,7 @@ use Test\Functional\WebTestCase;
 /**
  * @internal
  */
-class ConfirmationTest extends WebTestCase
+final class ConfirmationTest extends WebTestCase
 {
     private const URI = '/v1/auth/join/confirm';
 

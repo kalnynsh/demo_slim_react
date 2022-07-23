@@ -19,7 +19,7 @@ use Twig\Environment;
  *
  * @internal
  */
-class NewEmailConfirmTokenSenderTest extends TestCase
+final class NewEmailConfirmTokenSenderTest extends TestCase
 {
     public function testSuccess(): void
     {

@@ -11,7 +11,7 @@ use App\Auth\Entity\User\Token;
 use App\Auth\Entity\User\User;
 use Ramsey\Uuid\Uuid;
 
-class UserBuilder
+final class UserBuilder
 {
     private Id $id;
     private \DateTimeImmutable $date;

@@ -19,7 +19,7 @@ use Twig\Environment;
  *
  * @internal
  */
-class JoinConfirmationSenderTest extends TestCase
+final class JoinConfirmationSenderTest extends TestCase
 {
     public function testSuccess(): void
     {

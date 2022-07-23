@@ -12,7 +12,7 @@ use Test\Functional\Helper\JsonHelper;
  *
  * @internal
  */
-class NotFoundTest extends WebTestCase
+final class NotFoundTest extends WebTestCase
 {
     use ArraySubsetAsserts;
 

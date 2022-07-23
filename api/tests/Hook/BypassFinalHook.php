@@ -7,7 +7,7 @@ namespace Test\Hook;
 use DG\BypassFinals;
 use PHPUnit\Runner\BeforeTestHook;
 
-class BypassFinalHook implements BeforeTestHook
+final class BypassFinalHook implements BeforeTestHook
 {
     public function executeBeforeTest(string $test): void
     {

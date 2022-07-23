@@ -12,7 +12,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Persistence\ObjectManager;
 use Ramsey\Uuid\Uuid;
 
-class RequestFixture extends AbstractFixture
+final class RequestFixture extends AbstractFixture
 {
     public const DEFAULT_USER_EMAIL = 'existing-name@info.org';
 

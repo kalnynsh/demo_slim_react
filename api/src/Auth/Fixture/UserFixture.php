@@ -16,7 +16,7 @@ use Ramsey\Uuid\Uuid;
 /**
  * @psalm-suppress PropertyNotSetInConstructor
  */
-class UserFixture extends AbstractFixture
+final class UserFixture extends AbstractFixture
 {
     private PasswordHasher $hasher;
 

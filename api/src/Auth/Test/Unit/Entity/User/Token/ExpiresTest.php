@@ -13,7 +13,7 @@ use Ramsey\Uuid\Uuid;
  *
  * @internal
  */
-class ExpiresTest extends TestCase
+final class ExpiresTest extends TestCase
 {
     public function testNotExpired(): void
     {

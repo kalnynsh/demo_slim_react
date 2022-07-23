@@ -8,7 +8,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Interfaces\ErrorHandlerInterface;
 
-class SentryErrorHandlerDecorator implements ErrorHandlerInterface
+final class SentryErrorHandlerDecorator implements ErrorHandlerInterface
 {
     private ErrorHandlerInterface $next;
 

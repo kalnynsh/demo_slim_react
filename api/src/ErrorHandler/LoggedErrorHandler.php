@@ -11,7 +11,7 @@ use Slim\Handlers\ErrorHandler;
  * @psalm-suppress PropertyNotSetInConstructor
  * @property LoggerInterface $logger
  */
-class LoggedErrorHandler extends ErrorHandler
+final class LoggedErrorHandler extends ErrorHandler
 {
     /**
      * Ovewrite parent method.

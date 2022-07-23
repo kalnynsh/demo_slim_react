@@ -10,7 +10,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email as MimeEmail;
 use Twig\Environment;
 
-class NewEmailConfirmTokenSender
+final class NewEmailConfirmTokenSender
 {
     public const URI = 'email/confirm';
     public const SUBJECT = 'Your confirmation of setting new email';

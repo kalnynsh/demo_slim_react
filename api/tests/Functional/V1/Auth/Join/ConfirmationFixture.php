@@ -11,7 +11,7 @@ use App\Auth\Entity\User\User;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Persistence\ObjectManager;
 
-class ConfirmationFixture extends AbstractFixture
+final class ConfirmationFixture extends AbstractFixture
 {
     public const VALID = '00000000-0000-0000-0000-000000000001';
     public const EXPIRED = '00000000-0000-0000-0000-000000000002';

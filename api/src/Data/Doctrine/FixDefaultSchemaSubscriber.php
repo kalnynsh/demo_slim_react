@@ -9,7 +9,7 @@ use Doctrine\DBAL\Schema\PostgreSQLSchemaManager;
 use Doctrine\ORM\Tools\Event\GenerateSchemaEventArgs;
 use Doctrine\ORM\Tools\ToolEvents;
 
-class FixDefaultSchemaSubscriber implements EventSubscriber
+final class FixDefaultSchemaSubscriber implements EventSubscriber
 {
     public function getSubscribedEvents(): array
     {

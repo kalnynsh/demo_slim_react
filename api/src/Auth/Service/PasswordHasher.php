@@ -6,7 +6,7 @@ namespace App\Auth\Service;
 
 use Webmozart\Assert\Assert;
 
-class PasswordHasher
+final class PasswordHasher
 {
     private int $memoryCost;
 

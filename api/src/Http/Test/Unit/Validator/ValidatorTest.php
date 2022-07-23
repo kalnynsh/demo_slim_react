@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  *
  * @internal
  */
-class ValidatorTest extends TestCase
+final class ValidatorTest extends TestCase
 {
     public function testValid(): void
     {

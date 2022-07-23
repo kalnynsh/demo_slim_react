@@ -10,7 +10,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class HomeAction implements RequestHandlerInterface
+final class HomeAction implements RequestHandlerInterface
 {
     private FeatureFlag $flag;
 

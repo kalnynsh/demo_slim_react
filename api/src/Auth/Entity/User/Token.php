@@ -11,7 +11,7 @@ use Webmozart\Assert\Assert;
 /**
  * @ORM\Embeddable
  */
-class Token
+final class Token
 {
     /**
      * @ORM\Column(type="string", nullable=true)

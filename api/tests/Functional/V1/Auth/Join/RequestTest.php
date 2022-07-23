@@ -13,7 +13,7 @@ use Test\Functional\WebTestCase;
  *
  * @internal
  */
-class RequestTest extends WebTestCase
+final class RequestTest extends WebTestCase
 {
     private const URI = '/v1/auth/join';
 

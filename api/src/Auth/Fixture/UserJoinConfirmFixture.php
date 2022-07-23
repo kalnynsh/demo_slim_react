@@ -15,7 +15,7 @@ use Doctrine\Persistence\ObjectManager;
 /**
  * @psalm-suppress PropertyNotSetInConstructor
  */
-class UserJoinConfirmFixture extends AbstractFixture
+final class UserJoinConfirmFixture extends AbstractFixture
 {
     private PasswordHasher $hasher;
 

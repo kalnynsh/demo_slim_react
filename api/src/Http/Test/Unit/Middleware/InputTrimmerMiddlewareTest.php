@@ -19,7 +19,7 @@ use Slim\Psr7\Factory\UploadedFileFactory;
  *
  * @internal
  */
-class InputTrimmerMiddleware extends TestCase
+final class InputTrimmerMiddleware extends TestCase
 {
     public function testParsedBody(): void
     {

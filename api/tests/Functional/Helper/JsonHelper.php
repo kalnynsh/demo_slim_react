@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Test\Functional\Helper;
 
-class JsonHelper
+final class JsonHelper
 {
     /** @psalm-suppress MixedReturnStatement */
     public static function decode(string $data): array

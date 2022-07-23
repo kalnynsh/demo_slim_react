@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @internal
  */
-class RoleTest extends TestCase
+final class RoleTest extends TestCase
 {
     public function testSuccess(): void
     {

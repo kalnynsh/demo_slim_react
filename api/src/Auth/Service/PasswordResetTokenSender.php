@@ -10,7 +10,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email as MimeEmail;
 use Twig\Environment;
 
-class PasswordResetTokenSender
+final class PasswordResetTokenSender
 {
     public const URI = 'password/confirm';
     public const SUBJECT = 'Your confirmation of resetting password';

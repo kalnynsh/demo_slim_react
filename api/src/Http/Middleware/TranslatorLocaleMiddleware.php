@@ -10,7 +10,7 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Symfony\Component\Translation\Translator;
 
-class TranslatorLocaleMiddleware implements MiddlewareInterface
+final class TranslatorLocaleMiddleware implements MiddlewareInterface
 {
     private Translator $translator;
 

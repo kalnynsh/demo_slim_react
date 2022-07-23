@@ -7,7 +7,7 @@ namespace App\Auth\Service;
 use App\Auth\Entity\User\Token;
 use Ramsey\Uuid\Uuid;
 
-class Tokenizer
+final class Tokenizer
 {
     private \DateInterval $interval;
 
