@@ -8,7 +8,7 @@ RUN npm install --cache /tmp/empty-cache
 COPY ./ ./
 RUN npm run build
 
-FROM nginx:1.21-alpine
+FROM nginx:1.23-alpine
 
 COPY ./docker/production/nginx/conf.d /etc/nginx/conf.d
 
