@@ -4,8 +4,8 @@ pipeline {
         timestamps()
     }
     environment {
-        CI = "true"
-        REGISTRY = credentials("REGISTRY")
+        CI = 'true'
+        REGISTRY = credentials('REGISTRY')
         IMAGE_TAG = sh(
             returnStdout: true,
             script: "echo '${env.BUILD_TAG}' | sed 's/%2F/-/g'"
@@ -32,71 +32,71 @@ pipeline {
         ).trim()
     }
     stages {
-        stage("Init") {
+        stage('Init') {
             steps {
-                sh "touch .docker-images-before"
-                sh "make init-ci"
-                sh "docker compose images > .docker-images-after"
+                sh 'touch .docker-images-before'
+                sh 'make init-ci'
+                sh 'docker compose images > .docker-images-after'
                 script {
                     DOCKER_DIFF = sh(
                         returnStdout: true,
-                        script: "diff .docker-images-before .docker-images-after || true"
+                        script: 'diff .docker-images-before .docker-images-after || true'
                     )
                 }
             }
         }
-        stage("Validation") {
+        stage('Validation') {
             when {
                 expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_API }
             }
             steps {
-                sh "make api-validate-schema"
+                sh 'make api-validate-schema'
             }
         }
-        stage("Lint") {
+        stage('Lint') {
             parallel {
-                stage("API") {
+                stage('API') {
                     when {
                         expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_API }
                     }
                     steps {
-                        sh "make api-lint"
+                        sh 'make api-lint'
                     }
                 }
-                stage("Frontend") {
+                stage('Frontend') {
                     when {
                         expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_FRONTEND }
                     }
                     steps {
-                        sh "make frontend-lint"
+                        sh 'make frontend-lint'
                     }
                 }
-                stage("Cucumber") {
+                stage('Cucumber') {
                     when {
                         expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_CUCUMBER }
                     }
                     steps {
-                        sh "make cucumber-lint"
+                        sh 'make cucumber-lint'
                     }
                 }
             }
         }
-        stage("Analyze") {
+        stage('Analyze') {
             when {
                 expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_API }
             }
             steps {
-                sh "make api-analyze"
+                sh 'make api-analyze'
             }
         }
-        stage("Test") {
+        stage('Test') {
             parallel {
-                stage("API") {
+                stage('API') {
                     when {
                         expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_API }
                     }
                     steps {
-                        sh "make api-test"
+                        sh 'make api-test'
                     }
                     post {
                         failure {
@@ -104,41 +104,41 @@ pipeline {
                         }
                     }
                 }
-                stage("Front") {
+                stage('Front') {
                     when {
                         expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_FRONTEND }
                     }
                     steps {
-                        sh "make frontend-test"
+                        sh 'make frontend-test'
                     }
                 }
             }
         }
-        stage("Down") {
+        stage('Down') {
             steps {
-                sh "make docker-down-clear"
+                sh 'make docker-down-clear'
             }
         }
-        stage("Build") {
+        stage('Build') {
             steps {
-                sh "make build"
+                sh 'make build'
             }
         }
-        stage("Testing") {
+        stage('Testing') {
             stages {
-                stage("Build") {
+                stage('Build') {
                     steps {
-                        sh "make testing-build"
+                        sh 'make testing-build'
                     }
                 }
-                stage("Init") {
+                stage('Init') {
                     steps {
-                        sh "make testing-init"
+                        sh 'make testing-init'
                     }
                 }
-                stage("Smoke") {
+                stage('Smoke') {
                     steps {
-                        sh "make testing-smoke"
+                        sh 'make testing-smoke'
                     }
                     post {
                         failure {
@@ -146,9 +146,9 @@ pipeline {
                         }
                     }
                 }
-                stage("E2E") {
+                stage('E2E') {
                     steps {
-                        sh "make testing-e2e"
+                        sh 'make testing-e2e'
                     }
                     post {
                         failure {
@@ -156,39 +156,39 @@ pipeline {
                         }
                     }
                 }
-                stage("Down") {
+                stage('Down') {
                     steps {
-                        sh "make testing-down-clear"
+                        sh 'make testing-down-clear'
                     }
                 }
             }
         }
-        stage("Push") {
+        stage('Push') {
             when {
-                branch "main"
+                branch 'main'
             }
             steps {
                 withCredentials([
                     usernamePassword(
-                        credentialsId: "REGISTRY_AUTH",
-                        usernameVariable: "USER",
-                        passwordVariable: "PASSWORD"
+                        credentialsId: 'REGISTRY_AUTH',
+                        usernameVariable: 'USER',
+                        passwordVariable: 'PASSWORD'
                     )
                 ]) {
                     sh 'docker login -u=$USER -p=$PASSWORD $REGISTRY'
                 }
-                sh "make push"
+                sh 'make push'
             }
         }
-        stage("Stage on VM") {
+        stage('Stage on VM') {
             when {
-                branch "main"
+                branch 'main'
             }
             steps {
                 withCredentials([
-                    string(credentialsId: "D_USER", variable: "D_USER"),
-                    string(credentialsId: "PRODUCTION_HOST", variable: "HOST"),
-                    string(credentialsId: "PRODUCTION_PORT", variable: "PORT"),
+                    string(credentialsId: 'D_USER', variable: 'D_USER'),
+                    string(credentialsId: 'PRODUCTION_HOST', variable: 'HOST'),
+                    string(credentialsId: 'PRODUCTION_PORT', variable: 'PORT'),
                     string(credentialsId: 'API_DB_PASSWORD', variable: 'API_DB_PASSWORD'),
                     string(credentialsId: 'API_MAILER_HOST', variable: 'API_MAILER_HOST'),
                     string(credentialsId: 'API_MAILER_PORT', variable: 'API_MAILER_PORT'),
@@ -197,7 +197,7 @@ pipeline {
                     string(credentialsId: 'API_MAILER_FROM_EMAIL', variable: 'API_MAILER_FROM_EMAIL'),
                     string(credentialsId: 'SENTRY_DSN', variable: 'SENTRY_DSN')
                 ]) {
-                    sshagent (credentials: ["PRODUCTION_AUTH"]) {
+                    sshagent (credentials: ['PRODUCTION_AUTH']) {
                         sh "BUILD_NUMBER=${env.BUILD_NUMBER} make deploy-vm"
                     }
                 }
@@ -206,12 +206,12 @@ pipeline {
     }
     post {
         success {
-            sh "mv -f .docker-images-after .docker-images-before"
+            sh 'mv -f .docker-images-after .docker-images-before'
         }
         always {
-            sh "make docker-down-clear || true"
-            sh "make testing-down-clear || true"
-            sh "make deploy-vm-clean || true"
+            sh 'make docker-down-clear || true'
+            sh 'make testing-down-clear || true'
+            sh 'make deploy-vm-clean || true'
         }
     }
     failure {
