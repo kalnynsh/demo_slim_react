@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Test\Unit\Middleware;
 
 use App\Http\Middleware\DomainExceptionHandler;
+use DomainException;
 use Fig\Http\Message\StatusCodeInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -73,7 +74,7 @@ final class DomainExceptionHandlerTest extends TestCase
         $handler = $this->createStub(RequestHandlerInterface::class);
 
         $handler->method('handle')
-            ->willThrowException(new \DomainException('Error has occurred.'));
+            ->willThrowException(new DomainException('Error has occurred.'));
 
         $request = (new ServerRequestFactory())->createServerRequest('POST', 'http://test.org');
         $response = $middleware->process($request, $handler);

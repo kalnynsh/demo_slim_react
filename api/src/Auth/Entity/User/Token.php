@@ -6,6 +6,7 @@ namespace App\Auth\Entity\User;
 
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use DomainException;
 use Webmozart\Assert\Assert;
 
 /**
@@ -29,14 +30,14 @@ final class Token
         $this->expires = $expires;
     }
 
-    public function validate(string $givenValue, \DateTimeImmutable $givenDate): void
+    public function validate(string $givenValue, DateTimeImmutable $givenDate): void
     {
         if (! $this->isEqualTo($givenValue)) {
-            throw new \DomainException('Token is not valid.');
+            throw new DomainException('Token is not valid.');
         }
 
         if ($this->isExpiredTo($givenDate)) {
-            throw new \DomainException('Token was expired.');
+            throw new DomainException('Token was expired.');
         }
     }
 
@@ -45,7 +46,7 @@ final class Token
         return $this->value === $givenValue;
     }
 
-    public function isExpiredTo(\DateTimeImmutable $givenDate): bool
+    public function isExpiredTo(DateTimeImmutable $givenDate): bool
     {
         return $this->expires <= $givenDate;
     }

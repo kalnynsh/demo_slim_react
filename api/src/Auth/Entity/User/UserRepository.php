@@ -6,6 +6,7 @@ namespace App\Auth\Entity\User;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use DomainException;
 
 final class UserRepository
 {
@@ -25,7 +26,7 @@ final class UserRepository
     }
 
     /**
-     * @throws \DomainException
+     * @throws DomainException
      */
     public function get(Id $userId): User
     {
@@ -33,14 +34,14 @@ final class UserRepository
         $user = $this->repository->find($userId->getValue());
 
         if ($user === null) {
-            throw new \DomainException('User was not found.');
+            throw new DomainException('User was not found.');
         }
 
         return $user;
     }
 
     /**
-     * @throws \DomainException
+     * @throws DomainException
      */
     public function getByEmail(Email $email): User
     {
@@ -50,7 +51,7 @@ final class UserRepository
             ->findOneBy(['email' => $email->getValue()]);
 
         if ($user === null) {
-            throw new \DomainException('User was not found.');
+            throw new DomainException('User was not found.');
         }
 
         return $user;

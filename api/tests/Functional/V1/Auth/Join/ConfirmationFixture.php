@@ -8,6 +8,7 @@ use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\Id;
 use App\Auth\Entity\User\Token;
 use App\Auth\Entity\User\User;
+use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -21,7 +22,7 @@ final class ConfirmationFixture extends AbstractFixture
         // Valid
         $user = User::requestJoinByEmail(
             Id::generate(),
-            $date = new \DateTimeImmutable(),
+            $date = new DateTimeImmutable(),
             new Email('valid-name@test.org'),
             'password-hash',
             new Token($value = self::VALID, $date->modify('+1 hour'))
@@ -32,7 +33,7 @@ final class ConfirmationFixture extends AbstractFixture
         // Expired
         $user = User::requestJoinByEmail(
             Id::generate(),
-            $date = new \DateTimeImmutable(),
+            $date = new DateTimeImmutable(),
             new Email('expired-name@test.org'),
             'password-hash',
             new Token($value = self::EXPIRED, $date->modify('-2 hour'))

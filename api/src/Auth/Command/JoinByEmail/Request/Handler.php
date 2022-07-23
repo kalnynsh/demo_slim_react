@@ -12,6 +12,8 @@ use App\Auth\Service\JoinConfirmationSender;
 use App\Auth\Service\PasswordHasher;
 use App\Auth\Service\Tokenizer;
 use App\Flusher;
+use DateTimeImmutable;
+use DomainException;
 
 final class Handler
 {
@@ -40,10 +42,10 @@ final class Handler
         $email = new Email($command->email);
 
         if ($this->users->hasByEmail($email)) {
-            throw new \DomainException('User already exists.');
+            throw new DomainException('User already exists.');
         }
 
-        $date = new \DateTimeImmutable();
+        $date = new DateTimeImmutable();
 
         $user = User::requestJoinByEmail(
             Id::generate(),

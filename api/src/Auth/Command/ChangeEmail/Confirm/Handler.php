@@ -6,6 +6,8 @@ namespace App\Auth\Command\ChangeEmail\Confirm;
 
 use App\Auth\Entity\User\UserRepository;
 use App\Flusher;
+use DateTimeImmutable;
+use DomainException;
 
 final class Handler
 {
@@ -25,12 +27,12 @@ final class Handler
         $user = $this->users->findByNewEmailToken($command->token);
 
         if (! $user) {
-            throw new \DomainException('Given token is not valid.');
+            throw new DomainException('Given token is not valid.');
         }
 
         $user->confirmEmailChanging(
             $command->token,
-            new \DateTimeImmutable()
+            new DateTimeImmutable()
         );
 
         $this->flusher->flush();

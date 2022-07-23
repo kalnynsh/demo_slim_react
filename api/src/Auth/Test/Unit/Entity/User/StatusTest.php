@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Auth\Test\Unit\Entity\User;
 
 use App\Auth\Entity\User\Status;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -21,7 +22,7 @@ final class StatusTest extends TestCase
 
     public function testIncorrect(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         new Status('crazy');
     }
 

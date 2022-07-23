@@ -9,6 +9,7 @@ use App\Auth\Entity\User\Id;
 use App\Auth\Entity\User\Token;
 use App\Auth\Entity\User\User;
 use App\Auth\Service\PasswordHasher;
+use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -28,10 +29,10 @@ final class UserJoinFixture extends AbstractFixture
     {
         $user = User::requestJoinByEmail(
             Id::generate(),
-            new \DateTimeImmutable('-1 hours'),
+            new DateTimeImmutable('-1 hours'),
             new Email('join-existing@app.test'),
             $this->hasher->hash('new-PassworD-716'),
-            new Token('00000000-0000-0000-0000-100000000002', new \DateTimeImmutable('+1 hours'))
+            new Token('00000000-0000-0000-0000-100000000002', new DateTimeImmutable('+1 hours'))
         );
 
         $manager->persist($user);

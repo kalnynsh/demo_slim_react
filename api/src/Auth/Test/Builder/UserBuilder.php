@@ -9,12 +9,13 @@ use App\Auth\Entity\User\Id;
 use App\Auth\Entity\User\Network;
 use App\Auth\Entity\User\Token;
 use App\Auth\Entity\User\User;
+use DateTimeImmutable;
 use Ramsey\Uuid\Uuid;
 
 final class UserBuilder
 {
     private Id $id;
-    private \DateTimeImmutable $date;
+    private DateTimeImmutable $date;
     private Email $email;
     private string $passwordHash;
     private ?Token $joinConfirmToken;
@@ -24,7 +25,7 @@ final class UserBuilder
     public function __construct()
     {
         $this->id = Id::generate();
-        $this->date = new \DateTimeImmutable();
+        $this->date = new DateTimeImmutable();
         $this->email = new Email('john_dough@info.org');
 
         $this->passwordHash = 'hash';

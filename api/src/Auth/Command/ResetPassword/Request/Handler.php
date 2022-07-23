@@ -9,6 +9,7 @@ use App\Auth\Entity\User\UserRepository;
 use App\Auth\Service\PasswordResetTokenSender;
 use App\Auth\Service\Tokenizer;
 use App\Flusher;
+use DateTimeImmutable;
 
 final class Handler
 {
@@ -35,7 +36,7 @@ final class Handler
 
         $user = $this->users->getByEmail($email);
 
-        $date = new \DateTimeImmutable();
+        $date = new DateTimeImmutable();
 
         $user->requestPasswordReset(
             $token = $this->tokenizer->generate($date),

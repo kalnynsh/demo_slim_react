@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\Auth\Entity\User;
 
 use App\Auth\Service\PasswordHasher;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use DomainException;
 
 /**
  * @ORM\Entity
@@ -24,7 +26,7 @@ class User
     /**
      * @ORM\Column(type="datetime_immutable")
      */
-    private \DateTimeImmutable $date;
+    private DateTimeImmutable $date;
     /**
      * @ORM\Column(type="auth_user_email", unique=true)
      */
@@ -65,7 +67,7 @@ class User
 
     private function __construct(
         Id $id,
-        \DateTimeImmutable $date,
+        DateTimeImmutable $date,
         Email $email,
         Status $status
     ) {
@@ -79,7 +81,7 @@ class User
 
     public static function requestJoinByEmail(
         Id $id,
-        \DateTimeImmutable $date,
+        DateTimeImmutable $date,
         Email $email,
         string $passwordHash,
         Token $token
@@ -93,7 +95,7 @@ class User
 
     public static function joinByNetwork(
         Id $id,
-        \DateTimeImmutable $date,
+        DateTimeImmutable $date,
         Email $email,
         Network $network
     ): self {
@@ -103,10 +105,10 @@ class User
         return $user;
     }
 
-    public function confirmJoin(string $token, \DateTimeImmutable $date): void
+    public function confirmJoin(string $token, DateTimeImmutable $date): void
     {
         if (null === $this->joinConfirmToken) {
-            throw new \DomainException('Confirmation not possable');
+            throw new DomainException('Confirmation not possable');
         }
 
         $this->joinConfirmToken->validate($token, $date);
@@ -119,24 +121,24 @@ class User
         /** @var UserNetwork $existing */
         foreach ($this->networks as $existing) {
             if ($existing->getNetwork()->isEqualTo($network)) {
-                throw new \DomainException('This Network was already attached.');
+                throw new DomainException('This Network was already attached.');
             }
         }
 
         $this->networks->add(new UserNetwork($this, $network));
     }
 
-    public function requestPasswordReset(Token $token, \DateTimeImmutable $date): void
+    public function requestPasswordReset(Token $token, DateTimeImmutable $date): void
     {
         if (! $this->isActive()) {
-            throw new \DomainException('User is not active.');
+            throw new DomainException('User is not active.');
         }
 
         if (
             $this->passwordResetToken !== null
             && ! $this->passwordResetToken->isExpiredTo($date)
         ) {
-            throw new \DomainException('Passord resetting was already requested.');
+            throw new DomainException('Passord resetting was already requested.');
         }
 
         $this->passwordResetToken = $token;
@@ -144,11 +146,11 @@ class User
 
     public function resetPassword(
         string $tokenName,
-        \DateTimeImmutable $date,
+        DateTimeImmutable $date,
         string $hash
     ): void {
         if ($this->passwordResetToken === null) {
-            throw new \DomainException('Resetting is not requested.');
+            throw new DomainException('Resetting is not requested.');
         }
         $this->passwordResetToken->validate($tokenName, $date);
         $this->passwordResetToken = null;
@@ -161,11 +163,11 @@ class User
         PasswordHasher $hasher
     ): void {
         if (null === $this->passwordHash) {
-            throw new \DomainException('The user does not have an old password.');
+            throw new DomainException('The user does not have an old password.');
         }
 
         if (! $hasher->validate($current, $this->passwordHash)) {
-            throw new \DomainException('Incorrect current password.');
+            throw new DomainException('Incorrect current password.');
         }
 
         $this->passwordHash = $hasher->hash($new);
@@ -173,23 +175,23 @@ class User
 
     public function requestEmailChanging(
         Token $token,
-        \DateTimeImmutable $date,
+        DateTimeImmutable $date,
         Email $newEmail
     ): void {
         if ($token->isExpiredTo($date)) {
-            throw new \DomainException('Token was expired.');
+            throw new DomainException('Token was expired.');
         }
 
         if (! $this->isActive()) {
-            throw new \DomainException('User is not active.');
+            throw new DomainException('User is not active.');
         }
 
         if ($this->email->isEqualTo($newEmail)) {
-            throw new \DomainException('New email equals old email.');
+            throw new DomainException('New email equals old email.');
         }
 
         if ($this->newEmailToken !== null && ! $this->newEmailToken->isExpiredTo($date)) {
-            throw new \DomainException('Email changing was already requested.');
+            throw new DomainException('Email changing was already requested.');
         }
 
         $this->newEmail = $newEmail;
@@ -198,10 +200,10 @@ class User
 
     public function confirmEmailChanging(
         string $tokenValue,
-        \DateTimeImmutable $date
+        DateTimeImmutable $date
     ): void {
         if ($this->newEmail === null || $this->newEmailToken === null) {
-            throw new \DomainException('Changing was not requested.');
+            throw new DomainException('Changing was not requested.');
         }
 
         $this->newEmailToken->validate($tokenValue, $date);
@@ -220,7 +222,7 @@ class User
     public function remove(): void
     {
         if (! $this->isWait()) {
-            throw new \DomainException('Unable to remove an active user.');
+            throw new DomainException('Unable to remove an active user.');
         }
     }
 
@@ -229,7 +231,7 @@ class User
         return $this->id;
     }
 
-    public function getDate(): \DateTimeImmutable
+    public function getDate(): DateTimeImmutable
     {
         return $this->date;
     }

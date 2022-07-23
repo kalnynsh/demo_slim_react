@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Router\Test;
 
-use PHPUnit\Framework\TestCase;
 use App\Router\StaticRouterGroup;
+use PHPUnit\Framework\TestCase;
 use Slim\Routing\RouteCollectorProxy;
 
 /**

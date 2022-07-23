@@ -7,6 +7,7 @@ namespace App\ErrorHandler;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Interfaces\ErrorHandlerInterface;
+use Throwable;
 
 final class SentryErrorHandlerDecorator implements ErrorHandlerInterface
 {
@@ -19,7 +20,7 @@ final class SentryErrorHandlerDecorator implements ErrorHandlerInterface
 
     public function __invoke(
         ServerRequestInterface $request,
-        \Throwable $exception,
+        Throwable $exception,
         bool $displayErrorDetails,
         bool $logErrors,
         bool $logErrorDetails

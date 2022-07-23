@@ -6,6 +6,7 @@ namespace App\FeatureToggle\Test\Unit;
 
 use App\FeatureToggle\FeaturesContext;
 use App\FeatureToggle\FeaturesMonologProcessor;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -24,7 +25,7 @@ final class FeatureMonologProcessorTest extends TestCase
         $record = [
             'channel' => 'Unit test',
             'context' => [self::class],
-            'datetime' => new \DateTimeImmutable(),
+            'datetime' => new DateTimeImmutable(),
             'extra' => [],
             'level' => 500,
             'level_name' => 'INFO',

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Auth\Test\Unit\Service;
 
 use App\Auth\Service\PasswordHasher;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -34,7 +35,7 @@ final class PasswordHasherTest extends TestCase
 
     public function testEmpty(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->getHasher()->hash('');
     }
 

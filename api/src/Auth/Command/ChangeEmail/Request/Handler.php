@@ -10,6 +10,8 @@ use App\Auth\Entity\User\UserRepository;
 use App\Auth\Service\NewEmailConfirmTokenSender;
 use App\Auth\Service\Tokenizer;
 use App\Flusher;
+use DateTimeImmutable;
+use DomainException;
 
 final class Handler
 {
@@ -37,10 +39,10 @@ final class Handler
         $email = new Email($command->email);
 
         if ($this->users->hasByEmail($email)) {
-            throw new \DomainException('Given email already used.');
+            throw new DomainException('Given email already used.');
         }
 
-        $date = new \DateTimeImmutable();
+        $date = new DateTimeImmutable();
 
         $user->requestEmailChanging(
             $token = $this->tokenizer->generate($date),

@@ -7,6 +7,7 @@ namespace App\Auth\Test\Unit\Service;
 use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\Token;
 use App\Auth\Service\PasswordResetTokenSender;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Mailer\Mailer;
@@ -25,7 +26,7 @@ final class PasswordResetTokenSenderTest extends TestCase
     {
         $from = 'tester@app.test';
         $to = new Email('user@app.test');
-        $token = new Token(Uuid::uuid4()->toString(), new \DateTimeImmutable());
+        $token = new Token(Uuid::uuid4()->toString(), new DateTimeImmutable());
 
         $confirmUrl = 'http://test.org/' . PasswordResetTokenSender::URI . '?token=' . $token->getValue();
 

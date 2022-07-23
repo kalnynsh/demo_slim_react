@@ -7,6 +7,7 @@ namespace App\Auth\Test\Unit\Entity\User\User\ChangeEmail;
 use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\Token;
 use App\Auth\Test\Builder\UserBuilder;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
@@ -24,7 +25,7 @@ final class RequestTest extends TestCase
             ->active()
             ->build();
 
-        $now = new \DateTimeImmutable();
+        $now = new DateTimeImmutable();
         $token = $this->createToken($now->modify('+1 day'));
         $user->requestEmailChanging($token, $now, $new = new Email('new-john@info.org'));
 
@@ -40,7 +41,7 @@ final class RequestTest extends TestCase
             ->active()
             ->build();
 
-        $now = new \DateTimeImmutable();
+        $now = new DateTimeImmutable();
         $token = $this->createToken($now->modify('+1 day'));
 
         $this->expectExceptionMessage('New email equals old email.');
@@ -53,7 +54,7 @@ final class RequestTest extends TestCase
             ->active()
             ->build();
 
-        $now = new \DateTimeImmutable();
+        $now = new DateTimeImmutable();
         $token = $this->createToken($now->modify('+1 day'));
 
         $user->requestEmailChanging($token, $now, $new = new Email('new-john@info.org'));
@@ -68,7 +69,7 @@ final class RequestTest extends TestCase
             ->active()
             ->build();
 
-        $now = new \DateTimeImmutable();
+        $now = new DateTimeImmutable();
         $token = $this->createToken($now->modify('+1 hour'));
 
         $user->requestEmailChanging($token, $now, new Email('tmp-john@info.org'));
@@ -83,14 +84,14 @@ final class RequestTest extends TestCase
     public function testNotActive(): void
     {
         $user = (new UserBuilder())->build();
-        $now = new \DateTimeImmutable();
+        $now = new DateTimeImmutable();
         $token = $this->createToken($now->modify('+1 hour'));
 
         $this->expectExceptionMessage('User is not active.');
         $user->requestEmailChanging($token, $now, new Email('john-d@info.org'));
     }
 
-    private function createToken(\DateTimeImmutable $expires): Token
+    private function createToken(DateTimeImmutable $expires): Token
     {
         return new Token(
             Uuid::uuid4()->toString(),

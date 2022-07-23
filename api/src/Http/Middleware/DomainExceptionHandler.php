@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use App\Http\JsonResponse;
+use DomainException;
 use Fig\Http\Message\StatusCodeInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -30,7 +31,7 @@ final class DomainExceptionHandler implements MiddlewareInterface
     ): ResponseInterface {
         try {
             return $handler->handle($request);
-        } catch (\DomainException $exception) {
+        } catch (DomainException $exception) {
             $this
                 ->logger
                 ->warning($exception->getMessage(), [

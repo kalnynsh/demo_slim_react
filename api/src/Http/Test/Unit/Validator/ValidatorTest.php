@@ -6,6 +6,7 @@ namespace App\Http\Test\Unit\Validator;
 
 use App\Http\Validator\ValidationException;
 use App\Http\Validator\Validator;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use Symfony\Component\Validator\ConstraintViolation;
@@ -52,7 +53,7 @@ final class ValidatorTest extends TestCase
         try {
             $customValidator->validate($command);
             self::fail('Expected exception is not thrown');
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             self::assertInstanceOf(ValidationException::class, $exception);
             /** @var ConstraintViolationList $violations */
             self::assertEquals($violations, $exception->getViolations());
