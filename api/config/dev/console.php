@@ -36,7 +36,7 @@ return [
                 SchemaTool\DropCommand::class,
             ],
             'fixture_paths' => [
-                __DIR__  . '/../../src/Auth/Fixture',
+                __DIR__ . '/../../src/Auth/Fixture',
             ],
         ],
     ],

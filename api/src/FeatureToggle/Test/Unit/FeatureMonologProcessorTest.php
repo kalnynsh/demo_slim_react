@@ -34,7 +34,7 @@ final class FeatureMonologProcessorTest extends TestCase
 
         $result = $processor($record);
 
-        self::assertEquals(\array_merge_recursive($record, [
+        self::assertEquals(array_merge_recursive($record, [
             'extra' => [
                 'features' => $source,
             ],

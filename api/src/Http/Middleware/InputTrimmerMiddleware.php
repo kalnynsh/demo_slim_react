@@ -23,7 +23,7 @@ final class InputTrimmerMiddleware implements MiddlewareInterface
 
     private static function filterStrings(null|array|object $items): null|array|object
     {
-        if (! \is_array($items)) {
+        if (!\is_array($items)) {
             return $items;
         }
 
@@ -35,10 +35,10 @@ final class InputTrimmerMiddleware implements MiddlewareInterface
          */
         foreach ($items as $key => $value) {
             if (\is_string($value)) {
-                $result[$key] = \trim($value);
+                $result[$key] = trim($value);
             }
 
-            if (! \is_string($value)) {
+            if (!\is_string($value)) {
                 $result[$key] = self::filterStrings($value);
             }
         }
@@ -47,7 +47,6 @@ final class InputTrimmerMiddleware implements MiddlewareInterface
     }
 
     /**
-     *
      * @param array<string, array<string, UploadedFileInterface>|UploadedFileInterface> $items
      */
     private static function filterFiles($items): array

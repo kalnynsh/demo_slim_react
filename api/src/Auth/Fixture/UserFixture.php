@@ -21,7 +21,6 @@ final class UserFixture extends AbstractFixture
 {
     private PasswordHasher $hasher;
 
-
     public function __construct()
     {
         $this->hasher = new PasswordHasher();

@@ -52,7 +52,7 @@ final class RequestTest extends WebTestCase
             $response->getStatusCode()
         );
 
-        self::assertEquals('{}', (string) $response->getBody());
+        self::assertEquals('{}', (string)$response->getBody());
 
         self::assertTrue($this->mailer()->hasEmailSentTo($email));
     }
@@ -65,7 +65,7 @@ final class RequestTest extends WebTestCase
         ]));
 
         self::assertEquals(StatusCodeInterface::STATUS_CONFLICT, $response->getStatusCode());
-        self::assertJson($body = (string) $response->getBody());
+        self::assertJson($body = (string)$response->getBody());
 
         self::assertEquals([
             'message' => 'User already exists.',
@@ -80,7 +80,7 @@ final class RequestTest extends WebTestCase
         ]))->withHeader('Accept-Language', 'ru');
 
         self::assertEquals(StatusCodeInterface::STATUS_CONFLICT, $response->getStatusCode());
-        self::assertJson($body = (string) $response->getBody());
+        self::assertJson($body = (string)$response->getBody());
 
         $data = JsonHelper::decode($body);
 
@@ -95,7 +95,7 @@ final class RequestTest extends WebTestCase
 
         self::assertEquals(StatusCodeInterface::STATUS_UNPROCESSABLE_ENTITY, $response->getStatusCode());
 
-        self::assertJson($body = (string) $response->getBody());
+        self::assertJson($body = (string)$response->getBody());
 
         self::assertEquals([
             'errors' => [
@@ -114,7 +114,7 @@ final class RequestTest extends WebTestCase
 
         self::assertEquals(StatusCodeInterface::STATUS_UNPROCESSABLE_ENTITY, $response->getStatusCode());
 
-        self::assertJson($body = (string) $response->getBody());
+        self::assertJson($body = (string)$response->getBody());
 
         self::assertEquals([
             'errors' => [
@@ -146,6 +146,6 @@ final class RequestTest extends WebTestCase
 
     private static function getRandomNumber(): int
     {
-        return \random_int(1, 10000);
+        return random_int(1, 10000);
     }
 }

@@ -26,13 +26,13 @@ final class FixDefaultSchemaSubscriber implements EventSubscriber
             ->createSchemaManager();
 
         /** @psalm-suppress RedundantCondition */
-        if (! $schemaManager instanceof PostgreSQLSchemaManager) {
+        if (!$schemaManager instanceof PostgreSQLSchemaManager) {
             return;
         }
 
         /** @psalm-suppress InternalMethod */
         foreach ($schemaManager->getExistingSchemaSearchPaths() as $namespace) {
-            if (! $args->getSchema()->hasNamespace($namespace)) {
+            if (!$args->getSchema()->hasNamespace($namespace)) {
                 $args->getSchema()->createNamespace($namespace);
             }
         }

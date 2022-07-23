@@ -40,7 +40,7 @@ abstract class WebTestCase extends TestCase
 
         $request
             ->getBody()
-            ->write(\json_encode($body, JSON_THROW_ON_ERROR));
+            ->write(json_encode($body, JSON_THROW_ON_ERROR));
 
         return $request;
     }

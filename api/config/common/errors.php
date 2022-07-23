@@ -50,7 +50,7 @@ return [
             );
         }
 
-        if (! $config['use_sentry']) {
+        if (!$config['use_sentry']) {
             $middleware->setDefaultErrorHandler($loggedErrorHandler);
         }
 
@@ -59,8 +59,8 @@ return [
 
     'config' => [
         'errors' => [
-            'display_error_details' => (bool) \getenv('APP_DEBUG'),
-            'use_sentry' => (bool) \getenv('SENTRY_DSN'),
+            'display_error_details' => (bool)getenv('APP_DEBUG'),
+            'use_sentry' => (bool)getenv('SENTRY_DSN'),
         ],
     ],
 ];

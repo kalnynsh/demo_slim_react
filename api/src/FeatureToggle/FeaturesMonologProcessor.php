@@ -28,11 +28,10 @@ final class FeaturesMonologProcessor implements ProcessorInterface
      *  level_name: "ALERT"|"CRITICAL"|"DEBUG"|"EMERGENCY"|"ERROR"|"INFO"|"NOTICE"|"WARNING",
      *  message: string
      * } $record
-     *
      */
     public function __invoke(array $record): array
     {
-        return \array_merge_recursive($record, [
+        return array_merge_recursive($record, [
             'extra' => [
                 'features' => $this->context->getAllEnabled(),
             ],

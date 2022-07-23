@@ -7,7 +7,7 @@ namespace App\FeatureToggle;
 final class Features implements FeatureFlag, FeatureSwitch, FeaturesContext
 {
     /**
-     * @var array<string,bool> $features
+     * @var array<string,bool>
      */
     private array $features;
 
@@ -40,6 +40,6 @@ final class Features implements FeatureFlag, FeatureSwitch, FeaturesContext
 
     public function getAllEnabled(): array
     {
-        return \array_keys(\array_filter($this->features));
+        return array_keys(array_filter($this->features));
     }
 }

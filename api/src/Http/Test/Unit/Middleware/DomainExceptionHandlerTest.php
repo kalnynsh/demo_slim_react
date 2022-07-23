@@ -80,10 +80,10 @@ final class DomainExceptionHandlerTest extends TestCase
         $response = $middleware->process($request, $handler);
 
         self::assertEquals(StatusCodeInterface::STATUS_CONFLICT, $response->getStatusCode());
-        self::assertJson($body = (string) $response->getBody());
+        self::assertJson($body = (string)$response->getBody());
 
         /** @var array $bodyDecoded */
-        $bodyDecoded = \json_decode($body, true, 512, JSON_THROW_ON_ERROR);
+        $bodyDecoded = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
 
         self::assertEquals([
             'message' => 'Ошибка.',

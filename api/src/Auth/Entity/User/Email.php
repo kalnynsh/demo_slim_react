@@ -14,7 +14,7 @@ final class Email
     {
         Assert::notEmpty($value);
         Assert::email($value);
-        $this->value = \mb_strtolower($value);
+        $this->value = mb_strtolower($value);
     }
 
     public function isEqualTo(self $other): bool

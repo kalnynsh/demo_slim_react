@@ -36,12 +36,12 @@ final class DomainExceptionHandler implements MiddlewareInterface
                 ->logger
                 ->warning($exception->getMessage(), [
                     'exception' => $exception,
-                    'url' => (string) $request->getUri(),
+                    'url' => (string)$request->getUri(),
                 ]);
 
             return new JsonResponse([
-                    'message' => $this->translator->trans($exception->getMessage(), [], 'exceptions'),
-                ], StatusCodeInterface::STATUS_CONFLICT);
+                'message' => $this->translator->trans($exception->getMessage(), [], 'exceptions'),
+            ], StatusCodeInterface::STATUS_CONFLICT);
         }
     }
 }

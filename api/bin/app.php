@@ -9,8 +9,8 @@ use Symfony\Component\Console\Application;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-if (\getenv('SENTRY_DSN')) {
-    \Sentry\init(['dsn' => \getenv('SENTRY_DSN')]);
+if (getenv('SENTRY_DSN')) {
+    \Sentry\init(['dsn' => getenv('SENTRY_DSN')]);
 }
 
 /** @var Psr\Container\ContainerInterface $container */
@@ -18,7 +18,7 @@ $container = require __DIR__ . '/../config/container.php';
 
 $cli = new Application('Console', '1.0.0 (stable)');
 
-if (\getenv('SENTRY_DSN')) {
+if (getenv('SENTRY_DSN')) {
     $cli->setCatchExceptions(false);
 }
 

@@ -67,7 +67,7 @@ return [
             ],
         ],
         'locales' => [
-            'allowed' => ['en', 'ru',],
+            'allowed' => ['en', 'ru'],
         ],
     ],
 ];

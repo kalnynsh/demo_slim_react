@@ -15,8 +15,7 @@ final class LoggedErrorHandler extends ErrorHandler
 {
     /**
      * Ovewrite parent method.
-     * Write to the error log with \Monolog\Logger
-     *
+     * Write to the error log with \Monolog\Logger.
      */
     protected function writeToErrorLog(): void
     {
@@ -26,7 +25,7 @@ final class LoggedErrorHandler extends ErrorHandler
                 $this->exception->getMessage(),
                 [
                     'exception' => $this->exception,
-                    'url' => (string) $this->request->getUri(),
+                    'url' => (string)$this->request->getUri(),
                 ]
             );
     }

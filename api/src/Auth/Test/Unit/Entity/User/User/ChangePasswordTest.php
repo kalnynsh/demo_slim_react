@@ -65,7 +65,6 @@ final class ChangePasswordTest extends TestCase
         );
     }
 
-
     private function mockHasher(bool $isValid, string $hash): PasswordHasher
     {
         $hasher = $this->createStub(PasswordHasher::class);

@@ -114,7 +114,6 @@ final class UserRepository
             ->getSingleScalarResult() > 0;
     }
 
-
     public function hasByNetwork(Network $network): bool
     {
         return $this

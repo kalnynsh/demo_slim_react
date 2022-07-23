@@ -36,13 +36,13 @@ final class FrontendUrlGeneratorTest extends TestCase
     {
         $baseUrl = 'http://test.org';
         $path = 'images';
-        $params = ['pic' => 1, 'like' => 100,];
+        $params = ['pic' => 1, 'like' => 100];
 
         $generator = $this->getUrlGenerator($baseUrl);
 
         // URL = 'http://test.org/images?pic=1&like=100'
         self::assertEquals(
-            $baseUrl . '/' . $path . '?' . \http_build_query($params),
+            $baseUrl . '/' . $path . '?' . http_build_query($params),
             $generator->generate($path, $params)
         );
     }

@@ -17,6 +17,6 @@ final class FrontendUrlGenerator
     {
         return $this->baseUrl
             . ($uri ? '/' . $uri : '')
-            . ($params ? '?' . \http_build_query($params) : '');
+            . ($params ? '?' . http_build_query($params) : '');
     }
 }

@@ -53,7 +53,7 @@ final class ValidationExceptionHandlerTest extends TestCase
         self::assertJson($body = (string)$response->getBody());
 
         /** @var array $data */
-        $data = \json_decode($body, true, 512, JSON_THROW_ON_ERROR);
+        $data = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
 
         self::assertEquals([
             'errors' => [

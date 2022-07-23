@@ -19,7 +19,7 @@ use Slim\Psr7\Factory\UploadedFileFactory;
  *
  * @internal
  */
-final class InputTrimmerMiddleware extends TestCase
+final class InputTrimmerMiddlewareTest extends TestCase
 {
     public function testParsedBody(): void
     {
@@ -84,7 +84,7 @@ final class InputTrimmerMiddleware extends TestCase
             ->withUploadedFiles([
                 'real_file' => $realFile,
                 'none_file' => $noFile,
-                'files' => [$realFile, $noFile,],
+                'files' => [$realFile, $noFile],
             ]);
 
         $handler = $this->createMock(RequestHandlerInterface::class);
@@ -95,7 +95,7 @@ final class InputTrimmerMiddleware extends TestCase
             ->willReturnCallback(static function (ServerRequestInterface $request) use ($realFile): ResponseInterface {
                 self::assertEquals([
                     'real_file' => $realFile,
-                    'files' => [$realFile, ],
+                    'files' => [$realFile],
                 ], $request->getUploadedFiles());
 
                 return (new ResponseFactory())->createResponse();

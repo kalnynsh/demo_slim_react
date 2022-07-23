@@ -29,7 +29,6 @@ final class Handler
     {
         $user = $this->users->get(new Id($command->id));
 
-
         $user->changePassword(
             $command->current,
             $command->new,

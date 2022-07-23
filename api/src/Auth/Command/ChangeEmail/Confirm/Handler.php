@@ -26,7 +26,7 @@ final class Handler
     {
         $user = $this->users->findByNewEmailToken($command->token);
 
-        if (! $user) {
+        if (!$user) {
             throw new DomainException('Given token is not valid.');
         }
 

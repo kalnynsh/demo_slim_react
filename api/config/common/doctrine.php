@@ -45,7 +45,7 @@ return [
         $config->setNamingStrategy(new UnderscoreNamingStrategy());
 
         foreach ($settings['types'] as $name => $class) {
-            if (! Type::hasType($name)) {
+            if (!Type::hasType($name)) {
                 /** @psalm-suppress ArgumentTypeCoercion */
                 Type::addType($name, $class);
             }
@@ -55,7 +55,7 @@ return [
             $config->setAutoGenerateProxyClasses(true);
         }
 
-        if (! $settings['dev_mode']) {
+        if (!$settings['dev_mode']) {
             $config->setAutoGenerateProxyClasses(false);
         }
 

@@ -21,7 +21,7 @@ final class ContentLanguageTest extends TestCase
 {
     public function testDefault(): void
     {
-        $middleware = new ContentLanguage(['en', 'ru',]);
+        $middleware = new ContentLanguage(['en', 'ru']);
 
         $handler = $this->createStub(RequestHandlerInterface::class);
 
@@ -40,7 +40,7 @@ final class ContentLanguageTest extends TestCase
 
     public function testAccepted(): void
     {
-        $middleware = new ContentLanguage(['ru', 'en',]);
+        $middleware = new ContentLanguage(['ru', 'en']);
 
         $handler = $this->createStub(RequestHandlerInterface::class);
 
@@ -61,7 +61,7 @@ final class ContentLanguageTest extends TestCase
 
     public function testMulti(): void
     {
-        $middleware = new ContentLanguage(['ru', 'en',]);
+        $middleware = new ContentLanguage(['ru', 'en']);
 
         $handler = $this->createStub(RequestHandlerInterface::class);
 
@@ -80,10 +80,9 @@ final class ContentLanguageTest extends TestCase
         $middleware->process($request, $handler);
     }
 
-
     public function testOther(): void
     {
-        $middleware = new ContentLanguage(['en', 'ru',]);
+        $middleware = new ContentLanguage(['en', 'ru']);
 
         $handler = $this->createStub(RequestHandlerInterface::class);
 

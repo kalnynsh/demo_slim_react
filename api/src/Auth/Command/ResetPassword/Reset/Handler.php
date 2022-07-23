@@ -28,7 +28,7 @@ final class Handler
 
     public function handle(Command $command): void
     {
-        if (! $user = $this->users->findByPasswordResetToken($command->token)) {
+        if (!$user = $this->users->findByPasswordResetToken($command->token)) {
             throw new DomainException('Token is not found.');
         }
 

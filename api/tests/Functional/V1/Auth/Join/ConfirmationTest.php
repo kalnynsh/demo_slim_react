@@ -42,7 +42,7 @@ final class ConfirmationTest extends WebTestCase
         ]));
 
         self::assertEquals(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
-        self::assertEquals('{}', (string) $response->getBody());
+        self::assertEquals('{}', (string)$response->getBody());
     }
 
     public function testExpired(): void
@@ -52,7 +52,7 @@ final class ConfirmationTest extends WebTestCase
         ]));
 
         self::assertEquals(StatusCodeInterface::STATUS_CONFLICT, $response->getStatusCode());
-        self::assertJson($body = (string) $response->getBody());
+        self::assertJson($body = (string)$response->getBody());
 
         self::assertEquals([
             'message' => 'Token was expired.',
@@ -64,7 +64,7 @@ final class ConfirmationTest extends WebTestCase
         $response = $this->app()->handle(self::json('POST', self::URI, []));
 
         self::assertEquals(StatusCodeInterface::STATUS_UNPROCESSABLE_ENTITY, $response->getStatusCode());
-        self::assertJson($body = (string) $response->getBody());
+        self::assertJson($body = (string)$response->getBody());
 
         self::assertEquals([
             'errors' => [
@@ -80,7 +80,7 @@ final class ConfirmationTest extends WebTestCase
         ]));
 
         self::assertEquals(StatusCodeInterface::STATUS_CONFLICT, $response->getStatusCode());
-        self::assertJson($body = (string) $response->getBody());
+        self::assertJson($body = (string)$response->getBody());
 
         self::assertEquals([
             'message' => 'Incorrect token.',

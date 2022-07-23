@@ -23,11 +23,11 @@ final class FeaturesMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $header = $request->getHeaderLine($this->header);
-        $features = \array_filter(\preg_split('/\s*,\s*/', $header));
+        $features = array_filter(preg_split('/\s*,\s*/', $header));
 
         foreach ($features as $feature) {
-            if (\str_starts_with($feature, '!')) {
-                $this->switch->disable(\substr($feature, 1));
+            if (str_starts_with($feature, '!')) {
+                $this->switch->disable(substr($feature, 1));
             } else {
                 $this->switch->enable($feature);
             }

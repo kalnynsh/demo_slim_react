@@ -26,8 +26,8 @@ final class Network
         Assert::notEmpty($name);
         Assert::notEmpty($identity);
 
-        $this->name = \mb_strtolower($name);
-        $this->identity = \mb_strtolower($identity);
+        $this->name = mb_strtolower($name);
+        $this->identity = mb_strtolower($identity);
     }
 
     public function isEqualTo(self $givenNetwork): bool
@@ -36,10 +36,8 @@ final class Network
             && $this->getIdentity() === $givenNetwork->getIdentity();
     }
 
-
     /**
-     * Get the value of name
-     *
+     * Get the value of name.
      */
     public function getName(): string
     {
@@ -47,8 +45,7 @@ final class Network
     }
 
     /**
-     * Get the value of identity
-     *
+     * Get the value of identity.
      */
     public function getIdentity(): string
     {

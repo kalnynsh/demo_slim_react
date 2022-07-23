@@ -18,7 +18,7 @@ final class EmailType extends StringType
 
     public function convertToPHPValue($value, AbstractPlatform $platform): ?Email
     {
-        return ! empty($value) ? new Email((string) $value) : null;
+        return !empty($value) ? new Email((string)$value) : null;
     }
 
     public function getName(): string

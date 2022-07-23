@@ -33,7 +33,7 @@ final class CreateTest extends TestCase
         $value = Uuid::uuid4()->toString();
 
         $token = new Token(
-            \mb_strtoupper($value),
+            mb_strtoupper($value),
             new DateTimeImmutable()
         );
 

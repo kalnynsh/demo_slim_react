@@ -30,7 +30,7 @@ return [
             $mLogger->pushHandler(new StreamHandler('php://stderr', $level));
         }
 
-        if (! empty($config['file'])) {
+        if (!empty($config['file'])) {
             $mLogger->pushHandler(new StreamHandler($config['file'], $level));
         }
 
@@ -45,7 +45,7 @@ return [
 
     'config' => [
         'logger' => [
-            'debug' => (bool) getenv('APP_DEBUG'),
+            'debug' => (bool)getenv('APP_DEBUG'),
             'file' => null,
             'stderr' => true,
             'processors' => [

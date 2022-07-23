@@ -21,7 +21,7 @@ final class PasswordHasher
         Assert::notEmpty($password);
 
         /** @var false|string|null $hash */
-        $hash = \password_hash(
+        $hash = password_hash(
             $password,
             PASSWORD_ARGON2ID,
             ['memory_cost' => $this->memoryCost]
@@ -40,6 +40,6 @@ final class PasswordHasher
 
     public function validate(string $password, string $hash): bool
     {
-        return \password_verify($password, $hash);
+        return password_verify($password, $hash);
     }
 }

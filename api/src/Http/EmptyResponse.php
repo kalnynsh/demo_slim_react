@@ -12,7 +12,7 @@ final class EmptyResponse extends Response
 {
     public function __construct(int $status = StatusCodeInterface::STATUS_NO_CONTENT)
     {
-        $content = "{}";
+        $content = '{}';
 
         parent::__construct(
             $status,

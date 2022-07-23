@@ -130,13 +130,13 @@ class User
 
     public function requestPasswordReset(Token $token, DateTimeImmutable $date): void
     {
-        if (! $this->isActive()) {
+        if (!$this->isActive()) {
             throw new DomainException('User is not active.');
         }
 
         if (
             $this->passwordResetToken !== null
-            && ! $this->passwordResetToken->isExpiredTo($date)
+            && !$this->passwordResetToken->isExpiredTo($date)
         ) {
             throw new DomainException('Passord resetting was already requested.');
         }
@@ -166,7 +166,7 @@ class User
             throw new DomainException('The user does not have an old password.');
         }
 
-        if (! $hasher->validate($current, $this->passwordHash)) {
+        if (!$hasher->validate($current, $this->passwordHash)) {
             throw new DomainException('Incorrect current password.');
         }
 
@@ -182,7 +182,7 @@ class User
             throw new DomainException('Token was expired.');
         }
 
-        if (! $this->isActive()) {
+        if (!$this->isActive()) {
             throw new DomainException('User is not active.');
         }
 
@@ -190,7 +190,7 @@ class User
             throw new DomainException('New email equals old email.');
         }
 
-        if ($this->newEmailToken !== null && ! $this->newEmailToken->isExpiredTo($date)) {
+        if ($this->newEmailToken !== null && !$this->newEmailToken->isExpiredTo($date)) {
             throw new DomainException('Email changing was already requested.');
         }
 
@@ -214,14 +214,14 @@ class User
 
     public function changeRole(Role $newRole): void
     {
-        if (! $this->role->equalTo($newRole)) {
+        if (!$this->role->equalTo($newRole)) {
             $this->role = $newRole;
         }
     }
 
     public function remove(): void
     {
-        if (! $this->isWait()) {
+        if (!$this->isWait()) {
             throw new DomainException('Unable to remove an active user.');
         }
     }
@@ -272,14 +272,13 @@ class User
     }
 
     /**
-     *
      * @return Network[]
      */
     public function getNetworks(): array
     {
         /**
          * @psalm-suppress MixedArgumentTypeCoercion
-        */
+         */
         return $this
             ->networks
             ->map(static fn (UserNetwork $network) => $network->getNetwork())->toArray();

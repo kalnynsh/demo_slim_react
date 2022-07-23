@@ -27,7 +27,7 @@ final class IdTest extends TestCase
     {
         $value = Uuid::uuid4()->toString();
 
-        $id = new Id(\mb_strtoupper($value));
+        $id = new Id(mb_strtoupper($value));
 
         self::assertEquals($value, $id->getValue());
     }
