@@ -22,7 +22,7 @@
         "sentry/sdk": "^3.2",
         "slim/psr7": "^1.5",
         "slim/slim": "^4.9",
-        "symfony/cache": "^6.0",
+        "symfony/cache": "^6.1",
         "symfony/config": "^6.0",
         "symfony/console": "^6.0",
         "symfony/mailer": "^6.0",
