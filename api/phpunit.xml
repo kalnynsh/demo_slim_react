@@ -13,6 +13,7 @@
             <directory>src/Http/Test/Unit</directory>
             <directory>src/Frontend/Test/Unit</directory>
             <directory>src/FeatureToggle/Test/Unit</directory>
+            <directory>src/OAuth/Test</directory>
             <directory>src/Router/Test</directory>
         </testsuite>
         <testsuite name="functional">
