@@ -7,6 +7,8 @@ use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mailer\Transport;
 
+use function App\env;
+
 return [
     MailerInterface::class => static function (ContainerInterface $container) {
         /**
@@ -43,12 +45,12 @@ return [
 
     'config' => [
         'mailer' => [
-            'user'     => getenv('MAILER_USER'),
-            'password' => getenv('MAILER_PASSWORD'),
-            'host'     => getenv('MAILER_HOST'),
-            'port'     => getenv('MAILER_PORT'),
-            'encryption' => getenv('MAILER_ENCRYPTION'),
-            'from'       => getenv('MAILER_FROM_EMAIL'),
+            'user'     => env('MAILER_USER'),
+            'password' => env('MAILER_PASSWORD'),
+            'host'     => env('MAILER_HOST'),
+            'port'     => env('MAILER_PORT'),
+            'encryption' => env('MAILER_ENCRYPTION'),
+            'from'       => env('MAILER_FROM_EMAIL'),
             'verify_peer' => 1,
         ],
     ],

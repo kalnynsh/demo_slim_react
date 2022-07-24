@@ -10,6 +10,8 @@ use Twig\Extension\DebugExtension;
 use Twig\Extension\ExtensionInterface;
 use Twig\Loader\FilesystemLoader;
 
+use function App\env;
+
 return [
     Environment::class => static function (ContainerInterface $container): Environment {
         /**
@@ -57,7 +59,7 @@ return [
 
     'config' => [
         'twig' => [
-            'debug' => (bool)getenv('APP_DEBUG'),
+            'debug' => (bool)env('APP_DEBUG', '0'),
             'template_dirs' => [
                 FilesystemLoader::MAIN_NAMESPACE => __DIR__ . '/../../templates',
             ],
