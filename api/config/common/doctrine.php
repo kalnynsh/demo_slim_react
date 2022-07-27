@@ -85,6 +85,7 @@ return [
             'dev_mode' => false,
             'paths' => [
                 __DIR__ . '/../../src/Auth/Entity',
+                __DIR__ . '/../../src/OAuth/Entity',
             ],
             'proxy_dir' =>  __DIR__ . '/../../var/cache/doctrine/proxy',
             'cache_dir' =>  __DIR__ . '/../../var/cache/doctrine/cache',
