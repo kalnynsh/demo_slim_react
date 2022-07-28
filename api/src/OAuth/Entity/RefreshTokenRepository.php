@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\OAuth\Entity;
 
-use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 use League\OAuth2\Server\Entities\RefreshTokenEntityInterface;
-use League\OAuth2\Server\Repositories\RefreshTokenRepositoryInterface;
 use League\OAuth2\Server\Exception\UniqueTokenIdentifierConstraintViolationException;
+use League\OAuth2\Server\Repositories\RefreshTokenRepositoryInterface;
 
 final class RefreshTokenRepository implements RefreshTokenRepositoryInterface
 {
