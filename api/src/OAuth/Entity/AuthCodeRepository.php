@@ -6,9 +6,25 @@ namespace App\OAuth\Entity;
 
 use League\OAuth2\Server\Entities\AuthCodeEntityInterface;
 use League\OAuth2\Server\Repositories\AuthCodeRepositoryInterface;
+use League\OAuth2\Server\Exception\UniqueTokenIdentifierConstraintViolationException;
 
 final class AuthCodeRepository implements AuthCodeRepositoryInterface
 {
+    /**
+     * @var EntityRepository<AuthCode>
+     */
+    private EntityRepository $repo;
+    private EntityManagerInterface $em;
+
+    /**
+     * @param EntityRepository<AuthCode> $repo
+     */
+    public function __construct(EntityManagerInterface $em, EntityRepository $repo)
+    {
+        $this->repo = $repo;
+        $this->em = $em;
+    }
+
     public function getNewAuthCode(): AuthCode
     {
         return new AuthCode();
@@ -16,17 +32,35 @@ final class AuthCodeRepository implements AuthCodeRepositoryInterface
 
     public function persistNewAuthCode(AuthCodeEntityInterface $authCodeEntity): void
     {
-        // TODO: Implement persisting
+        if ($this->exists($authCodeEntity->getIdentifier())) {
+            throw UniqueTokenIdentifierConstraintViolationException::create();
+        }
+
+        $this->em->persist($authCodeEntity);
+        $this->em->flush();
     }
 
     public function revokeAuthCode($codeId): void
     {
-        // TODO: Implement revoking
+        if ($code = $this->repo->find($codeId)) {
+            $this->em->remove($code);
+            $this->em->flush();
+        }
     }
 
     public function isAuthCodeRevoked($codeId): bool
     {
-        // TODO: Implement checking
-        return false;
+        return !$this->exists($codeId);
+    }
+
+    private function exists(string $id): bool
+    {
+        return $this->repo
+            ->createQueryBuilder('t')
+            ->select('COUNT(t.identifier)')
+            ->andWhere('(t.identifier = :identifier')
+            ->setParameter(':identifier', $id)
+            ->getQuery()
+            ->getSingleScalarResult() > 0;
     }
 }

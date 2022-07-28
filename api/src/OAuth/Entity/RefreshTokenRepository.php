@@ -4,11 +4,29 @@ declare(strict_types=1);
 
 namespace App\OAuth\Entity;
 
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use League\OAuth2\Server\Entities\RefreshTokenEntityInterface;
 use League\OAuth2\Server\Repositories\RefreshTokenRepositoryInterface;
+use League\OAuth2\Server\Exception\UniqueTokenIdentifierConstraintViolationException;
 
 final class RefreshTokenRepository implements RefreshTokenRepositoryInterface
 {
+    /**
+     * @var EntityRepository<RefeshToken>
+     */
+    private EntityRepository $repo;
+    private EntityManagerInterface $em;
+
+    /**
+     * @param EntityRepository<RefeshToken> $repo
+     */
+    public function __construct(EntityManagerInterface $em, EntityRepository $repo)
+    {
+        $this->repo = $repo;
+        $this->em = $em;
+    }
+
     public function getNewRefreshToken(): ?RefreshToken
     {
         return new RefreshToken();
@@ -16,18 +34,35 @@ final class RefreshTokenRepository implements RefreshTokenRepositoryInterface
 
     public function persistNewRefreshToken(RefreshTokenEntityInterface $refreshTokenEntity): void
     {
-        // TODO: Implement persisting
+        if ($this->exists($refreshTokenEntity->getIdentifier())) {
+            throw UniqueTokenIdentifierConstraintViolationException::create();
+        }
+
+        $this->em->persist($refreshTokenEntity);
+        $this->em->flush();
     }
 
     public function revokeRefreshToken($tokenId): void
     {
-        // TODO: Implement revoking
+        if ($token = $this->repo->find($tokenId)) {
+            $this->em->remove($token);
+            $this->em->flush();
+        }
     }
 
     public function isRefreshTokenRevoked($tokenId): bool
     {
-        // TODO: Implement checking
+        return !$this->exists($tokenId);
+    }
 
-        return false;
+    private function exists(string $id): bool
+    {
+        return $this->repo
+            ->createQueryBuilder('t')
+            ->select('COUNT(t.identifier)')
+            ->andWhere('(t.identifier = :identifier')
+            ->setParameter(':identifier', $id)
+            ->getQuery()
+            ->getSingleScalarResult() > 0;
     }
 }

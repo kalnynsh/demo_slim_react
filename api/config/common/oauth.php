@@ -2,23 +2,26 @@
 
 declare(strict_types=1);
 
-use App\OAuth\Entity\AccessTokenRepository;
-use App\OAuth\Entity\AuthCodeRepository;
-use App\OAuth\Entity\Client;
-use App\OAuth\Entity\ClientRepository;
-use App\OAuth\Entity\RefreshTokenRepository;
-use App\OAuth\Entity\Scope;
-use App\OAuth\Entity\ScopeRepository;
-use App\OAuth\Entity\UserRepository;
-use League\OAuth2\Server\Repositories\AccessTokenRepositoryInterface;
-use League\OAuth2\Server\Repositories\AuthCodeRepositoryInterface;
-use League\OAuth2\Server\Repositories\ClientRepositoryInterface;
-use League\OAuth2\Server\Repositories\RefreshTokenRepositoryInterface;
-use League\OAuth2\Server\Repositories\ScopeRepositoryInterface;
-use League\OAuth2\Server\Repositories\UserRepositoryInterface;
-use Psr\Container\ContainerInterface;
-
 use function App\env;
+use App\OAuth\Entity\Scope;
+use App\OAuth\Entity\Client;
+use App\OAuth\Entity\AuthCode;
+use App\OAuth\Entity\RefreshToken;
+use App\OAuth\Entity\UserRepository;
+use App\OAuth\Entity\ScopeRepository;
+use Psr\Container\ContainerInterface;
+use App\OAuth\Entity\ClientRepository;
+use App\OAuth\Entity\AuthCodeRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use App\OAuth\Entity\AccessTokenRepository;
+use App\OAuth\Entity\RefreshTokenRepository;
+use League\OAuth2\Server\Repositories\UserRepositoryInterface;
+use League\OAuth2\Server\Repositories\ScopeRepositoryInterface;
+
+use League\OAuth2\Server\Repositories\ClientRepositoryInterface;
+use League\OAuth2\Server\Repositories\AuthCodeRepositoryInterface;
+use League\OAuth2\Server\Repositories\AccessTokenRepositoryInterface;
+use League\OAuth2\Server\Repositories\RefreshTokenRepositoryInterface;
 
 return [
     ScopeRepositoryInterface::class => static function (ContainerInterface $container): ScopeRepository {
@@ -57,8 +60,18 @@ return [
     },
     UserRepositoryInterface::class => \DI\get(UserRepository::class),
     AccessTokenRepositoryInterface::class => \DI\get(AccessTokenRepository::class),
-    AuthCodeRepositoryInterface::class => \DI\get(AuthCodeRepository::class),
-    RefreshTokenRepositoryInterface::class => \DI\get(RefreshTokenRepository::class),
+    AuthCodeRepositoryInterface::class => static function (ContainerInterface $container): AuthCodeRepository {
+        $em = $container->get(EntityManagerInterface::class);
+        $repo = $em->getRepository(AuthCode::class);
+
+        return new AuthCodeRepository($em, $repo);
+    },
+    RefreshTokenRepositoryInterface::class => static function (ContainerInterface $container): RefreshTokenRepository {
+        $em = $container->get(EntityManagerInterface::class);
+        $repo = $em->getRepository(RefreshToken::class);
+
+        return new RefreshTokenRepository($em, $repo);
+    },
 
     'config' => [
         'oauth' => [
