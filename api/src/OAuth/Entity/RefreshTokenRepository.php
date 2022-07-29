@@ -13,13 +13,13 @@ use League\OAuth2\Server\Repositories\RefreshTokenRepositoryInterface;
 final class RefreshTokenRepository implements RefreshTokenRepositoryInterface
 {
     /**
-     * @var EntityRepository<RefeshToken>
+     * @var EntityRepository<RefreshToken>
      */
     private EntityRepository $repo;
     private EntityManagerInterface $em;
 
     /**
-     * @param EntityRepository<RefeshToken> $repo
+     * @param EntityRepository<RefreshToken> $repo
      */
     public function __construct(EntityManagerInterface $em, EntityRepository $repo)
     {
