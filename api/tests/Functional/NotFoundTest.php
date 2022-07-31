@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Test\Functional;
 
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
-use Test\Functional\Helper\JsonHelper;
+use Test\Functional\Helper\Json;
 
 /**
  * @coversNothing
@@ -24,7 +24,7 @@ final class NotFoundTest extends WebTestCase
         self::assertJson($body = (string)$response->getBody());
 
         // $bodyDecoded = \json_decode($body, true, 512, JSON_THROW_ON_ERROR);
-        $bodyDecoded = JsonHelper::decode($body);
+        $bodyDecoded = Json::decode($body);
 
         self::assertArraySubset([
             'message' => '404 Not Found',

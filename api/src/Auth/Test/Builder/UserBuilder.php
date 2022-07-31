@@ -9,6 +9,7 @@ use App\Auth\Entity\User\Id;
 use App\Auth\Entity\User\Network;
 use App\Auth\Entity\User\Token;
 use App\Auth\Entity\User\User;
+use App\Auth\Service\PasswordHasher;
 use DateTimeImmutable;
 use Ramsey\Uuid\Uuid;
 
@@ -67,9 +68,24 @@ final class UserBuilder
         return $clone;
     }
 
+    public function withPasswordHash(?string $passwordHash = null): self
+    {
+        $clone = clone $this;
+
+        if ($passwordHash !== null) {
+            $clone->passwordHash = $passwordHash;
+        }
+
+        if ($passwordHash === null) {
+            $clone->passwordHash = $this->getHasher()->hash('very-secret-295');
+        }
+
+        return $clone;
+    }
+
     public function build(): User
     {
-        if ($this->networkIdentity) {
+        if ($this->networkIdentity !== null) {
             return User::joinByNetwork(
                 $this->id,
                 $this->date,
@@ -96,5 +112,10 @@ final class UserBuilder
         }
 
         return $user;
+    }
+
+    private function getHasher(): PasswordHasher
+    {
+        return new PasswordHasher(16);
     }
 }

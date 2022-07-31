@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Test\Functional\V1\Auth\Join;
 
 use Fig\Http\Message\StatusCodeInterface;
-use Test\Functional\Helper\JsonHelper;
+use Test\Functional\Helper\Json;
 use Test\Functional\WebTestCase;
 
 /**
@@ -69,7 +69,7 @@ final class RequestTest extends WebTestCase
 
         self::assertEquals([
             'message' => 'User already exists.',
-        ], JsonHelper::decode($body));
+        ], Json::decode($body));
     }
 
     public function testExistingLanguage(): void
@@ -82,7 +82,7 @@ final class RequestTest extends WebTestCase
         self::assertEquals(StatusCodeInterface::STATUS_CONFLICT, $response->getStatusCode());
         self::assertJson($body = (string)$response->getBody());
 
-        $data = JsonHelper::decode($body);
+        $data = Json::decode($body);
 
         self::assertEquals([
             'message' => 'User already exists.',
@@ -102,7 +102,7 @@ final class RequestTest extends WebTestCase
                 'email' => 'This value should not be blank.',
                 'password' => 'This value is too short. It should have 6 characters or more.',
             ],
-        ], JsonHelper::decode($body));
+        ], Json::decode($body));
     }
 
     public function testNotValid(): void
@@ -121,7 +121,7 @@ final class RequestTest extends WebTestCase
                 'email' => 'This value is not a valid email address.',
                 'password' => 'This value is too short. It should have 6 characters or more.',
             ],
-        ], JsonHelper::decode($body));
+        ], Json::decode($body));
     }
 
     public function testNotValidLanguage(): void
@@ -134,7 +134,7 @@ final class RequestTest extends WebTestCase
         self::assertEquals(StatusCodeInterface::STATUS_UNPROCESSABLE_ENTITY, $response->getStatusCode());
         self::assertJson($body = (string)$response->getBody());
 
-        $data = JsonHelper::decode($body);
+        $data = Json::decode($body);
 
         self::assertEquals([
             'errors' => [

@@ -6,7 +6,7 @@ namespace Test\Functional\V1\Auth\Join;
 
 use Fig\Http\Message\StatusCodeInterface;
 use Ramsey\Uuid\Uuid;
-use Test\Functional\Helper\JsonHelper;
+use Test\Functional\Helper\Json;
 use Test\Functional\WebTestCase;
 
 /**
@@ -56,7 +56,7 @@ final class ConfirmationTest extends WebTestCase
 
         self::assertEquals([
             'message' => 'Token was expired.',
-        ], JsonHelper::decode($body));
+        ], Json::decode($body));
     }
 
     public function testEmpty(): void
@@ -70,7 +70,7 @@ final class ConfirmationTest extends WebTestCase
             'errors' => [
                 'token' => 'This value should not be blank.',
             ],
-        ], JsonHelper::decode($body));
+        ], Json::decode($body));
     }
 
     public function testNotExistes(): void
@@ -84,6 +84,6 @@ final class ConfirmationTest extends WebTestCase
 
         self::assertEquals([
             'message' => 'Incorrect token.',
-        ], JsonHelper::decode($body));
+        ], Json::decode($body));
     }
 }
