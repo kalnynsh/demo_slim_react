@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Test\Unit;
 
-use App\Http\EmptyResponse;
+use App\Http\Response\EmptyResponse;
 use Fig\Http\Message\StatusCodeInterface;
 use PHPUnit\Framework\TestCase;
 
