@@ -12,7 +12,6 @@ use App\OAuth\Entity\RefreshTokenRepository;
 use App\OAuth\Entity\Scope;
 use App\OAuth\Entity\ScopeRepository;
 use App\OAuth\Entity\UserRepository;
-use DateInterval;
 use Doctrine\ORM\EntityManagerInterface;
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\CryptKey;
