@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace App\Http\Action;
 
-use Twig\Environment;
-use Psr\Log\LoggerInterface;
 use App\Http\Response\HtmlResponse;
-use Psr\Http\Message\ResponseInterface;
+use App\Sentry\Sentry;
+use Exception;
 use Fig\Http\Message\StatusCodeInterface;
+use League\OAuth2\Server\AuthorizationServer;
+use League\OAuth2\Server\Exception\OAuthServerException;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use League\OAuth2\Server\AuthorizationServer;
-use Psr\Http\Message\ResponseFactoryInterface;
-use League\OAuth2\Server\Exception\OAuthServerException;
-
+use Psr\Log\LoggerInterface;
+use Twig\Environment;
 
 final class AuthorizeAction implements RequestHandlerInterface
 {
@@ -24,19 +25,27 @@ final class AuthorizeAction implements RequestHandlerInterface
     private LoggerInterface $logger;
     private Environment $template;
     private ResponseFactoryInterface $response;
+    private Sentry $sentry;
 
     public function __construct(
         AuthorizationServer $server,
         LoggerInterface $logger,
         Environment $template,
-        ResponseFactoryInterface $response
+        ResponseFactoryInterface $response,
+        Sentry $sentry
     ) {
         $this->server = $server;
         $this->logger = $logger;
         $this->template = $template;
         $this->response = $response;
+        $this->sentry = $sentry;
     }
 
+    /**
+     * @psalm-suppress ImplementedReturnTypeMismatch
+     * @psalm-suppress InvalidReturnType
+     * @psalm-suppress InvalidReturnStatement
+     */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         try {
@@ -59,13 +68,14 @@ final class AuthorizeAction implements RequestHandlerInterface
 
             return $exception->generateHttpResponse($this->response->createResponse());
         } catch (Exception $exception) {
-            $this->logger->warning($exception->getMessage(), ['exception', $exception]);
+            $this->logger->error($exception->getMessage(), ['exception', $exception]);
+            $this->sentry->capture($exception);
 
-            return (new OAuthServerException(
+            return new OAuthServerException(
                 'Server error.',
                 0,
                 'unknown_error',
-                StatusCodeInterface::STATUS_INTERNAL_SERVER_ERROR)
+                StatusCodeInterface::STATUS_INTERNAL_SERVER_ERROR
             );
         }
     }

@@ -119,7 +119,7 @@ final class AuthorizeTest extends WebTestCase
                 'state' => 'sTaTe',
             ]),
             [
-                'email' => 'john-activater@test.org',
+                'email' => 'john-aCTIvater@test.org',
                 'password' => 'very-secret-295',
             ]
         ));

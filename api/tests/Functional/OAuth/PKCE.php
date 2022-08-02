@@ -10,13 +10,13 @@ final class PKCE
     {
         $bytes = random_bytes(64);
 
-        return strtr(rtrim(base64_encode($bytes), '='), '+/','-_');
+        return strtr(rtrim(base64_encode($bytes), '='), '+/', '-_');
     }
 
     public static function challenge(string $verifier): string
     {
         $challengeBytes = hash('sha256', $verifier, true);
 
-        return strtr(rtrim(base64_encode($challengeBytes), '='), '+/','-_');
+        return strtr(rtrim(base64_encode($challengeBytes), '='), '+/', '-_');
     }
 }

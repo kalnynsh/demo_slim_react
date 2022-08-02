@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\ErrorHandler;
 
+use App\Sentry\Sentry;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Interfaces\ErrorHandlerInterface;
@@ -12,10 +13,12 @@ use Throwable;
 final class SentryErrorHandlerDecorator implements ErrorHandlerInterface
 {
     private ErrorHandlerInterface $next;
+    private Sentry $sentry;
 
-    public function __construct(ErrorHandlerInterface $next)
+    public function __construct(ErrorHandlerInterface $next, Sentry $sentry)
     {
         $this->next = $next;
+        $this->sentry = $sentry;
     }
 
     public function __invoke(
@@ -25,7 +28,7 @@ final class SentryErrorHandlerDecorator implements ErrorHandlerInterface
         bool $logErrors,
         bool $logErrorDetails
     ): ResponseInterface {
-        \Sentry\captureException($exception);
+        $this->sentry->capture($exception);
 
         return ($this->next)(
             $request,

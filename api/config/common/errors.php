@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\ErrorHandler\LoggedErrorHandler;
 use App\ErrorHandler\SentryErrorHandlerDecorator;
+use App\Sentry\Sentry;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Log\LoggerInterface;
@@ -48,7 +49,10 @@ return [
 
         if ($config['use_sentry']) {
             $middleware->setDefaultErrorHandler(
-                new SentryErrorHandlerDecorator($loggedErrorHandler)
+                new SentryErrorHandlerDecorator(
+                    $loggedErrorHandler,
+                    $container->get(Sentry::class)
+                )
             );
         }
 
