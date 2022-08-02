@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Test\Functional\OAuth;
 
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
+use Fig\Http\Message\StatusCodeInterface;
 use Test\Functional\Helper\Json;
 use Test\Functional\WebTestCase;
 
@@ -26,73 +27,72 @@ final class AuthorizeTest extends WebTestCase
 
     public function testWithoutParams(): void
     {
-        self::markTestIncomplete();
-
         $response = $this->app()->handle(self::html('GET', '/authorize'));
-        self::assertEquals(400, $response->getStatusCode());
+        self::assertEquals(StatusCodeInterface::STATUS_BAD_REQUEST, $response->getStatusCode());
     }
 
     public function testPageWithoutChallenge(): void
     {
-        self::markTestIncomplete();
-
         $response = $this->app()->handle(self::html(
             'GET',
             '/authorize?'
             . http_build_query([
                 'response_type' => 'code',
                 'client_id' => 'frontend',
-                'redirect_url' => 'http://localhost:8080/oauth',
+                'redirect_uri' => 'http://localhost:8080/oauth',
                 'scope' => 'common',
-                'state' => 'State',
+                'state' => 'sTaTe',
             ])
         ));
 
-        self::assertEquals(401, $response->getStatusCode());
+        self::assertEquals(StatusCodeInterface::STATUS_BAD_REQUEST, $response->getStatusCode());
+        self::assertJson($content = (string)$response->getBody());
+
+        $data = Json::decode($content);
+
+        self::assertArraySubset([
+            'error' => 'invalid_request',
+        ], $data);
     }
 
     public function testPageWithChallenge(): void
     {
-        self::markTestIncomplete();
-
         $response = $this->app()->handle(self::html(
             'GET',
             '/authorize?'
             . http_build_query([
                 'response_type' => 'code',
                 'client_id' => 'frontend',
-                'redirect_url' => 'http://localhost:8080/oauth',
+                'redirect_uri' => 'http://localhost:8080/oauth',
                 'code_challenge' => PKCE::challenge(PKCE::verifier()),
                 'code_challenge_method' => 'S256',
                 'scope' => 'common',
-                'state' => 'State',
+                'state' => 'sTaTe',
             ])
         ));
 
-        self::assertEquals(200, $response->getStatusCode());
+        self::assertEquals(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
         self::assertNotEmpty($content = (string)$response->getBody());
-        self::assertStringContainsString('<title>Auth</title>', $content);
+        self::assertStringContainsString('<title>Authorization</title>', $content);
     }
 
     public function testInvalidClient(): void
     {
-        self::markTestIncomplete();
-
         $response = $this->app()->handle(self::html(
             'GET',
             '/authorize?'
             . http_build_query([
                 'response_type' => 'code',
                 'client_id' => 'invalid',
-                'redirect_url' => 'http://localhost:8080/oauth',
+                'redirect_uri' => 'http://localhost:8080/oauth',
                 'code_challenge' => PKCE::challenge(PKCE::verifier()),
                 'code_challenge_method' => 'S256',
                 'scope' => 'common',
-                'state' => 'State',
+                'state' => 'sTaTe',
             ])
         ));
 
-        self::assertEquals(401, $response->getStatusCode());
+        self::assertEquals(StatusCodeInterface::STATUS_UNAUTHORIZED, $response->getStatusCode());
         self::assertJson($content = (string)$response->getBody());
 
         $data = Json::decode($content);
@@ -112,11 +112,11 @@ final class AuthorizeTest extends WebTestCase
             . http_build_query([
                 'response_type' => 'code',
                 'client_id' => 'frontend',
-                'redirect_url' => 'http://localhost:8080/oauth',
+                'redirect_uri' => 'http://localhost:8080/oauth',
                 'code_challenge' => PKCE::challenge(PKCE::verifier()),
                 'code_challenge_method' => 'S256',
                 'scope' => 'common',
-                'state' => 'State',
+                'state' => 'sTaTe',
             ]),
             [
                 'email' => 'john-activater@test.org',
@@ -124,7 +124,7 @@ final class AuthorizeTest extends WebTestCase
             ]
         ));
 
-        self::assertEquals(302, $response->getStatusCode());
+        self::assertEquals(StatusCodeInterface::STATUS_FOUND, $response->getStatusCode());
         self::assertNotEmpty($location = $response->getHeaderLine('Location'));
 
         /** @var array{query:string} $url */
@@ -138,7 +138,7 @@ final class AuthorizeTest extends WebTestCase
         self::assertArrayHasKey('code', $query);
         self::assertNotEmpty($query['code']);
         self::assertArrayHasKey('state', $query);
-        self::assertEquals('State', $query['state']);
+        self::assertEquals('sTaTe', $query['state']);
     }
 
     public function testAuthWaitedUser(): void
@@ -151,11 +151,11 @@ final class AuthorizeTest extends WebTestCase
             . http_build_query([
                 'response_type' => 'code',
                 'client_id' => 'frontend',
-                'redirect_url' => 'http://localhost:8080/oauth',
+                'redirect_uri' => 'http://localhost:8080/oauth',
                 'code_challenge' => PKCE::challenge(PKCE::verifier()),
                 'code_challenge_method' => 'S256',
                 'scope' => 'common',
-                'state' => 'State',
+                'state' => 'sTaTe',
             ]),
             [
                 'email' => 'john-waiter@test.org',
@@ -163,7 +163,7 @@ final class AuthorizeTest extends WebTestCase
             ]
         ));
 
-        self::assertEquals(409, $response->getStatusCode());
+        self::assertEquals(StatusCodeInterface::STATUS_CONFLICT, $response->getStatusCode());
         self::assertNotEmpty($content = (string)$response->getBody());
         self::assertStringContainsString('User is not confirmed.', $content);
     }
@@ -178,11 +178,11 @@ final class AuthorizeTest extends WebTestCase
             . http_build_query([
                 'response_type' => 'code',
                 'client_id' => 'frontend',
-                'redirect_url' => 'http://localhost:8080/oauth',
+                'redirect_uri' => 'http://localhost:8080/oauth',
                 'code_challenge' => PKCE::challenge(PKCE::verifier()),
                 'code_challenge_method' => 'S256',
                 'scope' => 'common',
-                'state' => 'State',
+                'state' => 'sTaTe',
             ]),
             [
                 'email' => 'john-activater@test.org',
@@ -190,7 +190,7 @@ final class AuthorizeTest extends WebTestCase
             ]
         ));
 
-        self::assertEquals(400, $response->getStatusCode());
+        self::assertEquals(StatusCodeInterface::STATUS_BAD_REQUEST, $response->getStatusCode());
         self::assertNotEmpty($content = (string)$response->getBody());
         self::assertStringContainsString('Incorrect email or password.', $content);
     }
