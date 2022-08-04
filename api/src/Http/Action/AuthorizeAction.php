@@ -55,8 +55,6 @@ final class AuthorizeAction implements RequestHandlerInterface
      * @psalm-suppress ImplementedReturnTypeMismatch
      * @psalm-suppress InvalidReturnType
      * @psalm-suppress InvalidReturnStatement
-     *
-     * @throws Exception|OAuthServerException
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
