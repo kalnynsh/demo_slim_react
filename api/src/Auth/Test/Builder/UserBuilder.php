@@ -44,6 +44,14 @@ final class UserBuilder
         return $clone;
     }
 
+    public function withId(Id $id): self
+    {
+        $clone = clone $this;
+        $clone->id = $id;
+
+        return $clone;
+    }
+
     public function withJoinConfirmToken(Token $token): self
     {
         $clone = clone $this;

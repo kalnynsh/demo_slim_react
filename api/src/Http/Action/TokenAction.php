@@ -33,6 +33,14 @@ final class TokenAction implements RequestHandlerInterface
         $this->sentry = $sentry;
     }
 
+    /**
+     * @psalm-suppress ImplementedReturnTypeMismatch
+     * @psalm-suppress InvalidReturnType
+     * @psalm-suppress InvalidReturnStatement
+     *
+     * @throws OAuthServerException
+     * @throws Exception
+     */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $response = $this->response->createResponse();
