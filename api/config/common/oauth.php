@@ -23,6 +23,7 @@ use League\OAuth2\Server\Repositories\ClientRepositoryInterface;
 use League\OAuth2\Server\Repositories\RefreshTokenRepositoryInterface;
 use League\OAuth2\Server\Repositories\ScopeRepositoryInterface;
 use League\OAuth2\Server\Repositories\UserRepositoryInterface;
+use League\OAuth2\Server\ResourceServer;
 use Psr\Container\ContainerInterface;
 
 use function App\env;
@@ -70,6 +71,18 @@ return [
         $server->enableGrantType($grant, new DateInterval($config['access_token_interval']));
 
         return $server;
+    },
+    ResourceServer::class => static function (ContainerInterface $container): ResourceServer {
+        /**
+         * @psalm-suppress MixedArrayAccess
+         * @psalm-var array{public_key_path:string} $config
+         */
+        $config = $container->get('config')['oauth'];
+
+        return new ResourceServer(
+            $container->get(AccessTokenRepository::class),
+            new CryptKey($config['public_key_path'], null, false)
+        );
     },
     ScopeRepositoryInterface::class => static function (ContainerInterface $container): ScopeRepository {
         /**

@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace App\Http\Action;
 
-use Exception;
-use Twig\Environment;
-use App\OAuth\Entity\User;
-use Psr\Log\LoggerInterface;
+use App\Auth\Query\FindIdByCredentials\Fetcher;
+use App\Auth\Query\FindIdByCredentials\Query;
 use App\Http\Response\HtmlResponse;
-use Psr\Http\Message\ResponseInterface;
+use App\OAuth\Entity\User;
+use Exception;
 use Fig\Http\Message\StatusCodeInterface;
+use League\OAuth2\Server\AuthorizationServer;
+use League\OAuth2\Server\Exception\OAuthServerException;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use App\Auth\Query\FindIdByCredentials\Query;
-use League\OAuth2\Server\AuthorizationServer;
-use Psr\Http\Message\ResponseFactoryInterface;
-use App\Auth\Query\FindIdByCredentials\Fetcher;
+use Psr\Log\LoggerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use League\OAuth2\Server\Exception\OAuthServerException;
+use Twig\Environment;
 
 final class AuthorizeAction implements RequestHandlerInterface
 {
