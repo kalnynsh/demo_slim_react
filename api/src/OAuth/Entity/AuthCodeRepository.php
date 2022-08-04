@@ -60,7 +60,7 @@ final class AuthCodeRepository implements AuthCodeRepositoryInterface
         return $this->repo
             ->createQueryBuilder('t')
             ->select('COUNT(t.identifier)')
-            ->andWhere('(t.identifier = :identifier')
+            ->andWhere('t.identifier = :identifier')
             ->setParameter(':identifier', $id)
             ->getQuery()
             ->getSingleScalarResult() > 0;

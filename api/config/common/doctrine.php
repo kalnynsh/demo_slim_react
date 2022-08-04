@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Auth;
 use Doctrine\Common\EventManager;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\DBAL\Connection;
@@ -91,10 +90,10 @@ return [
             'cache_dir' =>  __DIR__ . '/../../var/cache/doctrine/cache',
             'proxy_namespace' => 'App\Proxies',
             'types' => [
-                Auth\Entity\User\IdType::NAME => Auth\Entity\User\IdType::class,
-                Auth\Entity\User\EmailType::NAME => Auth\Entity\User\EmailType::class,
-                Auth\Entity\User\RoleType::NAME => Auth\Entity\User\RoleType::class,
-                Auth\Entity\User\StatusType::NAME => Auth\Entity\User\StatusType::class,
+                App\Auth\Entity\User\IdType::NAME => App\Auth\Entity\User\IdType::class,
+                App\Auth\Entity\User\EmailType::NAME => App\Auth\Entity\User\EmailType::class,
+                App\Auth\Entity\User\RoleType::NAME => App\Auth\Entity\User\RoleType::class,
+                App\Auth\Entity\User\StatusType::NAME => App\Auth\Entity\User\StatusType::class,
             ],
             'connection' => [
                 'driver' => 'pdo_pgsql',

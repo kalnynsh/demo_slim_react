@@ -120,13 +120,13 @@
         </div>
 
         {% if error is defined %}
-            <p class="aler error">{{ error }}</p>
+            <p class="alert error">{{ error }}</p>
         {% endif %}
 
         <form method="POST" action="">
             <div classs="input-row">
                 <input
-                    value=""
+                    value="{{ query.email }}"
                     name="email"
                     type="email"
                     placeholder="Email"
@@ -135,7 +135,7 @@
             </div>
             <div classs="input-row">
                 <input
-                    value=""
+                    value="{{ query.password }}"
                     name="password"
                     type="password"
                     placeholder="Password"

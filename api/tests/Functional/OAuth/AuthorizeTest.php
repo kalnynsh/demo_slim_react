@@ -104,8 +104,6 @@ final class AuthorizeTest extends WebTestCase
 
     public function testAuthActiveUser(): void
     {
-        self::markTestIncomplete();
-
         $response = $this->app()->handle(self::html(
             'POST',
             '/authorize?'
@@ -119,7 +117,7 @@ final class AuthorizeTest extends WebTestCase
                 'state' => 'sTaTe',
             ]),
             [
-                'email' => 'john-aCTIvater@test.org',
+                'email' => 'john-aCTivater@test.org',
                 'password' => 'very-secret-295',
             ]
         ));
@@ -143,8 +141,6 @@ final class AuthorizeTest extends WebTestCase
 
     public function testAuthWaitedUser(): void
     {
-        self::markTestIncomplete();
-
         $response = $this->app()->handle(self::html(
             'POST',
             '/authorize?'
@@ -170,8 +166,6 @@ final class AuthorizeTest extends WebTestCase
 
     public function testAuthInvalidUser(): void
     {
-        self::markTestIncomplete();
-
         $response = $this->app()->handle(self::html(
             'POST',
             '/authorize?'
@@ -193,5 +187,32 @@ final class AuthorizeTest extends WebTestCase
         self::assertEquals(StatusCodeInterface::STATUS_BAD_REQUEST, $response->getStatusCode());
         self::assertNotEmpty($content = (string)$response->getBody());
         self::assertStringContainsString('Incorrect email or password.', $content);
+    }
+
+    public function testAuthInvalidUserLang(): void
+    {
+        self::markTestIncomplete();
+
+        $response = $this->app()->handle(self::html(
+            'POST',
+            '/authorize?'
+            . http_build_query([
+                'response_type' => 'code',
+                'client_id' => 'frontend',
+                'redirect_uri' => 'http://localhost:8080/oauth',
+                'code_challenge' => PKCE::challenge(PKCE::verifier()),
+                'code_challenge_method' => 'S256',
+                'scope' => 'common',
+                'state' => 'sTaTe',
+            ]),
+            [
+                'email' => 'john-activater@test.org',
+                'password' => 'worng_pswd_Xyz492',
+            ]
+        ))->withHeader('Accept-Language', 'ru');
+
+        self::assertEquals(StatusCodeInterface::STATUS_BAD_REQUEST, $response->getStatusCode());
+        self::assertNotEmpty($content = (string)$response->getBody());
+        self::assertStringContainsString('Неверный email или пароль.', $content);
     }
 }
