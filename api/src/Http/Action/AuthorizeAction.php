@@ -8,8 +8,6 @@ use App\Auth\Query\FindIdByCredentials\Fetcher;
 use App\Auth\Query\FindIdByCredentials\Query;
 use App\Http\Response\HtmlResponse;
 use App\OAuth\Entity\User;
-use App\Sentry\Sentry;
-use Exception;
 use Fig\Http\Message\StatusCodeInterface;
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Exception\OAuthServerException;
@@ -30,7 +28,6 @@ final class AuthorizeAction implements RequestHandlerInterface
     private Fetcher $users;
     private Environment $template;
     private ResponseFactoryInterface $response;
-    private Sentry $sentry;
     private TranslatorInterface $translator;
 
     public function __construct(
@@ -39,7 +36,6 @@ final class AuthorizeAction implements RequestHandlerInterface
         Fetcher $users,
         Environment $template,
         ResponseFactoryInterface $response,
-        Sentry $sentry,
         TranslatorInterface $translator
     ) {
         $this->server = $server;
@@ -47,7 +43,6 @@ final class AuthorizeAction implements RequestHandlerInterface
         $this->users = $users;
         $this->template = $template;
         $this->response = $response;
-        $this->sentry = $sentry;
         $this->translator = $translator;
     }
 
@@ -116,16 +111,6 @@ final class AuthorizeAction implements RequestHandlerInterface
             $this->logger->warning($exception->getMessage(), ['exception', $exception]);
 
             return $exception->generateHttpResponse($this->response->createResponse());
-        } catch (Exception $exception) {
-            $this->logger->error($exception->getMessage(), ['exception', $exception]);
-            $this->sentry->capture($exception);
-
-            return new OAuthServerException(
-                'Server error.',
-                0,
-                'unknown_error',
-                StatusCodeInterface::STATUS_INTERNAL_SERVER_ERROR
-            );
         }
     }
 }
