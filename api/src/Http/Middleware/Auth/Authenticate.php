@@ -6,6 +6,7 @@ namespace App\Http\Middleware\Auth;
 
 use League\OAuth2\Server\Exception\OAuthServerException;
 use League\OAuth2\Server\ResourceServer;
+use LogicException;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -14,7 +15,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 final class Authenticate implements MiddlewareInterface
 {
-    public const ATTRIBUTE = 'identity';
+    private const ATTRIBUTE = 'identity';
 
     private ResourceServer $server;
     private ResponseFactoryInterface $response;
@@ -39,5 +40,16 @@ final class Authenticate implements MiddlewareInterface
         $identity = new Identity((string)$request->getAttribute('oauth_user_id'));
 
         return $handler->handle($request->withAttribute(self::ATTRIBUTE, $identity));
+    }
+
+    public static function identity(ServerRequestInterface $request): Identity
+    {
+        $identity = $request->getAttribute(self::ATTRIBUTE);
+
+        if (!$identity instanceof Identity) {
+            throw new LogicException('Unable to fetch identity.');
+        }
+
+        return $identity;
     }
 }
