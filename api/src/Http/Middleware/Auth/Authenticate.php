@@ -31,6 +31,10 @@ final class Authenticate implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        if (!$request->hasHeader('authorization')) {
+            return $handler->handle($request);
+        }
+
         try {
             $request = $this->server->validateAuthenticatedRequest($request);
         } catch (OAuthServerException $exception) {
@@ -42,12 +46,12 @@ final class Authenticate implements MiddlewareInterface
         return $handler->handle($request->withAttribute(self::ATTRIBUTE, $identity));
     }
 
-    public static function identity(ServerRequestInterface $request): Identity
+    public static function identity(ServerRequestInterface $request): ?Identity
     {
         $identity = $request->getAttribute(self::ATTRIBUTE);
 
-        if (!$identity instanceof Identity) {
-            throw new LogicException('Unable to fetch identity.');
+        if ($identity !== null && !$identity instanceof Identity) {
+            throw new LogicException('Invalid identity.');
         }
 
         return $identity;
