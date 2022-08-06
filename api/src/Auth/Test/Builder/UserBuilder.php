@@ -7,11 +7,16 @@ namespace App\Auth\Test\Builder;
 use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\Id;
 use App\Auth\Entity\User\Network;
+use App\Auth\Entity\User\Role;
 use App\Auth\Entity\User\Token;
 use App\Auth\Entity\User\User;
 use App\Auth\Service\PasswordHasher;
 use DateTimeImmutable;
 use Ramsey\Uuid\Uuid;
+
+use function bin2hex;
+use function random_bytes;
+use function sprintf;
 
 final class UserBuilder
 {
@@ -22,18 +27,23 @@ final class UserBuilder
     private ?Token $joinConfirmToken;
     private bool $active = false;
     private ?Network $networkIdentity = null;
+    private Role $role;
 
     public function __construct()
     {
         $this->id = Id::generate();
         $this->date = new DateTimeImmutable();
-        $this->email = new Email('john_dough@info.org');
+
+        $emailString = sprintf('john_%s@info.org', bin2hex(random_bytes(6)));
+        $this->email = new Email($emailString);
 
         $this->passwordHash = 'hash';
         $this->joinConfirmToken = new Token(
             Uuid::uuid4()->toString(),
             $this->date->modify('+1 day')
         );
+
+        $this->role = Role::user();
     }
 
     public function viaNetwork(Network $network = null): self
@@ -48,6 +58,14 @@ final class UserBuilder
     {
         $clone = clone $this;
         $clone->id = $id;
+
+        return $clone;
+    }
+
+    public function withRole(Role $role): self
+    {
+        $clone = clone $this;
+        $clone->role = $role;
 
         return $clone;
     }
@@ -110,6 +128,10 @@ final class UserBuilder
             $this->passwordHash,
             $this->joinConfirmToken
         );
+
+        if ($this->role->getName() !== Role::USER) {
+            $user->changeRole($this->role);
+        }
 
         if ($this->active) {
             $user
