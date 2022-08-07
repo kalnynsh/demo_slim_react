@@ -76,6 +76,9 @@ api-check: api-validate-schema api-lint api-analyze api-test
 api-validate-schema:
 	docker compose run --rm api-php-cli php bin/app.php orm:validate-schema
 
+api-gen-token:
+	docker compose run --rm api-php-cli php bin/app.php oauth:e2e-token
+
 api-lint:
 	docker compose run --rm api-php-cli composer lint
 	docker compose run --rm api-php-cli composer php-cs-fixer fix -- --dry-run --diff
