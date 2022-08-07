@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Middleware\Auth\BearerTokenValidator;
 use App\OAuth\Entity\AccessTokenRepository;
 use App\OAuth\Entity\AuthCode;
 use App\OAuth\Entity\AuthCodeRepository;
@@ -79,9 +80,16 @@ return [
          */
         $config = $container->get('config')['oauth'];
 
+        $repository = $container->get(AccessTokenRepository::class);
+        $publicKey = new CryptKey($config['public_key_path'], null, false);
+
+        $validator = new BearerTokenValidator($repository);
+        $validator->setPublicKey($publicKey);
+
         return new ResourceServer(
-            $container->get(AccessTokenRepository::class),
-            new CryptKey($config['public_key_path'], null, false)
+            $repository,
+            $publicKey,
+            $validator
         );
     },
     ScopeRepositoryInterface::class => static function (ContainerInterface $container): ScopeRepository {

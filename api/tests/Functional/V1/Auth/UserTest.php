@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Test\Functional\V1\Auth;
 
-use App\Auth\Entity\User\Role;
 use Fig\Http\Message\StatusCodeInterface;
 use Test\Functional\Helper\Json;
 use Test\Functional\OAuth\AuthHeader;
@@ -41,7 +40,7 @@ final class UserTest extends WebTestCase
                 self::json('GET', '/v1/auth/user')
                     ->withHeader(
                         'Authorization',
-                        AuthHeader::for(UserFixture::USER_ADMIN_ID, UserFixture::USER_ADMIN_ROLE)
+                        AuthHeader::for(UserFixture::USER_ADMIN_ID, UserFixture::ROLE_ADMIN)
                     )
             );
 
@@ -50,22 +49,19 @@ final class UserTest extends WebTestCase
 
         self::assertEquals([
             'id' => UserFixture::USER_ADMIN_ID,
-            'role' => UserFixture::USER_ADMIN_ROLE,
+            'role' => UserFixture::ROLE_ADMIN,
         ], Json::decode($body));
     }
 
     public function testUser(): void
     {
-        $userId = UserFixture::USER_ID;
-        $userRole = Role::USER;
-
         $response = $this
             ->app()
             ->handle(
                 self::json('GET', '/v1/auth/user')
                     ->withHeader(
                         'Authorization',
-                        AuthHeader::for($userId, $userRole)
+                        AuthHeader::for(UserFixture::USER_ID, UserFixture::ROLE_USER)
                     )
             );
 
@@ -73,8 +69,8 @@ final class UserTest extends WebTestCase
         self::assertJson($body = (string)$response->getBody());
 
         self::assertEquals([
-            'id' => $userId,
-            'role' => $userRole,
+            'id' => UserFixture::USER_ID,
+            'role' => UserFixture::ROLE_USER,
         ], Json::decode($body));
     }
 }

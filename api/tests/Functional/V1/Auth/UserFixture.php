@@ -13,14 +13,15 @@ use Doctrine\Persistence\ObjectManager;
 final class UserFixture extends AbstractFixture
 {
     public const USER_ADMIN_ID = '00000000-0000-0000-0000-000000000004';
-    public const USER_ADMIN_ROLE = Role::ADMIN;
+    public const ROLE_ADMIN = Role::ADMIN;
     public const USER_ID = '00000000-0000-0000-0000-000000000005';
+    public const ROLE_USER = Role::USER;
 
     public function load(ObjectManager $manager): void
     {
         $user = (new UserBuilder())
             ->withId(new Id(self::USER_ADMIN_ID))
-            ->withRole(new Role(self::USER_ADMIN_ROLE))
+            ->withRole(new Role(self::ROLE_ADMIN))
             ->active()
             ->build();
 

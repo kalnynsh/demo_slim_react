@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\OAuth\Test\Unit\Entity;
 
+use App\Auth\Entity\User\Role;
 use App\OAuth\Entity\AccessToken;
 use App\OAuth\Entity\Scope;
 use App\OAuth\Test\Builder\ClientBuilder;
@@ -28,7 +29,7 @@ final class AccessTokenTest extends TestCase
 
         $token->setIdentifier($identifier = Uuid::uuid4()->toString());
         $token->setUserIdentifier($userIdentifier = Uuid::uuid4()->toString());
-        $token->setUserRole($userRole = 'admin');
+        $token->setUserRole($userRole = Role::ADMIN);
 
         $token->setExpiryDateTime($expiryDateTime = new DateTimeImmutable());
         $token->setPrivateKey(new CryptKey(env('JWT_PRIVATE_KEY_PATH'), null, false));
