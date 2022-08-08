@@ -62,7 +62,7 @@ final class RefreshTokenRepository implements RefreshTokenRepositoryInterface
             ->em
             ->createQueryBuilder()
             ->delete(RefreshToken::class, 'rt')
-            ->andWhere('rt.userIdentifier < :user_id')
+            ->andWhere('rt.userIdentifier = :user_id')
             ->setParameter(':user_id', $userId)
             ->getQuery()
             ->execute();
