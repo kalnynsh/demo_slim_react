@@ -17,7 +17,7 @@ use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use function App\env;
 
 return [
-    EntityManagerInterface::class => static function (ContainerInterface $container): EntityManagerInterface {
+    EntityManagerInterface::class => static function (ContainerInterface $container): EntityManager {
         /**
          * @psalm-suppress MixedAssignment
          * @var array{
