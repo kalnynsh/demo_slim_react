@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\OAuth;
 use Doctrine\Migrations;
 use Doctrine\ORM\Tools\Console\Command\ValidateSchemaCommand;
 
@@ -22,6 +23,8 @@ return [
                 Migrations\Tools\Console\Command\UpToDateCommand::class,
                 Migrations\Tools\Console\Command\DiffCommand::class,
                 Migrations\Tools\Console\Command\ListCommand::class,
+
+                OAuth\Console\ClearExpiredCommand::class,
             ],
         ],
     ],
