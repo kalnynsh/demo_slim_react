@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Http\Test\Unit\Middleware;
 
-use App\Http\Middleware\ValidationExceptionHandler;
-use App\Http\Validator\ValidationException;
-use Fig\Http\Message\StatusCodeInterface;
 use PHPUnit\Framework\TestCase;
+use App\Validator\ValidationException;
+use Slim\Psr7\Factory\ResponseFactory;
 use Psr\Http\Message\ResponseInterface;
+use Fig\Http\Message\StatusCodeInterface;
+use Slim\Psr7\Factory\ServerRequestFactory;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Slim\Psr7\Factory\ResponseFactory;
-use Slim\Psr7\Factory\ServerRequestFactory;
+use App\Http\Middleware\ValidationExceptionHandler;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
 
