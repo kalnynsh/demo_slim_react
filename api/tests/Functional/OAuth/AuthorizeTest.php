@@ -209,10 +209,33 @@ final class AuthorizeTest extends WebTestCase
                 'email' => 'john-activater@test.org',
                 'password' => 'worng_pswd_Xyz492',
             ]
-        ))->withHeader('Accept-Language', 'ru');
+        ))->withHeader('Accept-Language', 'ru-RU, ru;q=0.9');
 
         self::assertEquals(StatusCodeInterface::STATUS_BAD_REQUEST, $response->getStatusCode());
         self::assertNotEmpty($content = (string)$response->getBody());
         self::assertStringContainsString('Неверный email или пароль.', $content);
+    }
+
+    public function testLanguage(): void
+    {
+        self::markTestIncomplete();
+
+        $response = $this->app()->handle(self::html(
+            'GET',
+            '/authorize?'
+            . http_build_query([
+                'response_type' => 'code',
+                'client_id' => 'frontend',
+                'redirect_uri' => 'http://localhost:8080/oauth',
+                'code_challenge' => PKCE::challenge(PKCE::verifier()),
+                'code_challenge_method' => 'S256',
+                'scope' => 'common',
+                'state' => 'sTaTe',
+            ])
+        ))->withHeader('Accept-Language', 'ru-RU, ru;q=0.9');
+
+        self::assertEquals(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
+        self::assertNotEmpty($content = (string)$response->getBody());
+        self::assertStringContainsString('Вход', $content);
     }
 }
