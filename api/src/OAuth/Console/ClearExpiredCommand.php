@@ -18,6 +18,7 @@ final class ClearExpiredCommand extends ConsoleCommand
 
     public function __construct(Handler $handler)
     {
+        parent::__construct();
         $this->handler = $handler;
     }
 

@@ -11,8 +11,7 @@ use Symfony\Component\Translation\Translator;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 return [
-    TranslatorInterface::class => DI\get(Translator::class),
-
+    TranslatorInterface::class => \DI\get(Translator::class),
     Translator::class => static function (ContainerInterface $container): Translator {
         /**
          * @psalm-suppress MixedArrayAccess
@@ -30,14 +29,12 @@ return [
 
         return $translator;
     },
-
     TranslatorLocaleMiddleware::class => static function (ContainerInterface $container): TranslatorLocaleMiddleware {
         /** @var Translator $translator */
         $translator = $container->get(Translator::class);
 
         return new TranslatorLocaleMiddleware($translator);
     },
-
     ContentLanguage::class => static function (ContainerInterface $container): ContentLanguage {
         /**
          * @psalm-suppress MixedArrayAccess
@@ -63,6 +60,12 @@ return [
                     __DIR__ . '/../../translations/exceptions.ru.php',
                     'ru',
                     'exceptions',
+                ],
+                [
+                    'php',
+                    __DIR__ . '/../../translations/oauth.en.php',
+                    'en',
+                    'oauth',
                 ],
                 [
                     'php',

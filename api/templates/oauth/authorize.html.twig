@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Authorization</title>
+    <title>{{ trans('title', [], 'oauth') }}</title>
 
     <style>
         * {
@@ -115,7 +115,7 @@
     <div class="block">
         <div class="logo">
             <a href="{{ frontend_url('') }}">
-                Auction
+                {{ trans('logo.name', [], 'oauth') }}
             </a>
         </div>
 
@@ -129,7 +129,7 @@
                     value="{{ query.email }}"
                     name="email"
                     type="email"
-                    placeholder="Email"
+                    placeholder="{{ trans('input.email', [], 'oauth') }}"
                     class="input"
                     required />
             </div>
@@ -138,20 +138,20 @@
                     value="{{ query.password }}"
                     name="password"
                     type="password"
-                    placeholder="Password"
+                    placeholder="{{ trans('input.password', [], 'oauth') }}"
                     class="input"
                     required />
             </div>
             <div class="button-row">
                 <button type="submit" class="submit">
-                    Sing in
+                    {{ trans('button.login', [], 'oauth') }}
                 </button>
             </div>
         </form>
 
         <p class="links">
-            <a href="{{ frontend_url('join') }}">Sing up</a>
-            <a href="{{ frontend_url('reset') }}">Password reset</a>
+            <a href="{{ frontend_url('join') }}">{{ trans('link.join', [], 'oauth') }}</a>
+            <a href="{{ frontend_url('reset') }}">{{ trans('link.reset', [], 'oauth') }}</a>
         </p>
     </div>
 </body>
