@@ -276,8 +276,8 @@ deploy:
 	rm -f docker-compose-production-env.yml
 
 	ssh -o StrictHostKeyChecking=no ${D_USER}@${HOST} -p ${PORT} 'mkdir site_${BUILD_NUMBER}/secrets'
-	scp -o StrictHostKeyChecking=no -p ${PORT} ${JWT_PUBLIC_KEY} ${D_USER}@${HOST}site_${BUILD_NUMBER}/secrets/jwt_public.key
-	scp -o StrictHostKeyChecking=no -p ${PORT} ${JWT_PRIVATE_KEY} ${D_USER}@${HOST}site_${BUILD_NUMBER}/secrets/jwt_private.key
+	scp -o StrictHostKeyChecking=no -p ${PORT} ${JWT_PUBLIC_KEY} ${D_USER}@${HOST}site_${BUILD_NUMBER}/secrets/jwt_public_key
+	scp -o StrictHostKeyChecking=no -p ${PORT} ${JWT_PRIVATE_KEY} ${D_USER}@${HOST}site_${BUILD_NUMBER}/secrets/jwt_private_key
 
 	ssh -o StrictHostKeyChecking=no ${D_USER}@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy --compose-file docker-compose.yml auction --with-registry-auth --prune'
 
@@ -296,8 +296,8 @@ deploy-vm:
 	rm -f docker-compose-vm-env.yml
 
 	ssh -o StrictHostKeyChecking=no ${D_USER}@${HOST} -p ${PORT} 'mkdir site_${BUILD_NUMBER}/secrets'
-	scp -o StrictHostKeyChecking=no -p ${PORT} ${JWT_PUBLIC_KEY} ${D_USER}@${HOST}site_${BUILD_NUMBER}/secrets/jwt_public.key
-	scp -o StrictHostKeyChecking=no -p ${PORT} ${JWT_PRIVATE_KEY} ${D_USER}@${HOST}site_${BUILD_NUMBER}/secrets/jwt_private.key
+	scp -o StrictHostKeyChecking=no -p ${PORT} ${JWT_PUBLIC_KEY} ${D_USER}@${HOST}site_${BUILD_NUMBER}/secrets/jwt_public_key
+	scp -o StrictHostKeyChecking=no -p ${PORT} ${JWT_PRIVATE_KEY} ${D_USER}@${HOST}site_${BUILD_NUMBER}/secrets/jwt_private_key
 
 	ssh -o StrictHostKeyChecking=no ${D_USER}@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy --compose-file docker-compose.yml auction --with-registry-auth --prune'
 
