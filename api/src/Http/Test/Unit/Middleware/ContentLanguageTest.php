@@ -75,7 +75,7 @@ final class ContentLanguageTest extends TestCase
                 }
             );
 
-        $request = self::createRequest()->withHeader('Accept-Language', 'ru;q=0.9, es;q=0.8, *;q=0.5');
+        $request = self::createRequest()->withHeader('Accept-Language', 'ru-RU, ru;q=0.9, es;q=0.8, *;q=0.5');
 
         $middleware->process($request, $handler);
     }

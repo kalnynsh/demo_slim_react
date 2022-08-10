@@ -14,7 +14,6 @@ return static function (App $app): void {
     $app->add(Middleware\ValidationExceptionHandler::class);
     $app->add(FeaturesMiddleware::class);
     $app->add(Middleware\InputTrimmerMiddleware::class);
-
     $app->add(Middleware\TranslatorLocaleMiddleware::class);
     $app->add(ContentLanguage::class);
     $app->addBodyParsingMiddleware();

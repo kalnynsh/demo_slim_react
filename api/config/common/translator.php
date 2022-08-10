@@ -42,7 +42,10 @@ return [
          */
         $config = $container->get('config')['locales'];
 
-        return new ContentLanguage($config['allowed']);
+        $contentLanguage = new ContentLanguage($config['allowed']);
+        $contentLanguage->usePath(false);
+
+        return $contentLanguage;
     },
 
     'config' => [
