@@ -45,7 +45,7 @@ return [
 
     'config' => [
         'mailer' => [
-            'user'     => env('MAILER_USER'),
+            'user'     => env('MAILER_USERNAME'),
             'password' => env('MAILER_PASSWORD'),
             'host'     => env('MAILER_HOST'),
             'port'     => env('MAILER_PORT'),
