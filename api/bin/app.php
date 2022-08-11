@@ -7,10 +7,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper;
 use Symfony\Component\Console\Application;
 
+use function App\env;
+
 require __DIR__ . '/../vendor/autoload.php';
 
-if (getenv('SENTRY_DSN')) {
-    \Sentry\init(['dsn' => getenv('SENTRY_DSN')]);
+if ($dsn = env('SENTRY_DSN')) {
+    \Sentry\init(['dsn' => $dsn]);
 }
 
 /** @var Psr\Container\ContainerInterface $container */
@@ -18,14 +20,14 @@ $container = require __DIR__ . '/../config/container.php';
 
 $cli = new Application('Console', '1.0.0 (stable)');
 
+$cli->setCatchExceptions(true);
+
 if (getenv('SENTRY_DSN')) {
     $cli->setCatchExceptions(false);
 }
 
 /** @var EntityManagerInterface $entityManager */
 $entityManager = $container->get(EntityManagerInterface::class);
-
-$cli->setCatchExceptions(true);
 
 /** @psalm-suppress DeprecatedClass */
 $cli->getHelperSet()->set(new EntityManagerHelper($entityManager), 'em');

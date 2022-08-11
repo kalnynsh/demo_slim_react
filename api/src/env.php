@@ -6,12 +6,22 @@ namespace App;
 
 use RuntimeException;
 
+use function getenv;
+use function trim;
+use function file_get_contents;
+
 function env(string $name, ?string $default = null): string
 {
     $value = getenv($name);
 
     if ($value !== false) {
         return $value;
+    }
+
+    $file = getenv($name . '_FILE');
+
+    if ($file !== false) {
+        return trim(file_get_contents($file));
     }
 
     if ($default !== null) {
