@@ -276,6 +276,10 @@ deploy:
 	rm -f docker-compose-production-env.yml
 
 	ssh -o StrictHostKeyChecking=no ${D_USER}@${HOST} -p ${PORT} 'mkdir site_${BUILD_NUMBER}/secrets'
+	scp -o StrictHostKeyChecking=no -p ${PORT} ${API_DB_PASSWORD_FILE} ${D_USER}@${HOST}site_${BUILD_NUMBER}/secrets/api_db_password
+	scp -o StrictHostKeyChecking=no -p ${PORT} ${API_MAILER_PASSWORD_FILE} ${D_USER}@${HOST}site_${BUILD_NUMBER}/secrets/api_mailer_password
+	scp -o StrictHostKeyChecking=no -p ${PORT} ${SENTRY_DSN_FILE} ${D_USER}@${HOST}site_${BUILD_NUMBER}/secrets/sentry_dsn
+	scp -o StrictHostKeyChecking=no -p ${PORT} ${JWT_ENCRYPTION_KEY_FILE} ${D_USER}@${HOST}site_${BUILD_NUMBER}/secrets/jwt_encryption_key
 	scp -o StrictHostKeyChecking=no -p ${PORT} ${JWT_PUBLIC_KEY} ${D_USER}@${HOST}site_${BUILD_NUMBER}/secrets/jwt_public_key
 	scp -o StrictHostKeyChecking=no -p ${PORT} ${JWT_PRIVATE_KEY} ${D_USER}@${HOST}site_${BUILD_NUMBER}/secrets/jwt_private_key
 
@@ -293,6 +297,11 @@ deploy-vm:
 
 	envsubst < docker-compose-vm.yml > docker-compose-vm-env.yml
 	scp -o StrictHostKeyChecking=no -P ${PORT} docker-compose-production-env.yml ${D_USER}@${HOST}:site_${BUILD_NUMBER}/docker-compose.yml
+	scp -o StrictHostKeyChecking=no -p ${PORT} ${API_DB_PASSWORD_FILE} ${D_USER}@${HOST}site_${BUILD_NUMBER}/secrets/api_db_password
+	scp -o StrictHostKeyChecking=no -p ${PORT} ${API_MAILER_PASSWORD_FILE} ${D_USER}@${HOST}site_${BUILD_NUMBER}/secrets/api_mailer_password
+	scp -o StrictHostKeyChecking=no -p ${PORT} ${JWT_ENCRYPTION_KEY_FILE} ${D_USER}@${HOST}site_${BUILD_NUMBER}/secrets/jwt_encryption_key
+	scp -o StrictHostKeyChecking=no -p ${PORT} ${JWT_PUBLIC_KEY} ${D_USER}@${HOST}site_${BUILD_NUMBER}/secrets/jwt_public_key
+	scp -o StrictHostKeyChecking=no -p ${PORT} ${JWT_PRIVATE_KEY} ${D_USER}@${HOST}site_${BUILD_NUMBER}/secrets/jwt_private_key
 	rm -f docker-compose-vm-env.yml
 
 	ssh -o StrictHostKeyChecking=no ${D_USER}@${HOST} -p ${PORT} 'mkdir site_${BUILD_NUMBER}/secrets'
