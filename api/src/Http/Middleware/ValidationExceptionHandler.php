@@ -6,10 +6,10 @@ namespace App\Http\Middleware;
 
 use App\Http\Response\JsonResponse;
 use App\Validator\ValidationException;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Server\MiddlewareInterface;
 use Fig\Http\Message\StatusCodeInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 

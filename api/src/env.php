@@ -6,9 +6,9 @@ namespace App;
 
 use RuntimeException;
 
+use function file_get_contents;
 use function getenv;
 use function trim;
-use function file_get_contents;
 
 function env(string $name, ?string $default = null): string
 {
