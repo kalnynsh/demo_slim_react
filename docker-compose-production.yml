@@ -164,9 +164,37 @@ services:
                 constraints: [node.labels.db == db]
             endpoint_mode: dnsrr
 
+    api-postgres-backup:
+        image: ${REGISTRY}/auction-api-postgres-backup:${IMAGE_TAG}
+        environment:
+            BACKUP_NAME: auction_api-postgres
+            POSTGRES_HOST: api-postgres
+            POSTGRES_DB: an_app
+            POSTGRES_USERNAME: app
+            POSTGRES_PASSWORD_FILE: /run/secrets/api_db_password
+            AWS_ACCESS_KEY_ID: ${BACKUP_AWS_ACCESS_KEY_ID}
+            AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/backup_aws_secret_access_key
+            AWS_DEFAULT_REGION: ${BACKUP_AWS_DEFAULT_REGION}
+            S3_ENDPOINT: ${BACKUP_S3_ENDPOINT}
+            S3_BUCKET: ${BACKUP_S3_BUCKET}
+        secrets:
+          - api_db_password
+          - backup_aws_secret_access_key
+        command: sh -c 'wait-for-it api-postgres:5432 -t 20 && backup'
+        deploy:
+            labels:
+                - swarm.cronjob.enable=true
+                - swarm.cronjob.schedule=0 * * * *
+                - swarm.cronjob.skip-running=true
+            replicas: 0
+            restart_policy:
+                condition: none
+
 secrets:
     api_db_password:
         file: ./secrets/api_db_password
+    backup_aws_secret_access_key:
+        file: ./docker/development/secrets/backup_aws_secret_access_key
     api_mailer_password:
         file: ./secrets/api_mailer_password
     sentry_dsn:
@@ -177,5 +205,6 @@ secrets:
         file: ./secrets/jwt_public_key
     jwt_private_key:
         file: ./secrets/jwt_private_key
+
 volumes:
     api-postgres:
