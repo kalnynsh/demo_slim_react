@@ -30,7 +30,7 @@ final class AuthorizationCodeFixture extends AbstractFixture
             new Client(
                 identifier: 'frontend',
                 name: 'Frontend',
-                redirectUri: 'http://localhost:8080/oauth'
+                redirectUri: 'http://localhost/oauth'
             )
         );
 
@@ -39,7 +39,7 @@ final class AuthorizationCodeFixture extends AbstractFixture
         $code->setIdentifier('hwf51200k204tedcb214ce4139b9e');
 
         $code->setUserIdentifier($user->getId()->getValue());
-        $code->setRedirectUri('http://localhost:8080/oauth');
+        $code->setRedirectUri('http://localhost/oauth');
 
         $manager->persist($code);
 

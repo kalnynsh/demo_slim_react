@@ -50,7 +50,7 @@ final class RefreshTokenTest extends WebTestCase
                 [
                     'grant_type' => 'refresh_token',
                     'refresh_token' => $token,
-                    'redirect_uri' => 'http://localhost:8080/oauth',
+                    'redirect_uri' => 'http://localhost/oauth',
                     'client_id' => 'frontend',
                     'access_type' => 'offline',
                 ]

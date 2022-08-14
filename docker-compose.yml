@@ -1,24 +1,39 @@
 version: '3.9'
 services:
-    gateway:
-        build:
-            context: gateway/docker
-            dockerfile: development/nginx/Dockerfile
+    traefik:
+        image: traefik:2.8
+        command:
+            --providers.docker=true
+            --providers.docker.exposedByDefault=false
+            --entryPoints.http.address=:80
         ports:
-            - '8080:8080'
-            - '8081:8081'
-            - '8082:8082'
-            - '8083:8083'
+            - "80:80"
+        networks:
+            - traefik-public
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+        labels:
+            - traefik.enable=true
+            - traefik.docker.network=traefik-public
 
     frontend:
         build:
             context: frontend/docker/development/nginx
+        networks:
+            - traefik-public
+            - default
+        labels:
+            - traefik.enable=true
+            - traefik.docker.network=traefik-public
+            - traefik.http.routers.frontend.rule=Host(`localhost`)
+            - traefik.http.routers.frontend.entryPoints=http
+            - traefik.http.services.frontend.loadBalancer.server.port=80
 
     frontend-node:
         build:
             context: frontend/docker/development/node
         environment:
-            - WDS_SOCKET_PORT=80
+            - WDS_SOCKET_PORT=0
         volumes:
             - ./frontend:/app
         command: sh -c "until [ -f .ready ] ; do sleep 1 ; done && npm start"
@@ -36,6 +51,15 @@ services:
             dockerfile: development/nginx/Dockerfile
         volumes:
             - ./api:/app
+        networks:
+            - traefik-public
+            - default
+        labels:
+            - traefik.enable=true
+            - traefik.docker.network=traefik-public
+            - traefik.http.routers.api.rule=Host(`api.localhost`)
+            - traefik.http.routers.api.entryPoints=http
+            - traefik.http.services.api.loadBalancer.server.port=80
 
     api-php-fpm:
         build:
@@ -55,7 +79,7 @@ services:
             MAILER_PASSWORD_FILE: /run/secrets/api_mailer_password
             MAILER_ENCRYPTION: tcp
             MAILER_FROM_EMAIL: app-admin@info.org
-            FRONTEND_URL: http://localhost:8080
+            FRONTEND_URL: http://localhost
             SENTRY_DSN_FILE: /run/secrets/sentry_dsn
             JWT_ENCRYPTION_KEY_FILE: /run/secrets/jwt_encryption_key
             JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
@@ -87,7 +111,7 @@ services:
             MAILER_PASSWORD_FILE: /run/secrets/api_mailer_password
             MAILER_ENCRYPTION: tcp
             MAILER_FROM_EMAIL: app-admin@info.org
-            FRONTEND_URL: http://localhost:8080
+            FRONTEND_URL: http://localhost
             SENTRY_DSN_FILE: /run/secrets/sentry_dsn
             JWT_ENCRYPTION_KEY_FILE: /run/secrets/jwt_encryption_key
             JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
@@ -101,6 +125,7 @@ services:
             - jwt_encryption_key
             - jwt_public_key
             - jwt_private_key
+
     api-postgres:
         image: postgres:14.4-alpine
         environment:
@@ -124,6 +149,15 @@ services:
         volumes:
             - backup-storage:/data
         entrypoint: sh -c 'mkdir -p /data/backup && docker-entrypoint.sh minio server /data --console-address ":80"'
+        networks:
+            - traefik-public
+            - default
+        labels:
+            - traefik.enable=true
+            - traefik.docker.network=traefik-public
+            - traefik.http.routers.backup-storage.rule=Host(`backup-storage.localhost`)
+            - traefik.http.routers.backup-storage.entryPoints=http
+            - traefik.http.services.backup-storage.loadBalancer.server.port=80
 
     api-postgres-backup:
         build:
@@ -147,12 +181,22 @@ services:
 
     mailer:
         image: mailhog/mailhog
+        networks:
+            - traefik-public
+            - default
+        labels:
+            - traefik.enable=true
+            - traefik.docker.network=traefik-public
+            - traefik.http.routers.mailer.rule=Host(`mailer.localhost`)
+            - traefik.http.routers.mailer.entryPoints=http
+            - traefik.http.services.mailer.loadBalancer.server.port=8025
 
     cucumber-node-cli:
         build:
             context: cucumber/docker/development/node
         volumes:
             - ./cucumber:/app
+        network_mode: service:traefik
 
 secrets:
     api_db_password:
@@ -173,3 +217,7 @@ secrets:
 volumes:
     api-postgres:
     backup-storage:
+
+networks:
+    traefik-public:
+        name: traefik-public

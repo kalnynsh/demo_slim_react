@@ -42,7 +42,7 @@ final class AuthorizationCodeTest extends WebTestCase
 
         $payload = [
             'client_id' => 'frontend',
-            'redirect_uri' => 'http://localhost:8080/oauth',
+            'redirect_uri' => 'http://localhost/oauth',
             'auth_code_id' => 'hwf51200k204tedcb214ce4139b9e',
             'scopes' => 'common',
             'user_id' => '00000000-0000-0000-0000-000000000002',
@@ -60,7 +60,7 @@ final class AuthorizationCodeTest extends WebTestCase
                 [
                     'grant_type' => 'authorization_code',
                     'code' => $code,
-                    'redirect_uri' => 'http://localhost:8080/oauth',
+                    'redirect_uri' => 'http://localhost/oauth',
                     'client_id' => 'frontend',
                     'code_verifier' => $verifier,
                     'access_type' => 'offline',
@@ -94,7 +94,7 @@ final class AuthorizationCodeTest extends WebTestCase
 
         $payload = [
             'client_id' => 'frontend',
-            'redirect_uri' => 'http://localhost:8080/oauth',
+            'redirect_uri' => 'http://localhost/oauth',
             'auth_code_id' => 'hwf51200k204tedcb214ce4139b9e',
             'scopes' => 'common',
             'user_id' => '00000000-0000-0000-0000-000000000002',
@@ -112,7 +112,7 @@ final class AuthorizationCodeTest extends WebTestCase
                 [
                     'grant_type' => 'authorization_code',
                     'code' => $code,
-                    'redirect_uri' => 'http://localhost:8080/oauth',
+                    'redirect_uri' => 'http://localhost/oauth',
                     'client_id' => 'frontend',
                     'code_verifier' => PKCE::verifier(),
                     'access_type' => 'offline',
@@ -129,7 +129,7 @@ final class AuthorizationCodeTest extends WebTestCase
 
         $payload = [
             'client_id' => 'frontend',
-            'redirect_uri' => 'http://localhost:8080/oauth',
+            'redirect_uri' => 'http://localhost/oauth',
             'auth_code_id' => 'hwf51200k204tedcb214ce4139b9e',
             'scopes' => 'common',
             'user_id' => '00000000-0000-0000-0000-000000000002',
@@ -147,7 +147,7 @@ final class AuthorizationCodeTest extends WebTestCase
                 [
                     'grant_type' => 'authorization_code',
                     'code' => $code,
-                    'redirect_uri' => 'http://localhost:8080/oauth',
+                    'redirect_uri' => 'http://localhost/oauth',
                     'client_id' => 'frontend',
                     'access_type' => 'offline',
                 ]
@@ -164,7 +164,7 @@ final class AuthorizationCodeTest extends WebTestCase
 
         $payload = [
             'client_id' => 'frontend',
-            'redirect_uri' => 'http://localhost:8080/oauth',
+            'redirect_uri' => 'http://localhost/oauth',
             'auth_code_id' => 'hwf51200k204tedcb214ce4139b9e',
             'scopes' => 'common',
             'user_id' => '00000000-0000-0000-0000-000000000002',
@@ -182,7 +182,7 @@ final class AuthorizationCodeTest extends WebTestCase
                 [
                     'grant_type' => 'authorization_code',
                     'code' => $code,
-                    'redirect_uri' => 'http://localhost:8080/oauth',
+                    'redirect_uri' => 'http://localhost/oauth',
                     'client_id' => 'invalid-client-id',
                     'code_verifier' => $verifier,
                     'access_type' => 'offline',
