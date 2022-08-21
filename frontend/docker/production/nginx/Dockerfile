@@ -16,4 +16,4 @@ WORKDIR /app
 
 COPY --from=builder ./app/build ./public
 
-HEALTHCHECK --interval=5s --timeout=3s --start-period=1s --retries=10 CMD curl --fail http://127.0.0.1/health || exit 1
+HEALTHCHECK --interval=5s --timeout=3s --start-period=1s CMD curl --fail http://127.0.0.1/health || exit 1
