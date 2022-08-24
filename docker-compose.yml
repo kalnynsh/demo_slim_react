@@ -200,8 +200,6 @@ services:
             context: cucumber/docker/development/node
         volumes:
             - ./cucumber:/app
-        networks:
-            - traefik-public
         network_mode: service:traefik
 
 secrets:
