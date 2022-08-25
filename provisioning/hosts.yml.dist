@@ -18,4 +18,5 @@ all:
                     ansible_host: 0.0.0.0
                     ansible_port: 22
     vars:
+        cache_rgistry: https://cache-registry.mdv.org
         ansible_python_interpreter: /usr/bin/python3
