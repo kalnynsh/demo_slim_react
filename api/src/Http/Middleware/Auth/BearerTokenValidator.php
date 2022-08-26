@@ -95,6 +95,7 @@ final class BearerTokenValidator implements AuthorizationValidatorInterface
             InMemory::plainText('empty', 'empty')
         );
 
+        /** @psalm-suppress ArgumentTypeCoercion */
         $this->jwtConfiguration->setValidationConstraints(
             class_exists(StrictValidAt::class)
                 ? new StrictValidAt(new SystemClock(new DateTimeZone(date_default_timezone_get())))
