@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Auth\Service;
 
-use RuntimeException;
 use Webmozart\Assert\Assert;
 
 final class PasswordHasher
@@ -20,22 +19,11 @@ final class PasswordHasher
     {
         Assert::notEmpty($password);
 
-        /** @var false|string|null $hash */
-        $hash = password_hash(
+        return password_hash(
             $password,
             PASSWORD_ARGON2ID,
             ['memory_cost' => $this->memoryCost]
         );
-
-        if ($hash === null) {
-            throw new RuntimeException('Invalid hash algorithm.');
-        }
-
-        if ($hash === false) {
-            throw new RuntimeException('Unable to generate hash.');
-        }
-
-        return $hash;
     }
 
     public function validate(string $password, string $hash): bool

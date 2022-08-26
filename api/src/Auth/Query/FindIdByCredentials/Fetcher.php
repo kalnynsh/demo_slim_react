@@ -7,7 +7,6 @@ namespace App\Auth\Query\FindIdByCredentials;
 use App\Auth\Entity\User\Status;
 use App\Auth\Service\PasswordHasher;
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Result;
 
 final class Fetcher
 {
@@ -22,19 +21,15 @@ final class Fetcher
 
     public function fetch(Query $query): ?User
     {
-        $queryBuilder = $this->connection->createQueryBuilder();
-        $emailInLow = mb_strtolower($query->email);
-        $emailParameter = $queryBuilder->createNamedParameter($emailInLow);
-
-        /** @var Result $stmt */
-        $stmt = $queryBuilder
+        $result = $this->connection->createQueryBuilder()
             ->select([
                 'id',
                 'status',
                 'password_hash',
             ])
             ->from('auth_users')
-            ->where('email = ' . $emailParameter)
+            ->where('email = :email')
+            ->setParameter('email', mb_strtolower($query->email))
             ->executeQuery();
 
         /**
@@ -44,7 +39,7 @@ final class Fetcher
          *   password_hash: ?string,
          * }|false
          */
-        $row = $stmt->fetchAssociative();
+        $row = $result->fetchAssociative();
 
         if ($row === false) {
             return null;
