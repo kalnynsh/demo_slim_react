@@ -37,16 +37,16 @@ final class FeatureMonologProcessorTest extends TestCase
         $result = $processor($record);
 
         self::assertEquals([
-                'channel' => 'Unit test',
-                'message' => 'Message',
-                'context' => ['name' => 'value'],
-                'datetime' => $date,
-                'level' => Logger::WARNING,
-                'level_name' => 'WARNING',
-                'extra' => [
-                    'param' => 'value',
-                    'features' => $source,
-                ],
+            'channel' => 'Unit test',
+            'message' => 'Message',
+            'context' => ['name' => 'value'],
+            'datetime' => $date,
+            'level' => Logger::WARNING,
+            'level_name' => 'WARNING',
+            'extra' => [
+                'param' => 'value',
+                'features' => $source,
+            ],
         ], $result);
     }
 }
