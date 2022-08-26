@@ -26,7 +26,9 @@ test-e2e-full:
 test-smoke: api-fixtures cucumber-clear cucumber-smoke
 test-e2e: api-fixtures cucumber-clear cucumber-e2e
 
-frontend-init: frontend-npm-install
+frontend-init: frontend-yarn-install
+
+frontend-npm-init: frontend-npm-install
 
 deps-update: api-composer-update cucumber-npm-update frontend-npm-update restart
 
@@ -125,64 +127,115 @@ frontend-clear:
 frontend-npm-install:
 	docker-compose run --rm frontend-node-cli npm install
 
+frontend-yarn-install:
+	docker-compose run --rm frontend-node-cli yarn install
+
 frontend-npm-update:
 	docker-compose run --rm frontend-node-cli npm update --save
 
+frontend-yarn-upgrade:
+	docker-compose run --rm frontend-node-cli yarn upgrade
+
 frontend-npm-outdated:
 	docker-compose run --rm frontend-node-cli npm outdated
+
+frontend-yarn-outdated:
+	docker-compose run --rm frontend-node-cli yarn outdated
 
 frontend-ready:
 	docker run --rm -v ${PWD}/frontend:/app -w /app alpine touch .ready
 
 frontend-check: frontend-lint frontend-test
 
-frontend-lint:
+frontend-npm-lint:
 	docker-compose run --rm frontend-node-cli npm run eslint
 	docker-compose run --rm frontend-node-cli npm run stylelint
 
+frontend-lint:
+	docker-compose run --rm frontend-node-cli yarn eslint
+	docker-compose run --rm frontend-node-cli yarn stylelint
+
 frontend-start:
+	docker-compose run --rm frontend-node-cli yarn start
+
+frontend-nmp-start:
 	docker-compose run --rm frontend-node-cli npm run start
 
-frontend-test:
+frontend-npm-test:
 	docker-compose run --rm frontend-node-cli npm run test
 
-frontend-test-watch:
-	docker-compose run --rm frontend-node-cli npm run test_with_watch
+frontend-test:
+	docker-compose run --rm frontend-node-cli yarn test --watchAll=false
 
-frontend-eslint-fix:
+frontend-test-watch:
+	docker-compose run --rm frontend-node-cli yarn test
+
+frontend-npm-eslint-fix:
 	docker-compose run --rm frontend-node-cli npm run eslint-fix
 
-frontend-pretty:
+frontend-eslint-fix:
+	docker-compose run --rm frontend-node-cli yarn eslint-fix
+
+frontend-npm-pretty:
 	docker-compose run --rm frontend-node-cli npm run prettier
 
-cucumber-init: cucumber-npm-install
+frontend-pretty:
+	docker-compose run --rm frontend-node-cli yarn prettier
+
+cucumber-npm-init: cucumber-npm-install
+
+cucumber-init: cucumber-yarn-install
 
 cucumber-npm-install:
 	docker-compose run --rm cucumber-node-cli npm install
 
+cucumber-yarn-install:
+	docker-compose run --rm cucumber-node-cli yarn install
+
 cucumber-npm-update:
 	docker-compose run --rm cucumber-node-cli npm update --save
+
+cucumber-yarn-upgrade:
+	docker-compose run --rm cucumber-node-cli yarn update
 
 cucumber-npm-outdated:
 	docker-compose run --rm cucumber-node-cli npm outdated
 
-cucumber-e2e:
-	docker-compose run --rm cucumber-node-cli npm run e2e
+cucumber-yarn-outdated:
+	docker-compose run --rm cucumber-node-cli yarn outdated
 
-cucumber-lint:
+cucumber-npm-lint:
 	docker-compose run --rm cucumber-node-cli npm run lint
 
-cucumber-lint-fix:
+cucumber-lint:
+	docker-compose run --rm cucumber-node-cli yarn lint
+
+cucumber-npm-lint-fix:
 	docker-compose run --rm cucumber-node-cli npm run lint-fix
+
+cucumber-lint-fix:
+	docker-compose run --rm cucumber-node-cli yarn lint-fix
 
 cucumber-clear:
 	docker run --rm -v ${PWD}/cucumber:/app -w /app alpine sh -c 'rm -rf var/*'
 
-cucumber-report:
+cucumber-npm-report:
 	docker-compose run --rm cucumber-node-cli npm run report
 
-cucumber-smoke:
+cucumber-report:
+	docker-compose run --rm cucumber-node-cli yarn report
+
+cucumber-npm-smoke:
 	docker-compose run --rm cucumber-node-cli npm run smoke
+
+cucumber-smoke:
+	docker-compose run --rm cucumber-node-cli yarn smoke
+
+cucumber-npm-e2e:
+	docker-compose run --rm cucumber-node-cli npm run e2e
+
+cucumber-e2e:
+	docker-compose run --rm cucumber-node-cli yarn e2e
 
 build: build-frontend build-api
 
