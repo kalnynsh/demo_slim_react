@@ -32,9 +32,9 @@ codeship-steps.yml
 wercker.yml
 .tern-project
 .gitattributes
-.editorconfig
-.*ignore
-.eslintrc
+#.editorconfig
+#.*ignore
+#.eslintrc
 .jshintrc
 .flowconfig
 .documentup.json
