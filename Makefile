@@ -196,7 +196,7 @@ cucumber-npm-update:
 	docker-compose run --rm cucumber-node-cli npm update --save
 
 cucumber-yarn-upgrade:
-	docker-compose run --rm cucumber-node-cli yarn update
+	docker-compose run --rm cucumber-node-cli yarn upgrade -s
 
 cucumber-npm-outdated:
 	docker-compose run --rm cucumber-node-cli npm outdated
