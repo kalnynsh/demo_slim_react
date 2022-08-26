@@ -268,8 +268,8 @@ testing-e2e:
 try-testing: try-build try-testing-build try-testing-init try-testing-smoke try-testing-e2e try-testing-down-clear
 
 deploy:
-	ssh -o StrictHostKeyChecking=no ${D_USER}@${HOST} -p ${PORT} 'rm -rf site_${BUILD_NUMBER}'
-	ssh -o StrictHostKeyChecking=no ${D_USER}@${HOST} -p ${PORT} 'mkdir site_${BUILD_NUMBER}'
+	ssh -o StrictHostKeyChecking=no ${D_USER}@${HOST} -p ${PORT} 'docker network create --driver=overlay traefik-public || true'
+	ssh -o StrictHostKeyChecking=no ${D_USER}@${HOST} -p ${PORT} 'rm -rf site_${BUILD_NUMBER} && mkdir site_${BUILD_NUMBER}'
 
 	envsubst < docker-compose-production.yml > docker-compose-production-env.yml
 	scp -o StrictHostKeyChecking=no -P ${PORT} docker-compose-production-env.yml ${D_USER}@${HOST}:site_${BUILD_NUMBER}/docker-compose.yml
