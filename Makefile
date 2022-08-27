@@ -134,7 +134,7 @@ frontend-npm-update:
 	docker-compose run --rm frontend-node-cli npm update --save
 
 frontend-yarn-upgrade:
-	docker-compose run --rm frontend-node-cli yarn upgrade
+	docker-compose run --rm frontend-node-cli yarn upgrade --save
 
 frontend-npm-outdated:
 	docker-compose run --rm frontend-node-cli npm outdated
