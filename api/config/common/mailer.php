@@ -3,9 +3,13 @@
 declare(strict_types=1);
 
 use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\Mailer\EventListener\EnvelopeListener;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport;
+use Symfony\Component\Mime\Address;
 
 use function App\env;
 
@@ -19,26 +23,28 @@ return [
          *  user:string,
          *  password:string,
          *  encryption:string,
-         *  from: string,
+         *  from:array{'email':string, 'name':string},
          *  verify_peer:int
          * } $config
          */
         $config = $container->get('config')['mailer'];
 
-        /** @psalm-suppress MixedOperand */
-        $dsn = 'smtp://'
-            . $config['user']
-            . ':'
-            . $config['password']
-            . '@'
-            . $config['host']
-            . ':'
-            . $config['port']
-            . '?'
-            . 'verify_peer='
-            . $config['verify_peer'];
+        $dispatcher = new EventDispatcher();
 
-        $transport = Transport::fromDsn($dsn);
+        $dispatcher->addSubscriber(new EnvelopeListener(new Address(
+            $config['from']['email'],
+            $config['from']['name']
+        )));
+
+        $transport = (new EsmtpTransport(
+            $config['host'],
+            $config['port'],
+            $config['encryption'] === 'tls',
+            $dispatcher,
+            $container->get(LoggerInterface::class)
+        ))
+            ->setUsername($config['user'])
+            ->setPassword($config['password']);
 
         return new Mailer($transport);
     },
@@ -48,9 +54,12 @@ return [
             'user'     => env('MAILER_USERNAME'),
             'password' => env('MAILER_PASSWORD'),
             'host'     => env('MAILER_HOST'),
-            'port'     => env('MAILER_PORT'),
+            'port'     => (int)env('MAILER_PORT'),
             'encryption' => env('MAILER_ENCRYPTION'),
-            'from'       => env('MAILER_FROM_EMAIL'),
+            'from'       => [
+                'email' => env('MAILER_FROM_EMAIL'),
+                'name'  => 'Auction',
+            ],
             'verify_peer' => 1,
         ],
     ],

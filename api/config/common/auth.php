@@ -34,16 +34,9 @@ return [
         /** @var Environment $twig */
         $twig = $container->get(Environment::class);
 
-        /**
-         * @psalm-suppress MixedAssignment
-         * @psalm-var array{from:string} $mailerConfig
-         */
-        $mailerConfig = $container->get('config')['mailer'];
-
         return new JoinConfirmationSender(
             $mailer,
-            $twig,
-            $mailerConfig['from']
+            $twig
         );
     },
 
@@ -54,16 +47,9 @@ return [
         /** @var Environment $twig */
         $twig = $container->get(Environment::class);
 
-        /**
-         * @psalm-suppress MixedAssignment
-         * @psalm-var array{from:string} $mailerConfig
-         */
-        $mailerConfig = $container->get('config')['mailer'];
-
         return new NewEmailConfirmTokenSender(
             $mailer,
-            $twig,
-            $mailerConfig['from']
+            $twig
         );
     },
 
@@ -74,16 +60,9 @@ return [
         /** @var Environment $twig */
         $twig = $container->get(Environment::class);
 
-        /**
-         * @psalm-suppress MixedAssignment
-         * @psalm-var array{from:string} $mailerConfig
-         */
-        $mailerConfig = $container->get('config')['mailer'];
-
         return new PasswordResetTokenSender(
             $mailer,
-            $twig,
-            $mailerConfig['from']
+            $twig
         );
     },
 

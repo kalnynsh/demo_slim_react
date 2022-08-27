@@ -18,23 +18,19 @@ final class JoinConfirmationSender
 
     private MailerInterface $mailer;
     private Environment $twig;
-    private string $from;
 
     public function __construct(
         MailerInterface $mailer,
-        Environment $twig,
-        string $from
+        Environment $twig
     ) {
         $this->mailer = $mailer;
         $this->twig = $twig;
-        $this->from = $from;
     }
 
     public function send(Email $email, Token $token): void
     {
         /** @var MimeEmail $mimeEmail */
         $mimeEmail = (new MimeEmail())
-            ->from($this->from)
             ->to($email->getValue())
             ->subject(self::SUBJECT)
             ->priority(MimeEmail::PRIORITY_HIGH)

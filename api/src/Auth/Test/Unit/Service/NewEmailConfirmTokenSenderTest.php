@@ -11,7 +11,6 @@ use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Mailer\Mailer;
-use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email as MimeEmail;
 use Twig\Environment;
 
@@ -24,7 +23,6 @@ final class NewEmailConfirmTokenSenderTest extends TestCase
 {
     public function testSuccess(): void
     {
-        $from = 'tester@app.test';
         $to = new Email('user@app.test');
         $token = new Token(Uuid::uuid4()->toString(), new DateTimeImmutable());
 
@@ -51,20 +49,13 @@ final class NewEmailConfirmTokenSenderTest extends TestCase
         $mailer
             ->expects(self::once())
             ->method('send')
-            ->willReturnCallback(static function (MimeEmail $mimeEmail) use ($from, $to, $body): int {
-                self::assertEquals([new Address($from)], $mimeEmail->getFrom());
-                self::assertEquals([new Address($to->getValue())], $mimeEmail->getTo());
+            ->willReturnCallback(static function (MimeEmail $mimeEmail) use ($to, $body): void {
+                self::assertEquals($to->getValue(), $mimeEmail->getTo()[0]->getAddress());
                 self::assertEquals(NewEmailConfirmTokenSender::SUBJECT, $mimeEmail->getSubject());
                 self::assertEquals($body, $mimeEmail->getHtmlBody());
-
-                return 1;
             });
 
-        $sender = new NewEmailConfirmTokenSender(
-            $mailer,
-            $twig,
-            $from
-        );
+        $sender = new NewEmailConfirmTokenSender($mailer, $twig);
 
         $sender->send($to, $token);
     }
