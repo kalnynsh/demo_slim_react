@@ -25,11 +25,11 @@ function Confirm() {
   }, [success, error, token])
 
   if (success) {
-    return <Navigate to="/join/success" replace={true} />
+    return <Navigate to="/join/success" replace />
   }
 
   if (!token) {
-    return <Navigate to="/" replace={true} />
+    return <Navigate to="/" replace />
   }
 
   return (

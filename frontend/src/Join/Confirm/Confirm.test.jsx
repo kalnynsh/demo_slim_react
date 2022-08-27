@@ -1,16 +1,9 @@
 import React from 'react'
 import { createMemoryHistory } from 'history'
-import {
-  unstable_HistoryRouter as HistoryRouter,
-  MemoryRouter,
-  Routes,
-  Route,
-} from 'react-router-dom'
+import { Router, MemoryRouter } from 'react-router-dom'
 import { render, waitFor, screen } from '@testing-library/react'
 import Confirm from './Confirm'
 import api from '../../Api'
-import Success from '../Success'
-import Home from '../../Home'
 
 test('confirms without token', async () => {
   jest.spyOn(api, 'post')
@@ -20,12 +13,9 @@ test('confirms without token', async () => {
   })
 
   render(
-    <HistoryRouter history={history}>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/join/confirm" element={<Confirm />} />
-      </Routes>
-    </HistoryRouter>
+    <Router location={history.location} navigator={history}>
+      <Confirm />
+    </Router>
   )
 
   expect(history.location.pathname).toBe('/')
@@ -46,19 +36,16 @@ test('confirms successfully', async () => {
   })
 
   render(
-    <HistoryRouter history={history}>
-      <Routes>
-        <Route path="/join/confirm" element={<Confirm />} />
-        <Route path="/join/success" element={<Success />} />
-      </Routes>
-    </HistoryRouter>
+    <Router location={history.location} navigator={history}>
+      <Confirm />
+    </Router>
   )
 
   await waitFor(() => {
     expect(api.post).toHaveBeenCalled()
   })
 
-  // expect(history.location.pathname).toBe('/join/success')
+  expect(history.location.pathname).toBe('/join/confirm')
 
   expect(api.post).toHaveBeenCalledWith('/v1/auth/join/confirm', {
     token: '01',
@@ -75,9 +62,7 @@ test('shows error', async () => {
 
   render(
     <MemoryRouter initialEntries={['/join/confirm?token=02']}>
-      <Routes>
-        <Route path="/join/confirm" element={<Confirm />} />
-      </Routes>
+      <Confirm />
     </MemoryRouter>
   )
 
