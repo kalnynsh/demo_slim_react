@@ -40,7 +40,7 @@ final class RequestTest extends WebTestCase
     {
         $this->mailer()->clear();
 
-        $email = 'violetta_' . self::getRandomNumber() . '-morgan@info.org';
+        $email = 'violetta_' . self::getRandomNumber() . '_morgan@info.org';
 
         $response = $this->app()->handle(self::json('POST', self::URI, [
             'email' => $email,
@@ -100,7 +100,7 @@ final class RequestTest extends WebTestCase
         self::assertEquals([
             'errors' => [
                 'email' => 'This value should not be blank.',
-                'password' => 'This value is too short. It should have 6 characters or more.',
+                'password' => 'This value should not be blank.',
             ],
         ], Json::decode($body));
     }
@@ -109,7 +109,7 @@ final class RequestTest extends WebTestCase
     {
         $response = $this->app()->handle(self::json('POST', self::URI, [
             'email' => 'not-email',
-            'password' => '',
+            'password' => 'jHuP',
         ]));
 
         self::assertEquals(StatusCodeInterface::STATUS_UNPROCESSABLE_ENTITY, $response->getStatusCode());
@@ -139,7 +139,7 @@ final class RequestTest extends WebTestCase
         self::assertEquals([
             'errors' => [
                 'email' => 'This value is not a valid email address.',
-                'password' => 'This value is too short. It should have 6 characters or more.',
+                'password' => 'This value should not be blank.',
             ],
         ], $data);
     }
