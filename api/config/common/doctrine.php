@@ -8,6 +8,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\Driver\AttributeDriver;
 use Doctrine\ORM\Mapping\UnderscoreNamingStrategy;
 use Doctrine\ORM\ORMSetup;
 use Psr\Container\ContainerInterface;
@@ -21,7 +22,7 @@ return [
         /**
          * @psalm-suppress MixedAssignment
          * @var array{
-         *   paths:array<string,string>,
+         *   paths:string[],
          *   dev_mode:bool,
          *   proxy_dir:string,
          *   proxy_namespace:string,
@@ -41,6 +42,8 @@ return [
                 new FilesystemAdapter('doctrine_queries', 0, $settings['cache_dir']) :
                 new ArrayAdapter()
         );
+
+        $config->setMetadataDriverImpl(new AttributeDriver($settings['paths']));
 
         $config->setProxyNamespace($settings['proxy_namespace']);
         $config->setNamingStrategy(new UnderscoreNamingStrategy());

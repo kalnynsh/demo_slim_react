@@ -33,6 +33,8 @@ final class ConfirmTest extends TestCase
         $user->confirmEmailChanging($token->getValue(), $now->modify('+2 hour'));
 
         self::assertNull($user->getNewEmail());
+
+        /** @psalm-suppress DocblockTypeContradiction */
         self::assertNull($user->getNewEmailToken());
         self::assertEquals($new, $user->getEmail());
     }
