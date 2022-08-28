@@ -3,7 +3,7 @@
     "dependencies": {
         "@cucumber/cucumber": "^8.5.1",
         "chai": "^4.3.6",
-        "puppeteer": "^15.5.0"
+        "puppeteer": "^16.2.0"
     },
     "devDependencies": {
         "cucumber-html-reporter": "^5.5.0",
