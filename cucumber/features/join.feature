@@ -1,22 +1,13 @@
 Feature: View join page
 
-    Scenario: View join page without feature
-        Given I am a guest user
-        And I do not have "JOIN_TO_US" feature
-        When I open "/join" page
-        Then I see "Page is not found"
-
     Scenario: View join page
         Given I am a guest user
-        And I have "JOIN_TO_US" feature
         When I open "/join" page
         Then I see "Join to us" header
         And I see "join-form" element
 
-    @wip
     Scenario: Success join
         Given I am a guest user
-        And I have "JOIN_TO_US" feature
         And I am on "/join" page
         When I fill "email" field with "join-new@app.test"
         And I fill "password" field with "new-Password-583"
@@ -26,7 +17,6 @@ Feature: View join page
 
     Scenario: Existing join
         Given I am a guest user
-        And I have "JOIN_TO_US" feature
         And I am on "/join" page
         When I fill "email" field with "join-existing@app.test"
         And I fill "password" field with "new-Password-864"
@@ -36,7 +26,6 @@ Feature: View join page
 
     Scenario: Not valid join
         Given I am a guest user
-        And I have "JOIN_TO_US" feature
         And I am on "/join" page
         When I fill "email" field with "join-not-valid@app.test"
         And I fill "password" field with "new"

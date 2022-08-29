@@ -6,23 +6,13 @@ Feature: View home page
     @smoke
     Scenario: View home page content
         Given I am a guest user
-        And I do not have "JOIN_TO_US" feature
         When I open "/" page
         Then I see "Auction" header
-        And I see "We shall be here soon"
-        And I do not see "We are here"
-
-    Scenario: View new home page content
-        Given I am a guest user
-        And I have "JOIN_TO_US" feature
-        When I open "/" page
-        Then I see "Auction" header
-        And I do not see "We shall be here soon"
         And I see "We are here"
+        And I see "join-link" element
 
     Scenario: Click to join
         Given I am a guest user
-        And I have "JOIN_TO_US" feature
         And I am on "/" page
         When I click "join-link" element
         Then I see "Join to us" header
