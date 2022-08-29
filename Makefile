@@ -30,7 +30,9 @@ frontend-init: frontend-yarn-install
 
 frontend-npm-init: frontend-npm-install
 
-deps-update: api-composer-update cucumber-npm-update frontend-npm-update restart
+deps-npm-update: api-composer-update cucumber-npm-update frontend-npm-update restart
+
+deps-update: api-composer-update cucumber-yarn-upgrade frontend-yarn-upgrade restart
 
 docker-up:
 	docker-compose up -d
