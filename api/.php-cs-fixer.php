@@ -21,7 +21,6 @@ return
         ->setRules([
             '@PSR12' => true,
             '@PSR12:risky' => true,
-            '@DoctrineAnnotation' => true,
             '@PHP80Migration' => true,
             '@PHP80Migration:risky' => true,
             '@PHP81Migration' => true,
