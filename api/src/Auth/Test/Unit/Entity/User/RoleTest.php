@@ -23,15 +23,15 @@ final class RoleTest extends TestCase
     public function testIncorrect(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        /** @psalm-suppress UnusedVariable */
-        $role = new Role('su-manager');
+
+        new Role('su-manager');
     }
 
     public function testEmpty(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        /** @psalm-suppress UnusedVariable */
-        $role = new Role('');
+
+        new Role('');
     }
 
     public function testUserFactory(): void

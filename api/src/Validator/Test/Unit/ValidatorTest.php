@@ -55,7 +55,7 @@ final class ValidatorTest extends TestCase
             self::fail('Expected exception is not thrown');
         } catch (Exception $exception) {
             self::assertInstanceOf(ValidationException::class, $exception);
-            /** @var ConstraintViolationList $violations */
+
             self::assertEquals($violations, $exception->getViolations());
         }
     }

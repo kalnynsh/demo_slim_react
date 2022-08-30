@@ -14,6 +14,7 @@ final class InputTrimmerMiddleware implements MiddlewareInterface
 {
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        /** @psalm-suppress MixedArgumentTypeCoercion */
         $request = $request
             ->withParsedBody(self::filterStrings($request->getParsedBody()))
             ->withUploadedFiles(self::filterFiles($request->getUploadedFiles()));
@@ -53,16 +54,13 @@ final class InputTrimmerMiddleware implements MiddlewareInterface
     {
         $result = [];
 
-        /**
-         * @var string $key
-         * @var array|UploadedFileInterface $item
-         */
         foreach ($items as $key => $item) {
             if ($item instanceof UploadedFileInterface) {
                 if ($item->getError() !== UPLOAD_ERR_NO_FILE) {
                     $result[$key] = $item;
                 }
             } else {
+                /** @psalm-suppress MixedArgumentTypeCoercion */
                 $result[$key] = self::filterFiles($item);
             }
         }

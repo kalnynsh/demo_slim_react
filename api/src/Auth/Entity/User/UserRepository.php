@@ -30,7 +30,6 @@ final class UserRepository
      */
     public function get(Id $userId): User
     {
-        /** @var User|null */
         $user = $this->repository->find($userId->getValue());
 
         if ($user === null) {
@@ -45,7 +44,6 @@ final class UserRepository
      */
     public function getByEmail(Email $email): User
     {
-        /** @var User|null */
         $user = $this
             ->repository
             ->findOneBy(['email' => $email->getValue()]);

@@ -20,7 +20,7 @@ use function App\env;
 return [
     EntityManagerInterface::class => static function (ContainerInterface $container): EntityManager {
         /**
-         * @psalm-suppress MixedAssignment
+         * @psalm-suppress MixedArrayAccess
          * @var array{
          *   paths:string[],
          *   dev_mode:bool,

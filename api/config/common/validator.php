@@ -9,7 +9,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 return [
     ValidatorInterface::class => static function (ContainerInterface $container): ValidatorInterface {
-        /** @var TranslatorInterface $translator */
         $translator = $container->get(TranslatorInterface::class);
 
         return Validation::createValidatorBuilder()

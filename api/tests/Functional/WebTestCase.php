@@ -98,7 +98,6 @@ abstract class WebTestCase extends TestCase
             $loader->addFixture($fixture);
         }
 
-        /** @var EntityManagerInterface $em */
         $em = $container->get(EntityManagerInterface::class);
         $executor = new ORMExecutor($em, new ORMPurger($em));
         $executor->execute($loader->getFixtures());

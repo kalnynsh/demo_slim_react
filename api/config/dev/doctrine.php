@@ -10,17 +10,14 @@ use Psr\Container\ContainerInterface;
 
 return [
     ORMPurger::class => static function (ContainerInterface $container) {
-        /** @var EntityManagerInterface $em */
         $em = $container->get(EntityManagerInterface::class);
 
         return new ORMPurger($em);
     },
 
     ORMExecutor::class => static function (ContainerInterface $container) {
-        /** @var EntityManagerInterface $em */
         $em = $container->get(EntityManagerInterface::class);
 
-        /** @var ORMPurger $ormPurger */
         $ormPurger = $container->get(ORMPurger::class);
 
         return new ORMExecutor($em, $ormPurger);

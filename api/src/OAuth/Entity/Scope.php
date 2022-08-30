@@ -23,7 +23,7 @@ final class Scope implements ScopeEntityInterface
     }
 
     #[ReturnTypeWillChange]
-    public function jsonSerialize(): string
+    public function jsonSerialize(): mixed
     {
         return $this->getIdentifier();
     }

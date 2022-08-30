@@ -26,7 +26,6 @@ if (getenv('SENTRY_DSN')) {
     $cli->setCatchExceptions(false);
 }
 
-/** @var EntityManagerInterface $entityManager */
 $entityManager = $container->get(EntityManagerInterface::class);
 
 /** @psalm-suppress DeprecatedClass */

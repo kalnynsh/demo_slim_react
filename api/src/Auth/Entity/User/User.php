@@ -104,7 +104,6 @@ final class User
 
     public function attachNetwork(Network $network): void
     {
-        /** @var UserNetwork $existing */
         foreach ($this->networks as $existing) {
             if ($existing->getNetwork()->isEqualTo($network)) {
                 throw new DomainException('This Network was already attached.');

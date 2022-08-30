@@ -26,15 +26,15 @@ final class NetworkTest extends TestCase
     public function testEmptyName(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        /** @psalm-suppress UnusedVariable */
-        $network = new Network('', 'google-1');
+
+        new Network('', 'google-1');
     }
 
     public function testEmptyIdentity(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        /** @psalm-suppress UnusedVariable */
-        $network = new Network('google', '');
+
+        new Network('google', '');
     }
 
     public function testEquals(): void

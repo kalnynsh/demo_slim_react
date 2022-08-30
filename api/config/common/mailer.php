@@ -16,7 +16,7 @@ use function App\env;
 return [
     MailerInterface::class => static function (ContainerInterface $container) {
         /**
-         * @psalm-suppress MixedAssignment
+         * @psalm-suppress MixedArrayAccess
          * @var array{
          *  host:string,
          *  port:int,

@@ -17,10 +17,8 @@ return [
          */
         $config = $container->get('config')['console'];
 
-        /** @var Loader $loader */
         $loader = $container->get(Loader::class);
 
-        /** @var ORMExecutor $executor */
         $executor = $container->get(ORMExecutor::class);
 
         return new FixturesLoadCommand(

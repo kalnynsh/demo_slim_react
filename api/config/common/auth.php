@@ -16,22 +16,16 @@ use Twig\Environment;
 
 return [
     UserRepository::class => static function (ContainerInterface $container): UserRepository {
-        /** @var EntityManagerInterface $em */
         $em = $container->get(EntityManagerInterface::class);
 
-        /**
-         * @var EntityRepository<User> $repository
-         */
         $repository = $em->getRepository(User::class);
 
         return new UserRepository($em, $repository);
     },
 
     JoinConfirmationSender::class => static function (ContainerInterface $container): JoinConfirmationSender {
-        /** @var MailerInterface $mailer */
         $mailer = $container->get(MailerInterface::class);
 
-        /** @var Environment $twig */
         $twig = $container->get(Environment::class);
 
         return new JoinConfirmationSender(
@@ -41,10 +35,8 @@ return [
     },
 
     NewEmailConfirmTokenSender::class => static function (ContainerInterface $container): NewEmailConfirmTokenSender {
-        /** @var MailerInterface $mailer */
         $mailer = $container->get(MailerInterface::class);
 
-        /** @var Environment $twig */
         $twig = $container->get(Environment::class);
 
         return new NewEmailConfirmTokenSender(
@@ -54,10 +46,8 @@ return [
     },
 
     PasswordResetTokenSender::class => static function (ContainerInterface $container): PasswordResetTokenSender {
-        /** @var MailerInterface $mailer */
         $mailer = $container->get(MailerInterface::class);
 
-        /** @var Environment $twig */
         $twig = $container->get(Environment::class);
 
         return new PasswordResetTokenSender(
@@ -68,7 +58,7 @@ return [
 
     Tokenizer::class => static function (ContainerInterface $container): Tokenizer {
         /**
-         * @psalm-suppress MixedAssignment
+         * @psalm-suppress MixedArrayAccess
          * @var array{token_ttl:string} $config
          */
         $config = $container->get('config')['auth'];

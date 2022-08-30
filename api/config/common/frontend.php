@@ -10,7 +10,7 @@ use function App\env;
 return [
     FrontendUrlGenerator::class => static function (ContainerInterface $container): FrontendUrlGenerator {
         /**
-         * @psalm-suppress MixedAssignment
+         * @psalm-suppress MixedArrayAccess
          * @var array{url:string} $config
          */
         $config = $container->get('config')['frontend'];

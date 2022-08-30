@@ -16,7 +16,7 @@ use function App\env;
 return [
     Environment::class => static function (ContainerInterface $container): Environment {
         /**
-         * @psalm-suppress MixedAssignment
+         * @psalm-suppress MixedArrayAccess
          * @var array{
          *   debug:bool,
          *   template_dirs:array<string,string>,

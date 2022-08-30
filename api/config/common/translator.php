@@ -30,7 +30,6 @@ return [
         return $translator;
     },
     TranslatorLocaleMiddleware::class => static function (ContainerInterface $container): TranslatorLocaleMiddleware {
-        /** @var Translator $translator */
         $translator = $container->get(Translator::class);
 
         return new TranslatorLocaleMiddleware($translator);
