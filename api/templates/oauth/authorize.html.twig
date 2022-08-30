@@ -112,7 +112,7 @@
     </style>
 </head>
 <body>
-    <div class="block">
+    <div class="block" data-testid="authorize-page">
         <div class="logo">
             <a href="{{ frontend_url('') }}">
                 {{ trans('logo.name', [], 'oauth') }}
@@ -124,7 +124,7 @@
         {% endif %}
 
         <form method="POST" action="">
-            <div classs="input-row">
+            <div class="input-row">
                 <input
                     value="{{ query.email }}"
                     name="email"
@@ -133,7 +133,7 @@
                     class="input"
                     required />
             </div>
-            <div classs="input-row">
+            <div class="input-row">
                 <input
                     value="{{ query.password }}"
                     name="password"
