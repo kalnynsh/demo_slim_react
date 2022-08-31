@@ -27,3 +27,9 @@ Feature: Login
     And I am on "/" page
     When I click "login-button" element
     Then I see "authorize-page" element
+
+    When I fill "email" field with "john_crishum@info.org"
+    And I fill "password" field with "secret"
+    And I click sumbit button
+    Then I do not see "login-button" element
+    And I do not see "join-link" element

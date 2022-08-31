@@ -26,9 +26,10 @@ function Home() {
             </Link>
           ) : null}
         </FeatureFlag>
+
         <FeatureFlag name="OAUTH">
           {!isAuthenticated ? (
-            <button type="button" data-testid="login-button" onClick={login}>
+            <button type="submit" data-testid="login-button" onClick={login}>
               Log in
             </button>
           ) : null}
@@ -36,7 +37,7 @@ function Home() {
 
         <FeatureFlag name="OAUTH">
           {isAuthenticated ? (
-            <button type="button" data-testid="logout-button" onClick={logout}>
+            <button type="submit" data-testid="logout-button" onClick={logout}>
               Log out
             </button>
           ) : null}
