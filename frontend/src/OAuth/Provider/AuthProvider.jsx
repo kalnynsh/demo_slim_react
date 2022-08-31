@@ -161,15 +161,20 @@ function AuthProvider({
     window.location.assign(authorizeUrl + '?' + args)
   }, [authorizeUrl, clientId, redirectPath, scope])
 
+  const logout = useCallback(() => {
+    window.localStorage.removeItem('auth.tokens')
+    setIsAuthenticated(false)
+  }, [])
+
   const contextValue = useMemo(
     () => ({
       isAuthenticated,
       login,
-      logout: () => {},
+      logout,
       loading,
       error,
     }),
-    [isAuthenticated, login, loading, error]
+    [isAuthenticated, login, logout, loading, error]
   )
 
   return (

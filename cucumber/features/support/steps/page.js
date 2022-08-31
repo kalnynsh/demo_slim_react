@@ -43,5 +43,6 @@ Then('I do not see {string} element', async function (id) {
 })
 
 Then('I click {string} element', async function (id) {
+  await this.page.waitForSelector('[data-testid=' + id + ']')
   await this.page.click('[data-testid=' + id + ']')
 })

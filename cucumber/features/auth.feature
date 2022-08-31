@@ -33,3 +33,8 @@ Feature: Login
     And I click sumbit button
     Then I do not see "login-button" element
     And I do not see "join-link" element
+
+    When I click "logout-button" element
+    Then I see "login-button" element
+    And I do not see "logout-button" element
+    And I see "join-link" element
