@@ -138,6 +138,18 @@ function AuthProvider({
       })
   }, [])
 
+  useEffect(() => {
+    const listener = (e) => {
+      if (e.key === 'auth.tokens') {
+        setIsAuthenticated(JSON.parse(e.newValue) !== null)
+      }
+    }
+
+    window.addEventListener('storage', listener)
+
+    return () => window.removeEventListener('storage', listener)
+  }, [])
+
   const login = useCallback(async () => {
     const currentLocation = window.location.pathname
     const codeVerifier = generateCodeVerifier()
