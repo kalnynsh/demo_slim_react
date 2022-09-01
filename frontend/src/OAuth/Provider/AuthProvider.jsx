@@ -73,8 +73,8 @@ function AuthProvider({
       },
       body: new URLSearchParams({
         client_id: clientId,
-        code_verifier: window.localStorage.getItem('auth.code_verifier'),
         grant_type: 'authorization_code',
+        code_verifier: window.localStorage.getItem('auth.code_verifier'),
         redirect_uri: window.location.origin + redirectPath,
         access_type: 'offline',
         code: authCode,
@@ -92,14 +92,7 @@ function AuthProvider({
 
         setLoading(false)
 
-        const tokens = {
-          accessToken: data.token_type + ' ' + data.access_token,
-          expires: (
-            new Date().getTime() +
-            (data.expires_in - 5) * 1000
-          ).toString(),
-          refreshToken: data.refresh_token,
-        }
+        const tokens = buildTokens(data)
 
         window.localStorage.setItem('auth.tokens', JSON.stringify(tokens))
 
@@ -178,15 +171,66 @@ function AuthProvider({
     setIsAuthenticated(false)
   }, [])
 
-  const getToken = useCallback(() => {
+  const getToken = useCallback(async () => {
     const tokens = JSON.parse(window.localStorage.getItem('auth.tokens'))
 
     if (tokens === null) {
       return null
     }
 
-    return tokens.accessToken
+    if (tokens.expires > new Date().getTime()) {
+      return tokens.accessToken
+    }
+
+    setLoading(true)
+
+    return await fetch(tokenUrl, {
+      headers: {
+        Accept: 'application/json',
+        'Content-type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        client_id: clientId,
+        grant_type: 'refresh_token',
+        redirect_uri: window.location.origin + redirectPath,
+        access_type: 'offline',
+        refresh_token: tokens.refreshToken,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw response
+        }
+
+        return response
+      })
+      .then(async (response) => {
+        const data = await response.json()
+        setLoading(false)
+        const tokens = buildTokens(data)
+
+        window.localStorage.setItem('auth.tokens', JSON.stringify(tokens))
+        setIsAuthenticated(true)
+
+        return tokens.accessToken
+      })
+      .catch(() => {
+        setLoading(false)
+        window.localStorage.removeItem('auth.tokens')
+        setIsAuthenticated(false)
+
+        return null
+      })
   }, [])
+
+  const buildTokens = useCallback(
+    (data) => ({
+      accessToken: data.token_type + ' ' + data.access_token,
+      expires: (new Date().getTime() + (data.expires_in - 5) * 1000).toString(),
+      refreshToken: data.refresh_token,
+    }),
+    []
+  )
 
   const contextValue = useMemo(
     () => ({
