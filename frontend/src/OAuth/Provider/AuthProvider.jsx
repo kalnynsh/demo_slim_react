@@ -171,6 +171,8 @@ function AuthProvider({
     setIsAuthenticated(false)
   }, [])
 
+  const refreshPromises = useMemo(() => ({}), [])
+
   const getToken = useCallback(async () => {
     const tokens = JSON.parse(window.localStorage.getItem('auth.tokens'))
 
@@ -184,7 +186,11 @@ function AuthProvider({
 
     setLoading(true)
 
-    return await fetch(tokenUrl, {
+    if (refreshPromises[tokens.refreshToken]) {
+      return await refreshPromises[tokens.refreshToken]
+    }
+
+    refreshPromises[tokens.refreshToken] = fetch(tokenUrl, {
       headers: {
         Accept: 'application/json',
         'Content-type': 'application/x-www-form-urlencoded',
@@ -221,6 +227,8 @@ function AuthProvider({
 
         return null
       })
+
+    return await refreshPromises[tokens.refreshToken]
   }, [])
 
   const buildTokens = useCallback(
