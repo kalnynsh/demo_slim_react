@@ -1,6 +1,6 @@
-const { Given } = require('@cucumber/cucumber')
+import { Given } from '@cucumber/cucumber'
 
-Given('I am a guest user', function () {})
+Given('I am a guest user', () => null)
 
 Given('I am the user', async function () {
   await this.page.evaluateOnNewDocument(() => {

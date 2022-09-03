@@ -5,7 +5,10 @@
     "es6": true,
     "node": true
   },
-  "extends": ["standard"],
+  "extends": [
+    "standard",
+    "plugin:@typescript-eslint/recommended"
+  ],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -14,5 +17,6 @@
     "ecmaVersion": 2018
   },
   "rules": {
+    "@typescript-eslint/no-var-requires": "warn"
   }
 }
