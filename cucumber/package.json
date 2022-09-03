@@ -12,7 +12,8 @@
         "eslint-plugin-import": "^2.26.0",
         "eslint-plugin-n": "^15.2.5",
         "eslint-plugin-node": "^11.1.0",
-        "eslint-plugin-promise": "^6.0.1"
+        "eslint-plugin-promise": "^6.0.1",
+        "typescript": "^4.8.2"
     },
     "scripts": {
         "smoke": "cucumber-js --tags '@smoke and not @wip' --fail-fast --parallel 2",
