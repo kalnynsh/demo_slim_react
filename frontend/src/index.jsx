@@ -1,7 +1,6 @@
 import React from 'react'
 import './index.css'
 import App from './App'
-import * as serviceWorker from './serviceWorker'
 import { createRoot } from 'react-dom/client'
 import cookie from 'cookie'
 import { mergeFeatures } from './FeatureToggle'
@@ -21,5 +20,3 @@ root.render(
     <App features={features} />
   </React.StrictMode>
 )
-
-serviceWorker.unregister()
