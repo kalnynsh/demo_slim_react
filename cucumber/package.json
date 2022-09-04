@@ -6,6 +6,7 @@
         "puppeteer": "^17.0.0"
     },
     "devDependencies": {
+        "@types/chai": "^4.3.3",
         "@typescript-eslint/eslint-plugin": "^5.36.1",
         "@typescript-eslint/parser": "^5.36.1",
         "cucumber-html-reporter": "^5.5.0",
