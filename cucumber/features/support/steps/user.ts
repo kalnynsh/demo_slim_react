@@ -1,8 +1,13 @@
+import { CustomWorld } from '../world'
 import { Given } from '@cucumber/cucumber'
 
 Given('I am a guest user', () => null)
 
-Given('I am the user', async function () {
+Given('I am the user', async function (this: CustomWorld) {
+  if (!this.page) {
+    throw new Error('Page is undefined')
+  }
+
   await this.page.evaluateOnNewDocument(() => {
     localStorage.setItem('auth.tokens', JSON.stringify({
       accessToken:

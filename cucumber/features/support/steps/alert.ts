@@ -1,6 +1,6 @@
+import { CustomWorld } from '../world'
 import { Then } from '@cucumber/cucumber'
 import { expect } from 'chai'
-import { CustomWorld } from '../world'
 
 Then('I see success {string}', async function (this: CustomWorld, message: string) {
   if (!this.page) {
