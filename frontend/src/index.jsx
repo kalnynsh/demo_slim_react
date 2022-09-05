@@ -9,9 +9,7 @@ import defaultFeatures from './features'
 const root = createRoot(document.getElementById('root'))
 const cookies = cookie.parse(document.cookie)
 
-const cookieFeatures = (cookies.features || '')
-  .split(/\s*,\s*/g)
-  .filter(Boolean)
+const cookieFeatures = (cookies.features || '').split(/\s*,\s*/g).filter(Boolean)
 
 const features = mergeFeatures(defaultFeatures, cookieFeatures)
 
