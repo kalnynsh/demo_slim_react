@@ -6,7 +6,7 @@ import cookie from 'cookie'
 import { mergeFeatures } from './FeatureToggle'
 import defaultFeatures from './features'
 
-const root = createRoot(document.getElementById('root'))
+const root = createRoot(document.getElementById('root') as HTMLElement)
 const cookies = cookie.parse(document.cookie)
 
 const cookieFeatures = (cookies.features || '').split(/\s*,\s*/g).filter(Boolean)
