@@ -26,6 +26,8 @@
     "@types/react": "^18.0.18",
     "@types/react-dom": "^18.0.6",
     "@types/react-router-dom": "^5.3.3",
+    "@typescript-eslint/eslint-plugin": "^5.36.2",
+    "@typescript-eslint/parser": "^5.36.2",
     "@zarconontol/enzyme-adapter-react-18": "^0.7.3",
     "enzyme": "^3.11.0",
     "eslint": "^8.23.0",
@@ -53,10 +55,10 @@
     "build": "react-scripts build",
     "test_with_watch": "react-scripts test --watchAll=false",
     "test": "react-scripts test",
-    "eslint": "eslint --ext .js,.jsx src",
-    "eslint-fix": "eslint --fix --ext .js,.jsx src",
+    "eslint": "eslint --ext .js,.ts,.jsx,.tsx src",
+    "eslint-fix": "eslint --fix --ext .js,.ts,.jsx,.tsx src",
     "stylelint": "stylelint \"src/**/*.css\"",
-    "prettier": "prettier --write \"**/*.+(js|jsx|json|css|md)\""
+    "prettier": "prettier --write \"**/*.+(js|ts|jsx|tsx|json|css|md)\""
   },
   "browserslist": {
     "production": [
