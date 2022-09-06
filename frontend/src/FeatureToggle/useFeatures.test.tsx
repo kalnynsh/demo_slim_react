@@ -7,7 +7,7 @@ test('read features', () => {
   const Component = () => {
     const features = useFeatures()
 
-    return features.toString()
+    return <>{features.toString()}</>
   }
 
   const { container } = render(

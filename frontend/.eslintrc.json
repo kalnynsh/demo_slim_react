@@ -13,7 +13,7 @@
     "plugin:prettier/recommended",
     "plugin:jest-dom/recommended",
     "plugin:testing-library/react",
-    "plugin:@typescript-eslint/recommend"
+    "plugin:@typescript-eslint/recommended"
   ],
   "globals": {
     "Atomics": "readonly",
