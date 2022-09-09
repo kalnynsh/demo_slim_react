@@ -1,18 +1,18 @@
 import parseErrors from './parseErrors'
 
 test('response with violations', async () => {
-  const response = {
-    ok: false,
-    status: 422,
-    headers: new Headers({ 'content-type': 'application/json' }),
-    json: () =>
-      Promise.resolve({
-        errors: {
-          email: 'Wrong email',
-          password: 'Wrong password',
-        },
-      }),
-  }
+  const response = new Response(
+    JSON.stringify({
+      errors: {
+        email: 'Wrong email',
+        password: 'Wrong password',
+      },
+    }),
+    {
+      status: 422,
+      headers: new Headers({ 'content-type': 'application/json' }),
+    }
+  )
 
   const errors = await parseErrors(response)
 
@@ -23,12 +23,10 @@ test('response with violations', async () => {
 })
 
 test('response with error', async () => {
-  const response = {
-    ok: false,
+  const response = new Response(JSON.stringify({ error: 'Domain error' }), {
     status: 409,
     headers: new Headers({ 'content-type': 'application/json' }),
-    json: () => Promise.resolve({ error: 'Domain error' }),
-  }
+  })
 
   const errors = await parseErrors(response)
 
@@ -36,13 +34,11 @@ test('response with error', async () => {
 })
 
 test('html response with error', async () => {
-  const response = {
-    ok: false,
+  const response = new Response('Error', {
     status: 500,
-    statusMessage: 'Server Error',
+    statusText: 'Internal server error',
     headers: new Headers({ 'content-type': 'text/plain' }),
-    json: () => Promise.resolve('Error'),
-  }
+  })
 
   const errors = await parseErrors(response)
 
