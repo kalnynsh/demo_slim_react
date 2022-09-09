@@ -4,20 +4,20 @@ import { AlertError, AlertSuccess } from '../../Alert'
 import { ButtonRow, InputRow, InputLabel, InputError } from '../../Form'
 import styles from './JoinForm.module.css'
 
-function JoinForm() {
+function JoinForm(): JSX.Element {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     agree: false,
   })
 
-  const [buttonActive, setButtonActive] = useState(true)
-  const [errors, setErrors] = useState({})
-  const [error, setError] = useState(null)
-  const [success, setSuccess] = useState(null)
+  const [buttonActive, setButtonActive] = useState<boolean>(true)
+  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<string | null>(null)
 
-  const handleChange = (event) => {
-    const input = event.target
+  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+    const input = event.currentTarget
 
     setFormData({
       ...formData,
@@ -25,7 +25,7 @@ function JoinForm() {
     })
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault()
 
     if (!formData.agree) {
