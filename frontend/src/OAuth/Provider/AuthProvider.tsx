@@ -25,7 +25,7 @@ type Tokens = {
 }
 
 function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, children }: Props) {
-  const [isAuthenticated, setIsAuthenticated] = useState(
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
     window.localStorage.getItem('auth.tokens') !== null
   )
 
