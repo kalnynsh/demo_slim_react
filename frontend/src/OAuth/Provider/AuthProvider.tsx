@@ -1,20 +1,41 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import PropTypes from 'prop-types'
-import AuthContext from './AuthContext'
+import React, { ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
+import AuthContext, { AuthContextValue } from './AuthContext'
 import { generateCodeChallenge, generateCodeVerifier, generateState } from './crypt'
 
-function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, children }) {
+type Props = {
+  authorizeUrl: string
+  tokenUrl: string
+  clientId: string
+  scope: string
+  redirectPath: string
+  children: ReactNode
+}
+
+interface TokenResponse {
+  token_type: string
+  access_token: string
+  expires_in: number
+  refresh_token: string
+}
+
+type Tokens = {
+  accessToken: string
+  expires: number
+  refreshToken: string
+}
+
+function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, children }: Props) {
   const [isAuthenticated, setIsAuthenticated] = useState(
     window.localStorage.getItem('auth.tokens') !== null
   )
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState<boolean>(false)
 
   const isAuthRedirected = window.location.pathname === redirectPath
 
   const query = new URLSearchParams(window.location.search)
 
-  const getStateError = () => {
+  const getStateError = (): string | null => {
     if (!query.get('state')) {
       return 'State is empty.'
     }
@@ -30,7 +51,7 @@ function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, c
     return query.get('hint') || query.get('error_description') || query.get('error')
   }
 
-  const [error, setError] = useState(
+  const [error, setError] = useState<string | null>(
     isAuthRedirected ? getStateError() || getAuthRedirectError() : null
   )
 
@@ -52,6 +73,14 @@ function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, c
     setError(null)
     setLoading(true)
 
+    const codeVerifier = window.localStorage.getItem('auth.code_verifier')
+
+    if (!codeVerifier) {
+      setError('Empty verifier.')
+
+      return
+    }
+
     fetch(tokenUrl, {
       method: 'POST',
       headers: {
@@ -61,7 +90,7 @@ function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, c
       body: new URLSearchParams({
         client_id: clientId,
         grant_type: 'authorization_code',
-        code_verifier: window.localStorage.getItem('auth.code_verifier'),
+        code_verifier: codeVerifier,
         redirect_uri: window.location.origin + redirectPath,
         access_type: 'offline',
         code: authCode,
@@ -75,7 +104,7 @@ function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, c
         throw response
       })
       .then(async (response) => {
-        const data = await response.json()
+        const data = (await response.json()) as TokenResponse
 
         setLoading(false)
 
@@ -117,9 +146,9 @@ function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, c
   }, [])
 
   useEffect(() => {
-    const listener = (e) => {
+    const listener = (e: StorageEvent) => {
       if (e.key === 'auth.tokens') {
-        setIsAuthenticated(JSON.parse(e.newValue) !== null)
+        setIsAuthenticated(e.newValue ? JSON.parse(e.newValue) !== null : false)
       }
     }
 
@@ -156,10 +185,16 @@ function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, c
     setIsAuthenticated(false)
   }, [])
 
-  const refreshPromises = useMemo(() => ({}), [])
+  const refreshPromises: Record<string, Promise<string>> = useMemo(() => ({}), [])
 
   const getToken = useCallback(() => {
-    const tokens = JSON.parse(window.localStorage.getItem('auth.tokens'))
+    const storageTokens = window.localStorage.getItem('auth.tokens')
+
+    if (storageTokens === null) {
+      return Promise.reject(new Error())
+    }
+
+    const tokens = JSON.parse(storageTokens) as Tokens
 
     if (tokens === null) {
       return Promise.reject(new Error())
@@ -171,7 +206,7 @@ function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, c
 
     setLoading(true)
 
-    if (refreshPromises[tokens.refreshToken]) {
+    if (Object.prototype.hasOwnProperty.call(refreshPromises, tokens.refreshToken)) {
       return refreshPromises[tokens.refreshToken]
     }
 
@@ -217,16 +252,16 @@ function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, c
   }, [])
 
   const buildTokens = useCallback(
-    (data) => ({
+    (data: TokenResponse) => ({
       accessToken: data.token_type + ' ' + data.access_token,
-      expires: (new Date().getTime() + (data.expires_in - 5) * 1000).toString(),
+      expires: new Date().getTime() + (data.expires_in - 5) * 1000,
       refreshToken: data.refresh_token,
     }),
     []
   )
 
   const contextValue = useMemo(
-    () => ({
+    (): AuthContextValue => ({
       isAuthenticated,
       getToken,
       login,
@@ -238,15 +273,6 @@ function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, c
   )
 
   return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
-}
-
-AuthProvider.propTypes = {
-  authorizeUrl: PropTypes.string.isRequired,
-  tokenUrl: PropTypes.string.isRequired,
-  clientId: PropTypes.string.isRequired,
-  scope: PropTypes.string.isRequired,
-  redirectPath: PropTypes.string.isRequired,
-  children: PropTypes.object,
 }
 
 export default AuthProvider

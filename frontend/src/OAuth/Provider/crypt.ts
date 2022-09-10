@@ -1,4 +1,4 @@
-function generateRandomString(length) {
+function generateRandomString(length: number): string {
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 
   let text = ''
@@ -10,11 +10,11 @@ function generateRandomString(length) {
   return text
 }
 
-export function generateCodeVerifier() {
+export function generateCodeVerifier(): string {
   return generateRandomString(48)
 }
 
-export async function generateCodeChallenge(codeVerifier) {
+export async function generateCodeChallenge(codeVerifier: string): Promise<string> {
   const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(codeVerifier))
 
   return btoa(String.fromCharCode(...new Uint8Array(digest)))
@@ -23,6 +23,6 @@ export async function generateCodeChallenge(codeVerifier) {
     .replace(/\//g, '_')
 }
 
-export function generateState() {
+export function generateState(): string {
   return generateRandomString(16)
 }

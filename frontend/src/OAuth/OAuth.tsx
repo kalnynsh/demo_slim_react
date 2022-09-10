@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom'
 import { AlertError } from '../Alert'
 import useAuth from './Provider/useAuth'
 
-function OAuth() {
+function OAuth(): JSX.Element {
   const { error, loading } = useAuth()
 
   return (
     <System>
-      <h1>Authorization</h1>
+      <h1>Authentication</h1>
       <AlertError message={error} />
-      {loading ? <p>Loading ...</p> : null}
+      {loading ? <p>Loading...</p> : null}
       <p>
         <Link to="/">Back to Home</Link>
       </p>
