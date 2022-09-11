@@ -6,6 +6,7 @@ namespace App\Auth\Test\Unit\Entity\User\User\ResetPassword;
 
 use App\Auth\Entity\User\Token;
 use App\Auth\Test\Builder\UserBuilder;
+use DateInterval;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
@@ -24,11 +25,14 @@ final class RequestTest extends TestCase
             ->build();
 
         $now = new DateTimeImmutable();
-        $token = $this->createToken($now->modify('+1 hour'));
+
+        $token = $this->createToken($now->add(new DateInterval('PT1H')));
         $user->requestPasswordReset($token, $now);
 
-        $newDate = $now->modify('+1 hour');
-        $newToken = $this->createToken($newDate->modify('+2 hour'));
+        $newDate = $now->add(new DateInterval('PT1H'));
+
+        $newToken = $this->createToken($newDate->add(new DateInterval('PT2H')));
+
         $user->requestPasswordReset($newToken, $newDate);
 
         self::assertEquals($newToken, $user->getPasswordResetToken());
@@ -39,7 +43,7 @@ final class RequestTest extends TestCase
         $user = (new UserBuilder())->build();
 
         $now = new DateTimeImmutable();
-        $token = $this->createToken($now->modify('+1 hour'));
+        $token = $this->createToken($now->add(new DateInterval('PT1H')));
 
         $this->expectExceptionMessage('User is not active.');
         $user->requestPasswordReset($token, $now);

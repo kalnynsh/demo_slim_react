@@ -6,6 +6,7 @@ namespace App\Auth\Test\Unit\Entity\User\User\JoinByEmail;
 
 use App\Auth\Entity\User\Token;
 use App\Auth\Test\Builder\UserBuilder;
+use DateInterval;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
@@ -26,9 +27,10 @@ final class ConfirmTest extends TestCase
         self::assertTrue($user->isWait());
         self::assertFalse($user->isActive());
 
+        /** @psalm-suppress PossiblyFalseArgument */
         $user->confirmJoin(
             $token->getValue(),
-            $token->getExpires()->modify('-1 day')
+            $token->getExpires()->sub(new DateInterval('P1D'))
         );
 
         self::assertTrue($user->isActive());
@@ -45,9 +47,10 @@ final class ConfirmTest extends TestCase
 
         $this->expectExceptionMessage('Token is not valid.');
 
+        /** @psalm-suppress PossiblyFalseArgument */
         $user->confirmJoin(
             Uuid::uuid4()->toString(),
-            $token->getExpires()->modify('-1 day')
+            $token->getExpires()->sub(new DateInterval('P1D'))
         );
     }
 
@@ -61,7 +64,7 @@ final class ConfirmTest extends TestCase
 
         $user->confirmJoin(
             $token->getValue(),
-            $token->getExpires()->modify('+1 day')
+            $token->getExpires()->add(new DateInterval('P1D'))
         );
     }
 

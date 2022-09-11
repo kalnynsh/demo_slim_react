@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Auth\Test\Unit\Entity\User\Token;
 
 use App\Auth\Entity\User\Token;
+use DateInterval;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
@@ -23,8 +24,11 @@ final class ExpiresTest extends TestCase
             $expires = new DateTimeImmutable()
         );
 
-        self::assertTrue($token->isExpiredTo($expires->modify('+45 secs')));
+        self::assertTrue($token->isExpiredTo($expires->add(new DateInterval('PT45S'))));
+
         self::assertTrue($token->isExpiredTo($expires));
-        self::assertFalse($token->isExpiredTo($expires->modify('-45 secs')));
+
+        /** @psalm-suppress PossiblyFalseArgument */
+        self::assertFalse($token->isExpiredTo($expires->sub(new DateInterval('PT45S'))));
     }
 }

@@ -9,6 +9,7 @@ use App\Auth\Entity\User\Id;
 use App\Auth\Entity\User\Token;
 use App\Auth\Entity\User\User;
 use App\Auth\Service\PasswordHasher;
+use DateInterval;
 use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Persistence\ObjectManager;
@@ -33,7 +34,10 @@ final class UserFixture extends AbstractFixture
             $date = new DateTimeImmutable('-30 days'),
             new Email('john_crishum@info.org'),
             $this->hasher->hash('secret'),
-            new Token($value = Uuid::uuid4()->toString(), $date->modify('+1 day'))
+            new Token(
+                $value = Uuid::uuid4()->toString(),
+                $date->add(new DateInterval('P1D'))
+            )
         );
 
         $user->confirmJoin($value, $date);

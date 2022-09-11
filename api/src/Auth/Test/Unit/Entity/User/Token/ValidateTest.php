@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Auth\Test\Unit\Entity\User\Token;
 
 use App\Auth\Entity\User\Token;
+use DateInterval;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
@@ -26,7 +27,8 @@ final class ValidateTest extends TestCase
             $expires = new DateTimeImmutable()
         );
 
-        $token->validate($value, $expires->modify('-45 secs'));
+        /** @psalm-suppress PossiblyFalseArgument */
+        $token->validate($value, $expires->sub(new DateInterval('PT45S')));
     }
 
     public function testWarng(): void
@@ -38,9 +40,10 @@ final class ValidateTest extends TestCase
 
         $this->expectExceptionMessage('Token is not valid.');
 
+        /** @psalm-suppress PossiblyFalseArgument */
         $token->validate(
             Uuid::uuid4()->toString(),
-            $expires->modify('-45 secs')
+            $expires->sub(new DateInterval('PT45S'))
         );
     }
 
@@ -52,6 +55,7 @@ final class ValidateTest extends TestCase
         );
 
         $this->expectExceptionMessage('Token was expired.');
-        $token->validate($value, $expires->modify('+45 secs'));
+
+        $token->validate($value, $expires->add(new DateInterval('PT45S')));
     }
 }

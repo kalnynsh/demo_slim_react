@@ -6,6 +6,7 @@ namespace App\Auth\Test\Unit\Entity\User\User\ResetPassword;
 
 use App\Auth\Entity\User\Token;
 use App\Auth\Test\Builder\UserBuilder;
+use DateInterval;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
@@ -22,13 +23,13 @@ final class ResetTest extends TestCase
         $user = (new UserBuilder())->active()->build();
 
         $now = new DateTimeImmutable();
-        $token = $this->createToken($now->modify('+2 hour'));
+        $token = $this->createToken($now->add(new DateInterval('PT2H')));
 
         $user->requestPasswordReset($token, $now);
 
         self::assertNotNull($user->getPasswordResetToken());
 
-        $user->resetPassword($token->getValue(), $now->modify('+1 hour'), $hash = 'hash');
+        $user->resetPassword($token->getValue(), $now->add(new DateInterval('PT1H')), $hash = 'hash');
 
         self::assertEquals($hash, $user->getPasswordHash());
     }
@@ -38,7 +39,7 @@ final class ResetTest extends TestCase
         $user = (new UserBuilder())->active()->build();
 
         $now = new DateTimeImmutable();
-        $token = $this->createToken($now->modify('+1 hour'));
+        $token = $this->createToken($now->add(new DateInterval('PT1H')));
 
         $user->requestPasswordReset($token, $now);
 
@@ -51,12 +52,12 @@ final class ResetTest extends TestCase
         $user = (new UserBuilder())->active()->build();
 
         $now = new DateTimeImmutable();
-        $token = $this->createToken($now->modify('+1 hour'));
+        $token = $this->createToken($now->add(new DateInterval('PT1H')));
 
         $user->requestPasswordReset($token, $now);
 
         $this->expectExceptionMessage('Token was expired.');
-        $user->resetPassword($token->getValue(), $now->modify('+1 day'), 'hash');
+        $user->resetPassword($token->getValue(), $now->add(new DateInterval('P1D')), 'hash');
     }
 
     public function testNotRequested(): void

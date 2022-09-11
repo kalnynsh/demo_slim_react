@@ -11,6 +11,7 @@ use App\Auth\Entity\User\Role;
 use App\Auth\Entity\User\Token;
 use App\Auth\Entity\User\User;
 use App\Auth\Service\PasswordHasher;
+use DateInterval;
 use DateTimeImmutable;
 use Ramsey\Uuid\Uuid;
 
@@ -38,9 +39,10 @@ final class UserBuilder
         $this->email = new Email($emailString);
 
         $this->passwordHash = 'hash';
+
         $this->joinConfirmToken = new Token(
             Uuid::uuid4()->toString(),
-            $this->date->modify('+1 day')
+            $this->date->add(new DateInterval('P1D'))
         );
 
         $this->role = Role::user();
@@ -134,10 +136,11 @@ final class UserBuilder
         }
 
         if ($this->active) {
+            /** @psalm-suppress PossiblyFalseArgument */
             $user
                 ->confirmJoin(
                     $this->joinConfirmToken->getValue(),
-                    $this->joinConfirmToken->getExpires()->modify('-1 day')
+                    $this->joinConfirmToken->getExpires()->sub(new DateInterval('P1D'))
                 );
         }
 
