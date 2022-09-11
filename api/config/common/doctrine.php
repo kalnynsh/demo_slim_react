@@ -8,7 +8,6 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping\Driver\AttributeDriver;
 use Doctrine\ORM\Mapping\UnderscoreNamingStrategy;
 use Doctrine\ORM\ORMSetup;
 use Psr\Container\ContainerInterface;
@@ -18,7 +17,7 @@ use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use function App\env;
 
 return [
-    EntityManagerInterface::class => static function (ContainerInterface $container): EntityManager {
+    EntityManagerInterface::class => static function (ContainerInterface $container): EntityManagerInterface {
         /**
          * @psalm-suppress MixedArrayAccess
          * @var array{
@@ -28,13 +27,13 @@ return [
          *   proxy_namespace:string,
          *   types:array<string,class-string<Doctrine\DBAL\Types\Type>>,
          *   connection:array<string,mixed>,
-         *   cache_dir:string,
+         *   cache_dir:?string,
          *   subscribers:array<string>
          * } $settings
          */
         $settings = $container->get('config')['doctrine'];
 
-        $config = ORMSetup::createAnnotationMetadataConfiguration(
+        $config = ORMSetup::createAttributeMetadataConfiguration(
             $settings['paths'],
             $settings['dev_mode'],
             $settings['proxy_dir'],
@@ -42,8 +41,6 @@ return [
                 new FilesystemAdapter('doctrine_queries', 0, $settings['cache_dir']) :
                 new ArrayAdapter()
         );
-
-        $config->setMetadataDriverImpl(new AttributeDriver($settings['paths']));
 
         $config->setProxyNamespace($settings['proxy_namespace']);
         $config->setNamingStrategy(new UnderscoreNamingStrategy());

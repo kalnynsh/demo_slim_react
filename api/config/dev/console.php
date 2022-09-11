@@ -6,7 +6,9 @@ use App\Console\FixturesLoadCommand;
 use App\OAuth\Console\E2ETokenCommand;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Loader;
-use Doctrine\ORM\Tools\Console\Command\SchemaTool;
+use Doctrine\Migrations;
+use Doctrine\ORM\Tools\Console\Command\SchemaTool\DropCommand;
+use Doctrine\ORM\Tools\Console\EntityManagerProvider;
 use Psr\Container\ContainerInterface;
 
 return [
@@ -28,11 +30,18 @@ return [
         );
     },
 
+    DropCommand::class => static fn (ContainerInterface $container): DropCommand => new DropCommand($container->get(EntityManagerProvider::class)),
+
     'config' => [
         'console' => [
             'commands' => [
                 FixturesLoadCommand::class,
-                SchemaTool\DropCommand::class,
+
+                DropCommand::class,
+
+                Migrations\Tools\Console\Command\DiffCommand::class,
+                Migrations\Tools\Console\Command\GenerateCommand::class,
+
                 E2ETokenCommand::class,
             ],
             'fixture_paths' => [

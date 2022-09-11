@@ -9,7 +9,6 @@ use App\Auth\Service\NewEmailConfirmTokenSender;
 use App\Auth\Service\PasswordResetTokenSender;
 use App\Auth\Service\Tokenizer;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Twig\Environment;

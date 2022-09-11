@@ -3,8 +3,6 @@
 
 declare(strict_types=1);
 
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper;
 use Symfony\Component\Console\Application;
 
 use function App\env;
@@ -25,11 +23,6 @@ $cli->setCatchExceptions(true);
 if (getenv('SENTRY_DSN')) {
     $cli->setCatchExceptions(false);
 }
-
-$entityManager = $container->get(EntityManagerInterface::class);
-
-/** @psalm-suppress DeprecatedClass */
-$cli->getHelperSet()->set(new EntityManagerHelper($entityManager), 'em');
 
 /**
  * @var string[] $commands
