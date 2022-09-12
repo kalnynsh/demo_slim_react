@@ -16,21 +16,12 @@ use Psr\Log\LoggerInterface;
 
 final class TokenAction implements RequestHandlerInterface
 {
-    private AuthorizationServer $server;
-    private LoggerInterface $logger;
-    private ResponseFactoryInterface $response;
-    private Sentry $sentry;
-
     public function __construct(
-        AuthorizationServer $server,
-        LoggerInterface $logger,
-        ResponseFactoryInterface $response,
-        Sentry $sentry,
+        private readonly AuthorizationServer $server,
+        private readonly LoggerInterface $logger,
+        private readonly ResponseFactoryInterface $response,
+        private readonly Sentry $sentry
     ) {
-        $this->server = $server;
-        $this->logger = $logger;
-        $this->response = $response;
-        $this->sentry = $sentry;
     }
 
     /**

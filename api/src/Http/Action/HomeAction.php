@@ -12,11 +12,8 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 final class HomeAction implements RequestHandlerInterface
 {
-    private FeatureFlag $flag;
-
-    public function __construct(FeatureFlag $flag)
+    public function __construct(private readonly FeatureFlag $flag)
     {
-        $this->flag = $flag;
     }
 
     public function handle(ServerRequestInterface $request): ResponseInterface

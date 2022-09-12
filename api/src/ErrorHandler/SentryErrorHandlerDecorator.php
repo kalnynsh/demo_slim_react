@@ -12,13 +12,10 @@ use Throwable;
 
 final class SentryErrorHandlerDecorator implements ErrorHandlerInterface
 {
-    private ErrorHandlerInterface $next;
-    private Sentry $sentry;
-
-    public function __construct(ErrorHandlerInterface $next, Sentry $sentry)
-    {
-        $this->next = $next;
-        $this->sentry = $sentry;
+    public function __construct(
+        private readonly ErrorHandlerInterface $next,
+        private readonly Sentry $sentry
+    ) {
     }
 
     public function __invoke(

@@ -24,27 +24,14 @@ final class AuthorizeAction implements RequestHandlerInterface
 {
     private const TEMPLATE_PATH = 'oauth/authorize.html.twig';
 
-    private AuthorizationServer $server;
-    private LoggerInterface $logger;
-    private Fetcher $users;
-    private Environment $template;
-    private ResponseFactoryInterface $response;
-    private TranslatorInterface $translator;
-
     public function __construct(
-        AuthorizationServer $server,
-        LoggerInterface $logger,
-        Fetcher $users,
-        Environment $template,
-        ResponseFactoryInterface $response,
-        TranslatorInterface $translator
+        private readonly AuthorizationServer $server,
+        private readonly LoggerInterface $logger,
+        private readonly Fetcher $users,
+        private readonly Environment $template,
+        private readonly ResponseFactoryInterface $response,
+        private readonly TranslatorInterface $translator
     ) {
-        $this->server = $server;
-        $this->logger = $logger;
-        $this->users = $users;
-        $this->template = $template;
-        $this->response = $response;
-        $this->translator = $translator;
     }
 
     /**

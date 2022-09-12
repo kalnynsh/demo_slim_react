@@ -6,10 +6,7 @@ namespace App\OAuth\Command\ClearExpiredItems;
 
 final class Command
 {
-    public string $date;
-
-    public function __construct(string $date)
+    public function __construct(public readonly string $date)
     {
-        $this->date = $date;
     }
 }

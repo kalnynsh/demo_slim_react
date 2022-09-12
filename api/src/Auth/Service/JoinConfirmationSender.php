@@ -16,15 +16,10 @@ final class JoinConfirmationSender
     public const TEMPLATE_PATH = 'auth/join/confirm.html.twig';
     public const SUBJECT = 'Your confirmation of join';
 
-    private MailerInterface $mailer;
-    private Environment $twig;
-
     public function __construct(
-        MailerInterface $mailer,
-        Environment $twig
+        private readonly MailerInterface $mailer,
+        private readonly Environment $twig
     ) {
-        $this->mailer = $mailer;
-        $this->twig = $twig;
     }
 
     public function send(Email $email, Token $token): void

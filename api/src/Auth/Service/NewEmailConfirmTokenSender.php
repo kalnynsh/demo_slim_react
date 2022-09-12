@@ -16,15 +16,10 @@ final class NewEmailConfirmTokenSender
     public const SUBJECT = 'Your confirmation of setting new email';
     public const TEMPLATE_PATH = 'auth/email/confirm.html.twig';
 
-    private MailerInterface $mailer;
-    private Environment $twig;
-
     public function __construct(
-        MailerInterface $mailer,
-        Environment $twig
+        private readonly MailerInterface $mailer,
+        private readonly Environment $twig
     ) {
-        $this->mailer = $mailer;
-        $this->twig = $twig;
     }
 
     public function send(Email $email, Token $token): void
