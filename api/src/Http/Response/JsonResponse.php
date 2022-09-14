@@ -20,7 +20,7 @@ final class JsonResponse extends Response
             $status,
             new Headers(['Content-Type' => 'application/json']),
             (new StreamFactory())
-                ->createStream($isJson ? (string)$data: json_encode($data, JSON_THROW_ON_ERROR))
+                ->createStream($isJson ? (string)$data : json_encode($data, JSON_THROW_ON_ERROR))
         );
     }
 }

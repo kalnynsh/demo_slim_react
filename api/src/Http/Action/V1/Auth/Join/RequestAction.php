@@ -26,7 +26,7 @@ final class RequestAction implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         /** @var Command $command */
-        $command = $this->serialize->deserialize($request->getBody(), Command::class, 'json');
+        $command = $this->serializer->deserialize($request->getBody(), Command::class, 'json');
 
         $this->validator->validate($command);
 

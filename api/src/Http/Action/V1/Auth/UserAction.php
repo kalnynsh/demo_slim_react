@@ -30,6 +30,6 @@ final class UserAction implements RequestHandlerInterface
             throw new UnauthorizedHttpException($request);
         }
 
-        return new JsonResponse($this->serialize->serialize($identity, 'json'), 200, true);
+        return new JsonResponse($this->serializer->serialize($identity, 'json'), 200, true);
     }
 }
