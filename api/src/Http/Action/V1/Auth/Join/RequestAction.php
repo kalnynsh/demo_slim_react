@@ -12,10 +12,12 @@ use Fig\Http\Message\StatusCodeInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
 final class RequestAction implements RequestHandlerInterface
 {
     public function __construct(
+        private readonly SerializerInterface $serializer,
         private readonly Handler $handler,
         private readonly Validator $validator
     ) {
@@ -23,12 +25,8 @@ final class RequestAction implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        /** @var array{email:?string, password:?string} */
-        $body = $request->getParsedBody();
-
-        $command = new Command();
-        $command->email = $body['email'] ?? '';
-        $command->password = $body['password'] ?? '';
+        /** @var Command $command */
+        $command = $this->serialize->deserialize($request->getBody(), Command::class, 'json');
 
         $this->validator->validate($command);
 
