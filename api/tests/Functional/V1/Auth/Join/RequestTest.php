@@ -105,6 +105,18 @@ final class RequestTest extends WebTestCase
         ], Json::decode($body));
     }
 
+    public function testIncorrectFormat(): void
+    {
+        self::markTestIncomplete();
+
+        $response = $this->app()->handle(self::json('POST', self::URI, [
+            'email' => true,
+            'password' => 42,
+        ]));
+
+        self::assertEquals(StatusCodeInterface::STATUS_BAD_REQUEST, $response->getStatusCode());
+    }
+
     public function testNotValid(): void
     {
         $response = $this->app()->handle(self::json('POST', self::URI, [
