@@ -32,15 +32,15 @@ final class InputTrimmerMiddleware implements MiddlewareInterface
 
         /**
          * @var string $key
-         * @var object|string|null $value
+         * @var array|int|object|string|null $value
          */
         foreach ($items as $key => $value) {
             if (\is_string($value)) {
                 $result[$key] = trim($value);
-            }
-
-            if (!\is_string($value)) {
+            } elseif (\is_array($value)) {
                 $result[$key] = self::filterStrings($value);
+            } else {
+                $result[$key] = $value;
             }
         }
 
