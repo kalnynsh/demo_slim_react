@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Http\Action\V1\Auth\Join;
 
-use App\Validator\Validator;
-use App\Http\Response\EmptyResponse;
-use Psr\Http\Message\ResponseInterface;
-use Fig\Http\Message\StatusCodeInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
-use App\Http\Exception\BadRequestHttpException;
 use App\Auth\Command\JoinByEmail\Request\Command;
 use App\Auth\Command\JoinByEmail\Request\Handler;
-use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use App\Http\Response\EmptyResponse;
+use App\Http\Response\JsonResponse;
+use App\Validator\Validator;
+use Fig\Http\Message\StatusCodeInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 final class RequestAction implements RequestHandlerInterface
 {
@@ -30,8 +30,16 @@ final class RequestAction implements RequestHandlerInterface
         try {
             /** @var Command $command */
             $command = $this->denormalizer->denormalize($request->getParsedBody(), Command::class);
-        } catch (NotNormalizableValueException) {
-            throw new BadRequestHttpException($request);
+        } catch (NotNormalizableValueException $exception) {
+            return new JsonResponse([
+                'errors' => [
+                    (string)$exception->getPath() => sprintf(
+                        'The type must be one of "%s" ("%s" given).',
+                        implode(',', (array)$exception->getExpectedTypes()),
+                        (string)$exception->getCurrentType()
+                    ),
+                ],
+            ], StatusCodeInterface::STATUS_UNPROCESSABLE_ENTITY);
         }
 
         $this->validator->validate($command);
