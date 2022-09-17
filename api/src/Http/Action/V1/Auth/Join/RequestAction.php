@@ -7,18 +7,17 @@ namespace App\Http\Action\V1\Auth\Join;
 use App\Auth\Command\JoinByEmail\Request\Command;
 use App\Auth\Command\JoinByEmail\Request\Handler;
 use App\Http\Response\EmptyResponse;
+use App\Serializer\Denormalizer;
 use App\Validator\Validator;
 use Fig\Http\Message\StatusCodeInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 final class RequestAction implements RequestHandlerInterface
 {
     public function __construct(
-        private readonly DenormalizerInterface $denormalizer,
+        private readonly Denormalizer $denormalizer,
         private readonly Handler $handler,
         private readonly Validator $validator
     ) {
@@ -27,15 +26,7 @@ final class RequestAction implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         /** @var Command $command */
-        $command = $this->denormalizer->denormalize(
-            $request->getParsedBody(),
-            Command::class,
-            null,
-            [
-                DenormalizerInterface::COLLECT_DENORMALIZATION_ERRORS => true,
-                AbstractNormalizer::ALLOW_EXTRA_ATTRIBUTES => false,
-            ]
-        );
+        $command = $this->denormalizer->denormalize($request->getParsedBody(), Command::class);
 
         $this->validator->validate($command);
 
