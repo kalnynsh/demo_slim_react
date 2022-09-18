@@ -42,7 +42,7 @@ final class DenormalizationExceptionHandler implements MiddlewareInterface
         }
     }
 
-    private static function attributeToViolation(string $attribute)
+    private static function attributeToViolation(string $attribute): ConstraintViolation
     {
         return new ConstraintViolation('The attribute is not allowed', '', [], null, $attribute, null);
     }

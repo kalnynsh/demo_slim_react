@@ -25,7 +25,6 @@ final class RequestAction implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        /** @var Command $command */
         $command = $this->denormalizer->denormalize($request->getParsedBody(), Command::class);
 
         $this->validator->validate($command);

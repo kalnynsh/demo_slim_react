@@ -26,7 +26,7 @@ return [
         /**
          * @psalm-suppress MixedArrayAccess
          * @var array{
-         *  normalizers: array<array-key, class-string<DenormalizerInterface>|class-string<NormalizerInterface>
+         *  normalizers: array<array-key, class-string<DenormalizerInterface>|class-string<NormalizerInterface>>
          * } $config
          */
         $config = $container->get('config')['serializer'];
@@ -36,6 +36,7 @@ return [
             $config['normalizers']
         );
 
+        /** @psalm-suppress MixedArgumentTypeCoercion */
         return new Serializer([
             ...$normalizers,
             new DateTimeNormalizer(),

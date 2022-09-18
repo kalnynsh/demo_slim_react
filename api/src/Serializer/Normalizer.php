@@ -14,7 +14,7 @@ final class Normalizer
     ) {
     }
 
-    public function normalize(mixed $object): array|string|float|bool|ArrayObject|null
+    public function normalize(mixed $object): array|string|int|float|bool|ArrayObject|null
     {
         return $this->normalizer->normalize($object);
     }
