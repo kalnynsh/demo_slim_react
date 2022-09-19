@@ -6,6 +6,9 @@ namespace App\Auth\Command\ChangeRole;
 
 final class Command
 {
-    public string $id = '';
-    public string $roleName = '';
+    public function __construct(
+        public readonly string $id = '',
+        public readonly string $roleName = ''
+    ) {
+    }
 }
