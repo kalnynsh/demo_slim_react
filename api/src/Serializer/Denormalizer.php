@@ -15,7 +15,7 @@ final class Denormalizer
     }
 
     /**
-     * @template T
+     * @template T of object
      * @param class-string<T> $type
      * @return T
      */
